@@ -4,7 +4,6 @@
  */
 package views.user;
 
-
 import com.mycompany.quanlythuchanh.model.LopHocPhan;
 import com.mycompany.quanlythuchanh.model.ThucHanh;
 import database.DBQuanLyThucHanh;
@@ -26,11 +25,13 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
      *
      * @param maGV
      * @param maPM
+     * @param tenPM
+     * @param diaChiPM
      */
-    public DangKiPhongMay(String maGV, int maPM) {
+    public DangKiPhongMay(String maGV, int maPM, String tenPM, String diaChiPM) {
         this.maGV = maGV;
         this.maPM = maPM;
-        tenPhong = DBQuanLyThucHanh.getTenPhongMay(maPM);
+        tenPhong = tenPM + " - " + diaChiPM;
 
         initComponents();
         tenPhongMay.setText(tenPhong);
@@ -1333,7 +1334,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            DangKiPhongMay dkPM = new DangKiPhongMay("2020603171", 1);
+            DangKiPhongMay dkPM = new DangKiPhongMay("2020603171", 1, "PM02", "Tòa A4 - phòng 402");
             dkPM.setVisible(true);
         });
     }

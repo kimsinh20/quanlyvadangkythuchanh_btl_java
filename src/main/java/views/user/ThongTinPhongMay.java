@@ -22,8 +22,11 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
     /**
      * Creates new form ThongTinPhongMay
+     *
+     * @param maGV
      */
-    public ThongTinPhongMay() {
+    public ThongTinPhongMay(String maGV) {
+        this.maGV = maGV;
         initComponents();
         tableDanhSachPhong.getColumnModel().getColumn(0).setPreferredWidth(174);
         tableDanhSachPhong.getColumnModel().getColumn(1).setPreferredWidth(85);
@@ -225,7 +228,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     }//GEN-LAST:event_buoiToiActionPerformed
 
     private void tableDanhSachPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachPhongMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:m
         if (tinhTrang.getSelectedIndex() == 1) {
             int row = tableDanhSachPhong.rowAtPoint(evt.getPoint());
             int col = tableDanhSachPhong.columnAtPoint(evt.getPoint());
@@ -233,9 +236,13 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
                 int maPM = arrPhongMay.get(row).getMaPhongMay();
                 String tenPM = arrPhongMay.get(row).getTenPhongMay();
                 String diaChiPM = arrPhongMay.get(row).getDiaChiPhongMay();
-                System.out.println("mapm: "+maPM);
+                System.out.println("mapm: " + maPM);
                 System.out.println(tenPM);
                 System.out.println(diaChiPM);
+
+                this.dispose();
+                DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM);
+                dk.setVisible(true);
             }
         } else {
             evt.consume();
@@ -272,7 +279,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new ThongTinPhongMay().setVisible(true);
+            new ThongTinPhongMay("1").setVisible(true);
         });
     }
 
@@ -291,7 +298,8 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     private javax.swing.JTable tableDanhSachPhong;
     private javax.swing.JComboBox<String> tinhTrang;
     // End of variables declaration//GEN-END:variables
-    ArrayList<PhongMay> arrPhongMay;
+    private String maGV;
+    private ArrayList<PhongMay> arrPhongMay;
 
     private void updateTable() {
         DefaultTableModel model = (DefaultTableModel) tableDanhSachPhong.getModel();
@@ -313,11 +321,11 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(chuaDangKi, ngay.getSelectedItem().toString(), buoi);
         if (chuaDangKi == 1) {
             for (PhongMay phongMay : arrPhongMay) {
-                model.addRow(new Object[]{phongMay.getTenPhongMay() + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), "Đăng kí"});
+                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), "Đăng kí"});
             }
         } else {
             for (PhongMay phongMay : arrPhongMay) {
-                model.addRow(new Object[]{phongMay.getTenPhongMay() + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), ""});
+                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), ""});
             }
         }
 
