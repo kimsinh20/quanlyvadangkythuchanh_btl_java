@@ -8,6 +8,7 @@ import com.mycompany.quanlythuchanh.model.LopHocPhan;
 import com.mycompany.quanlythuchanh.model.ThucHanh;
 import database.DBQuanLyThucHanh;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +33,8 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         this.maGV = maGV;
         this.maPM = maPM;
         tenPhong = tenPM + " - " + diaChiPM;
-
+        
+        isUsingProcess = true;
         initComponents();
         tenPhongMay.setText(tenPhong);
 
@@ -74,7 +76,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     public void autoRefresh() {
         Thread thAutoRefresh = new Thread(() -> {
-            while (true) {
+            while (isUsingProcess) {
                 refreshData();
                 try {
                     Thread.sleep(60_000);
@@ -283,10 +285,11 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        tabDanhSachCacPhong = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lichDangKi.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -1006,10 +1009,15 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
         jMenu2.setText("Phòng máy");
 
-        jMenuItem2.setText("Thông tin chi tiết");
-        jMenu2.add(jMenuItem2);
+        tabDanhSachCacPhong.setText("Danh sách các phòng");
+        tabDanhSachCacPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tabDanhSachCacPhongActionPerformed(evt);
+            }
+        });
+        jMenu2.add(tabDanhSachCacPhong);
 
-        jMenuItem1.setText("Tình trạng");
+        jMenuItem1.setText("Danh sách đã đăng kí");
         jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
@@ -1302,6 +1310,16 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_T7ContentMouseClicked
 
+    private void tabDanhSachCacPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tabDanhSachCacPhongActionPerformed
+        // TODO add your handling code here:
+        Point locationOnScreen = this.getLocationOnScreen();
+        this.dispose();
+        this.isUsingProcess = false;
+        ThongTinPhongMay ttpm = new ThongTinPhongMay(maGV);
+        ttpm.setLocation(locationOnScreen);
+        ttpm.setVisible(true);
+    }//GEN-LAST:event_tabDanhSachCacPhongActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1401,7 +1419,6 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1430,6 +1447,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JPanel lichDangKi;
     private javax.swing.JLabel lyThuyet;
     private javax.swing.JLabel maLop;
+    private javax.swing.JMenuItem tabDanhSachCacPhong;
     private javax.swing.JLabel tenGV;
     private javax.swing.JLabel tenPhongMay;
     private javax.swing.JLabel thu2Ngay;
@@ -1446,6 +1464,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private final int soTuanDangDuocKiTruoc = 4;
     private String currentMaLop;
     private int currentTuan;
+    private boolean isUsingProcess;
     private ArrayList<String> arrMaLopHP = new ArrayList<>();
     private final javax.swing.JEditorPane[][] thoiKhoaBieu = new javax.swing.JEditorPane[3][7];
     private final javax.swing.JLabel[] ngayThang = new javax.swing.JLabel[7];

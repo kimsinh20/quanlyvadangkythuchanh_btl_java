@@ -14,14 +14,17 @@
             <Property name="text" type="java.lang.String" value="Ph&#xf2;ng m&#xe1;y"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="tabDanhSachCacPhong">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Th&#xf4;ng tin chi ti&#x1ebf;t"/>
+                <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch c&#xe1;c ph&#xf2;ng"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tabDanhSachCacPhongActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xec;nh tr&#x1ea1;ng"/>
+                <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch &#x111;&#xe3; &#x111;&#x103;ng k&#xed;"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -31,6 +34,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>

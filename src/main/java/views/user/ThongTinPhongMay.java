@@ -8,6 +8,9 @@ import com.mycompany.quanlythuchanh.model.PhongMay;
 import database.DBQuanLyThucHanh;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -36,7 +39,15 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         tableDanhSachPhong.getColumnModel().getColumn(5).setPreferredWidth(70);
         tinhTrang.setSelectedIndex(1);
         ngay.setSelectedIndex(0);
+        
+        Toolkit toolkit = Toolkit.getDefaultToolkit();        
+        Dimension screenSize = toolkit.getScreenSize();
 
+        //Calculate the frame location  
+        int x = (screenSize.width - getWidth()) / 2;        
+        int y = (screenSize.height - getHeight()) / 2;        
+        
+        this.setLocation(x, y);
         updateTable();
     }
 
@@ -64,6 +75,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         tableDanhSachPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -239,9 +251,11 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
                 System.out.println("mapm: " + maPM);
                 System.out.println(tenPM);
                 System.out.println(diaChiPM);
-
+                
+                Point locationOnScreen = this.getLocationOnScreen();
                 this.dispose();
                 DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM);
+                dk.setLocation(locationOnScreen);
                 dk.setVisible(true);
             }
         } else {
@@ -300,13 +314,13 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private String maGV;
     private ArrayList<PhongMay> arrPhongMay;
-
+    
     private void updateTable() {
         DefaultTableModel model = (DefaultTableModel) tableDanhSachPhong.getModel();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-
+        
         String buoi = "";
         if (buoiSang.isSelected()) {
             buoi += "S";
@@ -328,22 +342,22 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
                 model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), ""});
             }
         }
-
+        
         TableColumn tColumn = tableDanhSachPhong.getColumnModel().getColumn(5);
         tColumn.setCellRenderer(new ColumnColorRenderer(Color.blue));
-
+        
     }
     // Customize the code to set the background and foreground color for each column of a JTable
 
     class ColumnColorRenderer extends DefaultTableCellRenderer {
-
+        
         Color foregroundColor;
-
+        
         public ColumnColorRenderer(Color foregroundColor) {
             super();
             this.foregroundColor = foregroundColor;
         }
-
+        
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             cell.setForeground(foregroundColor);
