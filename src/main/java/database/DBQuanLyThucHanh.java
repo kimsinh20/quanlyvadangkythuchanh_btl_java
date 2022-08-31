@@ -7,6 +7,7 @@ package database;
 import com.mycompany.quanlythuchanh.model.GiangVien;
 import com.mycompany.quanlythuchanh.model.LopHocPhan;
 import com.mycompany.quanlythuchanh.model.MonHoc;
+import com.mycompany.quanlythuchanh.model.PhongMay;
 import com.mycompany.quanlythuchanh.model.ThucHanh;
 import java.util.ArrayList;
 
@@ -107,4 +108,18 @@ public class DBQuanLyThucHanh {
 
         return daDangKi;
     }
+
+    public static ArrayList<PhongMay> getPhongMayTheoTinhTrang(int isChuaDangKi, String ngay, String buoi) {
+        // sql execute: CALL get_phong_may_theo_tinh_trang(isChuaDangKi, ngay, buoi) -> return: maPM, tenPM, diaChiPM, soMC, soMT, tinhTrang, cacPhanMemTrenMay
+        ArrayList<PhongMay> arrPhongMay = new ArrayList<>();
+
+        arrPhongMay.add(new PhongMay(1, "PM01", "Tòa A1 - Phòng 701", 1, 40, "Sử dụng được", "Word, excel, powerpoint, VS code"));
+        arrPhongMay.add(new PhongMay(2, "PM02", "Tòa A1 - Phòng 702", 1, 40, "Sử dụng được", "Word, excel, powerpoint, VS code"));
+        arrPhongMay.add(new PhongMay(3, "PM03", "Tòa A1 - Phòng 703", 1, 40, "Sử dụng được", "Word, excel, powerpoint, VS code"));
+        arrPhongMay.add(new PhongMay(4, "PM04", "Tòa A1 - Phòng 704", 1, 40, "Sử dụng được", "Word, excel, powerpoint, VS code"));
+        arrPhongMay.add(new PhongMay(5, "PM05", "Tòa A1 - Phòng 705", 1, 40, "Sử dụng được", "Word, excel, powerpoint, VS code"));
+
+        return arrPhongMay;
+    }
+
 }

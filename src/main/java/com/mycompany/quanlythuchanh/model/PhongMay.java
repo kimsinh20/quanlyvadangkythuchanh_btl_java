@@ -10,23 +10,35 @@ import java.io.Serializable;
  *
  * @author Sinh
  */
-public class PhongMay implements Serializable
-{
+public class PhongMay implements Serializable {
+
     private int maPhongMay;
     private String tenPhongMay;
     private String diaChiPhongMay;
-    private int soThietBi;
-    private String trangThai;
+    private int soMayChieu;
+    private int soMayTinh;
+    private String tinhTrang;
+    private String cacPhanMem;
 
     public PhongMay() {
     }
 
-    public PhongMay(int maPhongMay, String tenPhongMay, String diaChiPhongMay, int soThietBi, String trangThai) {
+    public PhongMay(int maPhongMay, String tenPhongMay, String diaChiPhongMay, int soMayChieu, int soMayTinh, String tinhTrang, String cacPhanMem) {
         this.maPhongMay = maPhongMay;
         this.tenPhongMay = tenPhongMay;
         this.diaChiPhongMay = diaChiPhongMay;
-        this.soThietBi = soThietBi;
-        this.trangThai = trangThai;
+        this.soMayChieu = soMayChieu;
+        this.soMayTinh = soMayTinh;
+        this.tinhTrang = tinhTrang;
+        this.cacPhanMem = cacPhanMem;
+    }
+
+    public String getCacPhanMem() {
+        return cacPhanMem;
+    }
+
+    public void setCacPhanMem(String cacPhanMem) {
+        this.cacPhanMem = cacPhanMem;
     }
 
     public int getMaPhongMay() {
@@ -53,24 +65,33 @@ public class PhongMay implements Serializable
         this.diaChiPhongMay = diaChiPhongMay;
     }
 
-    public int getSoThietBi() {
-        return soThietBi;
+    public int getSoMayChieu() {
+        return soMayChieu;
     }
 
-    public void setSoThietBi(int soThietBi) {
-        this.soThietBi = soThietBi;
+    public void setSoMayChieu(int soMayChieu) {
+        this.soMayChieu = soMayChieu;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public int getSoMayTinh() {
+        return soMayTinh;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setSoMayTinh(int soMayTinh) {
+        this.soMayTinh = soMayTinh;
+    }
+
+    public String getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
     }
 
     @Override
     public String toString() {
-        return "PhongMay{" + "maPhongMay=" + maPhongMay + ", tenPhongMay=" + tenPhongMay + ", diaChiPhongMay=" + diaChiPhongMay + ", soThietBi=" + soThietBi + ", trangThai=" + trangThai + '}';
+        return "PhongMay{" + "maPhongMay=" + maPhongMay + ", tenPhongMay=" + tenPhongMay + ", diaChiPhongMay=" + diaChiPhongMay + ", soMayChieu=" + soMayChieu + ", soMayTinh=" + soMayTinh + ", tinhTrang=" + tinhTrang + '}';
     }
+
 }
