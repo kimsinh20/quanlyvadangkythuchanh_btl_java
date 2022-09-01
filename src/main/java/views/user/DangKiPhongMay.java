@@ -8,7 +8,10 @@ import com.mycompany.quanlythuchanh.model.LopHocPhan;
 import com.mycompany.quanlythuchanh.model.ThucHanh;
 import database.DBQuanLyThucHanh;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,11 +32,33 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
      * @param tenPM
      * @param diaChiPM
      */
-    public DangKiPhongMay(String maGV, int maPM, String tenPM, String diaChiPM) {
+    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM) {
         this.maGV = maGV;
         this.maPM = maPM;
         tenPhong = tenPM + " - " + diaChiPM;
-        
+
+        initClass();
+    }
+
+    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM, int x, int y) {
+        this.maGV = maGV;
+        this.maPM = maPM;
+        tenPhong = tenPM + " - " + diaChiPM;
+
+        this.setLocation(x, y);
+        initClass();
+    }
+
+    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM, Point locationOnScreen) {
+        this.maGV = maGV;
+        this.maPM = maPM;
+        tenPhong = tenPM + " - " + diaChiPM;
+
+        this.setLocation(locationOnScreen);
+        initClass();
+    }
+
+    private void initClass() {
         isUsingProcess = true;
         initComponents();
         tenPhongMay.setText(tenPhong);
@@ -74,7 +99,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         autoRefresh();
     }
 
-    public void autoRefresh() {
+    private void autoRefresh() {
         Thread thAutoRefresh = new Thread(() -> {
             while (isUsingProcess) {
                 refreshData();
@@ -137,10 +162,21 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 7; j++) {
                 lichInCurrentCell = isInDanhSachDaDangKi(danhSachDaDangKi, i, j);
+                // Đã đăng kí 
                 if (lichInCurrentCell != null) {
+                    // Do giáo viên này đăng kí 
+                    System.out.println("current: " + maGV);
+                    System.out.println("access to: " + lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien());
+                    if (lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien() == maGV) {
+                        thoiKhoaBieu[i][j].setComponentPopupMenu(menuHuy);
+                        thoiKhoaBieu[i][j].setToolTipText("Nhấn phải chuột");
+                    } else {
+                        thoiKhoaBieu[i][j].setComponentPopupMenu(null);
+                    }
                     setDaDangKi(thoiKhoaBieu[i][j], lichInCurrentCell.getLopHocPhan().getMaLopHocPhan(), lichInCurrentCell.getLopHocPhan().getGiangVien().getTenGiangVien(), lichInCurrentCell.getLopHocPhan().getMonHoc().getTenMH(), lichInCurrentCell.getTietTH() + (j + 1), lichInCurrentCell.getThoiGianDangKi());
                 } else {
                     setChuaDangKi(thoiKhoaBieu[i][j]);
+                    thoiKhoaBieu[i][j].setComponentPopupMenu(null);
                 }
             }
         }
@@ -188,6 +224,8 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuHuy = new javax.swing.JPopupMenu();
+        buttonHuy = new javax.swing.JMenuItem();
         lichDangKi = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -288,7 +326,28 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         tabDanhSachCacPhong = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
+        menuHuy.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+                menuHuyPopupMenuWillBecomeVisible(evt);
+            }
+        });
+
+        buttonHuy.setText("Hủy đăng kí");
+        buttonHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHuyActionPerformed(evt);
+            }
+        });
+        menuHuy.add(buttonHuy);
+
+        menuHuy.getAccessibleContext().setAccessibleParent(C3Content);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         lichDangKi.setBackground(new java.awt.Color(204, 204, 204));
@@ -368,9 +427,16 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         S3.setBackground(new java.awt.Color(255, 255, 255));
 
         S3Content.setEditable(false);
+        S3Content.setToolTipText("");
+        S3Content.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         S3Content.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 S3ContentMouseClicked(evt);
+            }
+        });
+        S3Content.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                S3ContentComponentShown(evt);
             }
         });
         jScrollPane2.setViewportView(S3Content);
@@ -912,6 +978,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         jLabel11.setText("Tuần:");
 
         comboTuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "46", "47", "48", "49", "50", "51", "52" }));
+        comboTuan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         comboTuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTuanActionPerformed(evt);
@@ -965,6 +1032,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         jLabel15.setText("Lớp:");
 
         comboLop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mạng máy tính - 2022IT6023002", "Lập trình web" }));
+        comboLop.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         comboLop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboLopActionPerformed(evt);
@@ -1320,6 +1388,52 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         ttpm.setVisible(true);
     }//GEN-LAST:event_tabDanhSachCacPhongActionPerformed
 
+    private void S3ContentComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_S3ContentComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_S3ContentComponentShown
+
+    private void menuHuyPopupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_menuHuyPopupMenuWillBecomeVisible
+        // TODO add your handling code here:
+//        System.out.println("kich hoat huy");
+
+    }//GEN-LAST:event_menuHuyPopupMenuWillBecomeVisible
+
+    private void buttonHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHuyActionPerformed
+        // TODO add your handling code here:
+        Component invoker = menuHuy.getInvoker();
+        javax.swing.JEditorPane canHuy = (javax.swing.JEditorPane) invoker;
+        String buoiTH = "";
+        String ngayCanHuy = "";
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (thoiKhoaBieu[i][j].getText().equalsIgnoreCase(canHuy.getText())) {
+                    switch (i) {
+                        case 0 ->
+                            buoiTH = "S";
+                        case 1 ->
+                            buoiTH = "C";
+                        case 2 ->
+                            buoiTH = "T";
+                    }
+                    ngayCanHuy = ngayThang[j].getText();
+
+                    i = 99;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Buoi can huy: " + buoiTH);
+        System.out.println("Ngay can huy: " + ngayCanHuy);
+
+        boolean isDeletedLichThucHanh = DBQuanLyThucHanh.deleteLichThucHanh(maGV, buoiTH, ngayCanHuy);
+        if (isDeletedLichThucHanh) {
+            JOptionPane.showMessageDialog(this, "Hủy thành công");
+        }
+
+        refreshData();
+    }//GEN-LAST:event_buttonHuyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1352,8 +1466,17 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            DangKiPhongMay dkPM = new DangKiPhongMay("2020603171", 1, "PM02", "Tòa A4 - phòng 402");
+            DangKiPhongMay dkPM = new DangKiPhongMay(1, 1, "PM02", "Tòa A4 - phòng 402");
             dkPM.setVisible(true);
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = toolkit.getScreenSize();
+
+            //Calculate the frame location  
+            int x = (screenSize.width - dkPM.getWidth()) / 2;
+            int y = (screenSize.height - dkPM.getHeight()) / 2;
+
+            dkPM.setLocation(x, y);
         });
     }
 
@@ -1400,6 +1523,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JEditorPane T7Content;
     private javax.swing.JPanel T8;
     private javax.swing.JEditorPane T8Content;
+    private javax.swing.JMenuItem buttonHuy;
     private javax.swing.JComboBox<String> comboLop;
     private javax.swing.JComboBox<String> comboTuan;
     private javax.swing.JLabel jLabel1;
@@ -1447,6 +1571,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JPanel lichDangKi;
     private javax.swing.JLabel lyThuyet;
     private javax.swing.JLabel maLop;
+    private javax.swing.JPopupMenu menuHuy;
     private javax.swing.JMenuItem tabDanhSachCacPhong;
     private javax.swing.JLabel tenGV;
     private javax.swing.JLabel tenPhongMay;
@@ -1459,7 +1584,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JLabel thu8Ngay;
     // End of variables declaration//GEN-END:variables
     private int maPM;
-    private String maGV;
+    private int maGV;
     private String tenPhong;
     private final int soTuanDangDuocKiTruoc = 4;
     private String currentMaLop;

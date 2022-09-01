@@ -26,11 +26,6 @@ public class MonHoc implements Serializable{
         this.hinhThucThi = hinhThucThi;
     }
     
-    public MonHoc(String maMH, String tenMH) {
-        this.maMH = maMH;
-        this.tenMH = tenMH;
-    }
-    
     public MonHoc(String tenMH) {
         this.tenMH = tenMH;
     }

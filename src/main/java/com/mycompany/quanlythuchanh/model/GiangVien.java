@@ -10,7 +10,8 @@ import java.io.Serializable;
  *
  * @author Sinh
  */
-public class GiangVien implements Serializable{
+public class GiangVien implements Serializable {
+
     private int maGiangVien;
     private String tenGiangVien;
     private String soDT;
@@ -36,10 +37,11 @@ public class GiangVien implements Serializable{
         return maGiangVien;
     }
 
-    public GiangVien(String tenGiangVien) {
+    public GiangVien(String tenGiangVien, int maGiangVien) {
         this.tenGiangVien = tenGiangVien;
+        this.maGiangVien = maGiangVien;
     }
-    
+
     public void setMaGiangVien(int maGiangVien) {
         this.maGiangVien = maGiangVien;
     }

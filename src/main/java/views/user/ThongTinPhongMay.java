@@ -28,7 +28,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
      *
      * @param maGV
      */
-    public ThongTinPhongMay(String maGV) {
+    public ThongTinPhongMay(int maGV) {
         this.maGV = maGV;
         initComponents();
         tableDanhSachPhong.getColumnModel().getColumn(0).setPreferredWidth(174);
@@ -37,17 +37,9 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         tableDanhSachPhong.getColumnModel().getColumn(3).setPreferredWidth(127);
         tableDanhSachPhong.getColumnModel().getColumn(4).setPreferredWidth(790);
         tableDanhSachPhong.getColumnModel().getColumn(5).setPreferredWidth(70);
-        tinhTrang.setSelectedIndex(1);
+        tinhTrang.setSelectedIndex(2);
         ngay.setSelectedIndex(0);
-        
-        Toolkit toolkit = Toolkit.getDefaultToolkit();        
-        Dimension screenSize = toolkit.getScreenSize();
 
-        //Calculate the frame location  
-        int x = (screenSize.width - getWidth()) / 2;        
-        int y = (screenSize.height - getHeight()) / 2;        
-        
-        this.setLocation(x, y);
         updateTable();
     }
 
@@ -111,9 +103,9 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableDanhSachPhong);
 
-        jLabel1.setText("Tình trạng: ");
+        jLabel1.setText("Loại phòng: ");
 
-        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã đăng kí", "Chưa đăng kí" }));
+        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã đăng kí", "Chưa đăng kí", "Tất cả", " " }));
         tinhTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tinhTrangActionPerformed(evt);
@@ -241,22 +233,22 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
     private void tableDanhSachPhongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDanhSachPhongMouseClicked
         // TODO add your handling code here:m
-        if (tinhTrang.getSelectedIndex() == 1) {
+        if (tinhTrang.getSelectedIndex() >= 1) {
             int row = tableDanhSachPhong.rowAtPoint(evt.getPoint());
             int col = tableDanhSachPhong.columnAtPoint(evt.getPoint());
-            if (row >= 0 && col == 5) {
+            if (row >= 0 && row < soPhongMayTrong && col == 5) {
                 int maPM = arrPhongMay.get(row).getMaPhongMay();
                 String tenPM = arrPhongMay.get(row).getTenPhongMay();
                 String diaChiPM = arrPhongMay.get(row).getDiaChiPhongMay();
                 System.out.println("mapm: " + maPM);
                 System.out.println(tenPM);
                 System.out.println(diaChiPM);
-                
+
                 Point locationOnScreen = this.getLocationOnScreen();
                 this.dispose();
-                DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM);
-                dk.setLocation(locationOnScreen);
+                DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM, locationOnScreen);
                 dk.setVisible(true);
+
             }
         } else {
             evt.consume();
@@ -293,7 +285,17 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new ThongTinPhongMay("1").setVisible(true);
+            ThongTinPhongMay ttpm = new ThongTinPhongMay(1);
+            ttpm.setVisible(true);
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = toolkit.getScreenSize();
+
+            //Calculate the frame location  
+            int x = (screenSize.width - ttpm.getWidth()) / 2;
+            int y = (screenSize.height - ttpm.getHeight()) / 2;
+
+            ttpm.setLocation(x, y);
         });
     }
 
@@ -312,15 +314,16 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     private javax.swing.JTable tableDanhSachPhong;
     private javax.swing.JComboBox<String> tinhTrang;
     // End of variables declaration//GEN-END:variables
-    private String maGV;
+    private int maGV;
+    private int soPhongMayTrong;
     private ArrayList<PhongMay> arrPhongMay;
-    
+
     private void updateTable() {
         DefaultTableModel model = (DefaultTableModel) tableDanhSachPhong.getModel();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-        
+
         String buoi = "";
         if (buoiSang.isSelected()) {
             buoi += "S";
@@ -331,33 +334,50 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         if (buoiToi.isSelected()) {
             buoi += "T";
         }
-        int chuaDangKi = tinhTrang.getSelectedIndex();
-        arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(chuaDangKi, ngay.getSelectedItem().toString(), buoi);
-        if (chuaDangKi == 1) {
-            for (PhongMay phongMay : arrPhongMay) {
-                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), "Đăng kí"});
-            }
-        } else {
+        int selectedTinhTrang = tinhTrang.getSelectedIndex();
+
+        arrPhongMay = null;
+        if (selectedTinhTrang == 0) {
+            // lay cac phong da dang ki
+            arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(0, ngay.getSelectedItem().toString(), buoi);
+            soPhongMayTrong = 0;
+
             for (PhongMay phongMay : arrPhongMay) {
                 model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), ""});
             }
+        } else if (selectedTinhTrang > 0) {
+            arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(1, ngay.getSelectedItem().toString(), buoi);
+            soPhongMayTrong = arrPhongMay.size();
+            if (selectedTinhTrang == 2) {
+                arrPhongMay.addAll(DBQuanLyThucHanh.getPhongMayTheoTinhTrang(1, ngay.getSelectedItem().toString(), buoi));
+            }
+            for (int i = 0; i < arrPhongMay.size(); i++) {
+                if (i < soPhongMayTrong) {
+                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrang(), arrPhongMay.get(i).getCacPhanMem(), "Đăng kí"});
+                } else {
+                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrang(), arrPhongMay.get(i).getCacPhanMem(), ""});
+                }
+            }
+
+        } else {
+            System.out.println("SOS!!!");
         }
-        
+
         TableColumn tColumn = tableDanhSachPhong.getColumnModel().getColumn(5);
         tColumn.setCellRenderer(new ColumnColorRenderer(Color.blue));
-        
+
     }
     // Customize the code to set the background and foreground color for each column of a JTable
 
     class ColumnColorRenderer extends DefaultTableCellRenderer {
-        
+
         Color foregroundColor;
-        
+
         public ColumnColorRenderer(Color foregroundColor) {
             super();
             this.foregroundColor = foregroundColor;
         }
-        
+
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
             cell.setForeground(foregroundColor);

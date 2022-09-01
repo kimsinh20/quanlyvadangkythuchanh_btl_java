@@ -23,9 +23,9 @@ public class DBQuanLyThucHanh {
         return true;
     }
 
-    public static ArrayList<LopHocPhan> getListMon(String maGV) {
+    public static ArrayList<LopHocPhan> getListMon(int maGV) {
 
-        // sql execute: CALL get_list_mon("maGV") -> trả về các môn gv dạy và mã lớp hp
+        // sql execute: CALL get_list_mon(maGV) -> trả về các môn gv dạy và mã lớp hp
         // DATA GIẢ:
         ArrayList<LopHocPhan> mon = new ArrayList<>();
         mon.add(new LopHocPhan("2022IT6022001", new MonHoc("Lập trình Java")));
@@ -41,8 +41,8 @@ public class DBQuanLyThucHanh {
         return 46;
     }
 
-    public static String getTenGV(String maGV) {
-        // sql execute: CALL get_ten_gv("maGV")
+    public static String getTenGV(int maGV) {
+        // sql execute: CALL get_ten_gv(maGV)
 
         return "Nguyễn Thị T";
     }
@@ -92,18 +92,19 @@ public class DBQuanLyThucHanh {
     }
 
     public static ArrayList<ThucHanh> getDanhSachDaDangKi(String ngayBatDau, String ngayKetThuc, int maPhongMay) {
-        // sql execute: CALL get_danh_sach_da_dang_ki(ngayBatDau, ngayKetThuc, maPhongMay) -> return: malophp, ngayThucHanh, buoiTH, thoiGianDangKi, giangvien(tenGiangVien), monhoc(tenMH)
+        // sql execute: CALL get_danh_sach_da_dang_ki(ngayBatDau, ngayKetThuc, maPhongMay) 
+        // -> return: malophp, ngayThucHanh, buoiTH, thoiGianDangKi, giangvien(tenGiangVien, maGV), monhoc(tenMH)
 
         ArrayList<ThucHanh> daDangKi = new ArrayList<>();
         if ("1/9/2022".equalsIgnoreCase(ngayBatDau)) {
-            daDangKi.add(new ThucHanh("1/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình hướng đối tượng"), new GiangVien("An Văn Minh")), "1 phút trước"));
-            daDangKi.add(new ThucHanh("2/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Mạng máy tính"), new GiangVien("Lê Thị Huyền")), "29/08/2022"));
-            daDangKi.add(new ThucHanh("5/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web"), new GiangVien("Phạm Thế Anh")), "30/08/2022"));
+            daDangKi.add(new ThucHanh("1/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình hướng đối tượng"), new GiangVien("An Văn Minh", 3)), "1 phút trước"));
+            daDangKi.add(new ThucHanh("2/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Mạng máy tính"), new GiangVien("Nguyễn Thị T", 1)), "29/08/2022"));
+            daDangKi.add(new ThucHanh("5/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web"), new GiangVien("Phạm Thế Anh", 5)), "30/08/2022"));
         } else {
-            daDangKi.add(new ThucHanh("8/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình căn bản"), new GiangVien("Phan Xuân An")), "1 phút trước"));
-            daDangKi.add(new ThucHanh("10/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình .net"), new GiangVien("Nguyễn Thế Vinh")), "1 phút trước"));
-            daDangKi.add(new ThucHanh("11/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình ASP.net"), new GiangVien("Nguyễn Ngọc Kí")), "29/08/2022"));
-            daDangKi.add(new ThucHanh("13/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web bằng PHP"), new GiangVien("Trần Thị Huyền")), "30/08/2022"));
+            daDangKi.add(new ThucHanh("8/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình căn bản"), new GiangVien("Nguyễn Thị T", 1)), "1 phút trước"));
+            daDangKi.add(new ThucHanh("10/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình .net"), new GiangVien("Nguyễn Thế Vinh", 6)), "1 phút trước"));
+            daDangKi.add(new ThucHanh("11/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình ASP.net"), new GiangVien("Nguyễn Ngọc Kí", 7)), "29/08/2022"));
+            daDangKi.add(new ThucHanh("13/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web bằng PHP"), new GiangVien("Trần Thị Huyền", 8)), "30/08/2022"));
         }
 
         return daDangKi;
@@ -122,4 +123,9 @@ public class DBQuanLyThucHanh {
         return arrPhongMay;
     }
 
+    public static boolean deleteLichThucHanh(int maGV, String buoiTH, String ngayThucHanh) {
+        // sql execute: CALL delete_lich_thuc_hanh(maGV, buoiTH, ngayThucHanh)
+
+        return true;
+    }
 }
