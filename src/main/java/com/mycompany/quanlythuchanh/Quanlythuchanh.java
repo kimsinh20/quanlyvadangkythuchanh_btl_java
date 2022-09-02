@@ -16,7 +16,7 @@ public class Quanlythuchanh {
     }
 
     public static void main(String[] args) {
-        ThongTinPhongMay windowThongTinPhongMay = new ThongTinPhongMay(1);
+        ThongTinPhongMay windowThongTinPhongMay = new ThongTinPhongMay("20226001");
         windowThongTinPhongMay.setVisible(true);
     }
 }

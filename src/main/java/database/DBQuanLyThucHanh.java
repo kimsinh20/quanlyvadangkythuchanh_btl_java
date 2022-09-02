@@ -9,7 +9,14 @@ import com.mycompany.quanlythuchanh.model.LopHocPhan;
 import com.mycompany.quanlythuchanh.model.MonHoc;
 import com.mycompany.quanlythuchanh.model.PhongMay;
 import com.mycompany.quanlythuchanh.model.ThucHanh;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,41 +24,88 @@ import java.util.ArrayList;
  */
 public class DBQuanLyThucHanh {
 
+    private static final String databaseHost = "sql6.freesqldatabase.com";
+    private static final String databaseName = "sql6516524";
+    private static final String username = "sql6516524";
+    private static final String password = "cfC9FxDEIG";
+    private static final String port = "3306";
+
     public static boolean insertThucHanh(int maPM, String maLopHP, String ngayTH, String buoiTH) {
 //        String ;
         // sql execute: CALL insert_thuc_hanh("maPM", malophp, ngayth, buoith) -> thoiGianDangKi sẽ tự thêm trong lúc insert
         return true;
     }
 
-    public static ArrayList<LopHocPhan> getListMon(int maGV) {
-
-        // sql execute: CALL get_list_mon(maGV) -> trả về các môn gv dạy và mã lớp hp
-        // DATA GIẢ:
+    public static ArrayList<LopHocPhan> getListMon(String maGV) {
         ArrayList<LopHocPhan> mon = new ArrayList<>();
-        mon.add(new LopHocPhan("2022IT6022001", new MonHoc("Lập trình Java")));
-        mon.add(new LopHocPhan("2022IT6052001", new MonHoc("Lập trình web")));
-        mon.add(new LopHocPhan("2022IT6024001", new MonHoc("Lập trình căn bản")));
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //here sonoo is database name, root is username and password
+            try ( Connection con = DriverManager.getConnection(
+                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
+                //here sonoo is database name, root is username and password
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("CALL get_list_mon('"+maGV+"');");
+                while (rs.next()) {
+                    mon.add(new LopHocPhan(rs.getString(1), new MonHoc(rs.getString(2))));
+//                    System.out.println(rs.getString(1) + "  " + rs.getString(2));
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
 
         return mon;
     }
 
-    public static int getTuanNay(String maLop) {
-        // sql execute: CALL get_tuan_nay("maLop")
+    public static int getTuanNay() {
+        // sql execute: CALL get_tuan_nay()
 
         return 46;
     }
 
-    public static String getTenGV(int maGV) {
+    public static String getTenGV(String maGV) {
         // sql execute: CALL get_ten_gv(maGV)
-
-        return "Nguyễn Thị T";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //here sonoo is database name, root is username and password
+            try ( Connection con = DriverManager.getConnection(
+                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
+                //here sonoo is database name, root is username and password
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("CALL get_ten_gv('"+maGV+"');");
+                while (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e);
+        }
+        return "Nguyễn Thị Lỗi";
     }
 
-    public static String getTenPhongMay(int maPM) {
-        // sql execute: CALL get_ten_phong_may(maPM)
-
-        return "PM04 - Tòa A1 - Phòng 701";
-    }
+//    public static String getTenPhongMay(int maPM) {
+//        // sql execute: CALL get_ten_phong_may(maPM) -> return: tenPM + vitripM
+////        call get_ten_phong_may(1);
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            //here sonoo is database name, root is username and password
+//            try ( Connection con = DriverManager.getConnection(
+//                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
+//                //here sonoo is database name, root is username and password
+//                Statement stmt = con.createStatement();
+//                ResultSet rs = stmt.executeQuery("CALL get_ten_phong_may("+maPM+");");
+//                while (rs.next()) {
+//                    return rs.getString(1) + rs.getString(2);
+//                }
+//            }
+//        } catch (ClassNotFoundException | SQLException e) {
+//            System.out.println(e);
+//        }
+//        
+//        return "PM999 - Tòa A999 - Phòng 999";
+//    }
 
     public static ArrayList<String> getBayNgayTrongTuan(int tuan) {
         // sql execute: CALL get_bay_ngay_trong_tuan(tuan)
@@ -85,8 +139,8 @@ public class DBQuanLyThucHanh {
         return "Lịch lý thuyết: C4, Tòa A4 - phòng 402, tiết 3, 4, 5";
     }
 
-    public static int getKhoa(String maGV) {
-        // sql execute: CALL get_khoa(malophp)
+    public static int getKhoa(String malophp) {
+        // sql execute: CALL get_khoa(malophp) -> return: Khóa 
 
         return 15;
     }
@@ -123,7 +177,7 @@ public class DBQuanLyThucHanh {
         return arrPhongMay;
     }
 
-    public static boolean deleteLichThucHanh(int maGV, String buoiTH, String ngayThucHanh) {
+    public static boolean deleteLichThucHanh(String maGV, String buoiTH, String ngayThucHanh) {
         // sql execute: CALL delete_lich_thuc_hanh(maGV, buoiTH, ngayThucHanh)
 
         return true;

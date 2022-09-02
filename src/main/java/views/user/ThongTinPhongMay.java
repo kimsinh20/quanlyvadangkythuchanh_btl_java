@@ -28,7 +28,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
      *
      * @param maGV
      */
-    public ThongTinPhongMay(int maGV) {
+    public ThongTinPhongMay(String maGV) {
         this.maGV = maGV;
         initComponents();
         tableDanhSachPhong.getColumnModel().getColumn(0).setPreferredWidth(174);
@@ -285,7 +285,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ThongTinPhongMay ttpm = new ThongTinPhongMay(1);
+            ThongTinPhongMay ttpm = new ThongTinPhongMay("20226001");
             ttpm.setVisible(true);
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -314,7 +314,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     private javax.swing.JTable tableDanhSachPhong;
     private javax.swing.JComboBox<String> tinhTrang;
     // End of variables declaration//GEN-END:variables
-    private int maGV;
+    private String maGV;
     private int soPhongMayTrong;
     private ArrayList<PhongMay> arrPhongMay;
 

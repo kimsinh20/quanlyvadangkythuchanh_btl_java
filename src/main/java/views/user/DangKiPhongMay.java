@@ -32,7 +32,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
      * @param tenPM
      * @param diaChiPM
      */
-    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM) {
+    public DangKiPhongMay(String maGV, int maPM, String tenPM, String diaChiPM) {
         this.maGV = maGV;
         this.maPM = maPM;
         tenPhong = tenPM + " - " + diaChiPM;
@@ -40,7 +40,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         initClass();
     }
 
-    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM, int x, int y) {
+    public DangKiPhongMay(String maGV, int maPM, String tenPM, String diaChiPM, int x, int y) {
         this.maGV = maGV;
         this.maPM = maPM;
         tenPhong = tenPM + " - " + diaChiPM;
@@ -49,7 +49,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         initClass();
     }
 
-    public DangKiPhongMay(int maGV, int maPM, String tenPM, String diaChiPM, Point locationOnScreen) {
+    public DangKiPhongMay(String maGV, int maPM, String tenPM, String diaChiPM, Point locationOnScreen) {
         this.maGV = maGV;
         this.maPM = maPM;
         tenPhong = tenPM + " - " + diaChiPM;
@@ -116,6 +116,9 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private void initData() {
         // init lop
         ArrayList<LopHocPhan> mon_maLopHP = DBQuanLyThucHanh.getListMon(maGV);
+        if(mon_maLopHP == null){
+            System.out.println("SOS giao vien nay khong co lop hoc.");
+        }
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         for (LopHocPhan mon_ma : mon_maLopHP) {
             model.addElement(mon_ma.getMonHoc().getTenMH() + " - " + mon_ma.getMaLopHocPhan());
@@ -126,7 +129,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         currentMaLop = arrMaLopHP.get(comboLop.getSelectedIndex());
 
         //init Tuan
-        int tuanNay = DBQuanLyThucHanh.getTuanNay(currentMaLop);
+        int tuanNay = DBQuanLyThucHanh.getTuanNay();
         currentTuan = tuanNay;
         model = new DefaultComboBoxModel();
         for (Integer i = tuanNay; i <= tuanNay + soTuanDangDuocKiTruoc; i++) {
@@ -167,7 +170,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
                     // Do giáo viên này đăng kí 
                     System.out.println("current: " + maGV);
                     System.out.println("access to: " + lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien());
-                    if (lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien() == maGV) {
+                    if (lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien() ==Integer.parseInt(maGV)) {
                         thoiKhoaBieu[i][j].setComponentPopupMenu(menuHuy);
                         thoiKhoaBieu[i][j].setToolTipText("Nhấn phải chuột");
                     } else {
@@ -1165,7 +1168,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private void comboLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLopActionPerformed
         // TODO add your handling code here:
         String maL = arrMaLopHP.get(comboLop.getSelectedIndex());
-        int tuanNay = DBQuanLyThucHanh.getTuanNay(maL);
+        int tuanNay = DBQuanLyThucHanh.getTuanNay();
 
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         for (Integer i = tuanNay; i <= tuanNay + soTuanDangDuocKiTruoc; i++) {
@@ -1466,7 +1469,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            DangKiPhongMay dkPM = new DangKiPhongMay(1, 1, "PM02", "Tòa A4 - phòng 402");
+            DangKiPhongMay dkPM = new DangKiPhongMay("20226001", 1, "PM02", "Tòa A4 - phòng 402");
             dkPM.setVisible(true);
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -1584,7 +1587,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private javax.swing.JLabel thu8Ngay;
     // End of variables declaration//GEN-END:variables
     private int maPM;
-    private int maGV;
+    private String maGV;
     private String tenPhong;
     private final int soTuanDangDuocKiTruoc = 4;
     private String currentMaLop;

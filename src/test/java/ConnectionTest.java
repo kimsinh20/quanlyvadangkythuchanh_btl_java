@@ -28,10 +28,10 @@ public class ConnectionTest {
                     String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
                 //here sonoo is database name, root is username and password
                 Statement stmt = con.createStatement();
-//                ResultSet rs = stmt.executeQuery("select * from emp");
-//                while (rs.next()) {
-//                    System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-//                }
+                ResultSet rs = stmt.executeQuery("CALL get_list_mon('20226001');");
+                while (rs.next()) {
+                    System.out.println(rs.getString(1) + "  " + rs.getString(2));
+                }
             }
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
