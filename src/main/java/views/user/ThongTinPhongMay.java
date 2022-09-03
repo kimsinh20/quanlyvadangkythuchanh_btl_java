@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -36,6 +38,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     public ThongTinPhongMay(String maGV) {
         this.maGV = maGV;
         initComponents();
+        isUsingProcess = true;
         tableDanhSachPhong.getColumnModel().getColumn(0).setPreferredWidth(174);
         tableDanhSachPhong.getColumnModel().getColumn(1).setPreferredWidth(85);
         tableDanhSachPhong.getColumnModel().getColumn(2).setPreferredWidth(75);
@@ -53,8 +56,10 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         }
         ngay.setModel(model);
         ngay.setSelectedIndex(0);
-
-        updateTable();
+        TableColumn tColumn = tableDanhSachPhong.getColumnModel().getColumn(5);
+        tColumn.setCellRenderer(new ColumnColorRenderer(Color.blue));
+        
+        autoRefresh();
     }
 
     public static String convertDateToString(Date date) {
@@ -124,7 +129,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         jLabel1.setText("Loại phòng: ");
 
-        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã đăng kí", "Chưa đăng kí", "Tất cả", " " }));
+        tinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã đăng kí", "Chưa đăng kí", "Tất cả" }));
         tinhTrang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tinhTrangActionPerformed(evt);
@@ -133,7 +138,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         jLabel2.setText("Ngày: ");
 
-        ngay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "31/08/2022", "1/09/2022" }));
+        ngay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "", "" }));
         ngay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ngayActionPerformed(evt);
@@ -255,22 +260,34 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         if (tinhTrang.getSelectedIndex() >= 1) {
             int row = tableDanhSachPhong.rowAtPoint(evt.getPoint());
             int col = tableDanhSachPhong.columnAtPoint(evt.getPoint());
-            if (row >= 0 && row < soPhongMayTrong && col == 5) {
+            if (row >= 0 && row < soPhongMayTrong && col == 5 && arrPhongMay != null) {
                 int maPM = arrPhongMay.get(row).getMaPhongMay();
                 String tenPM = arrPhongMay.get(row).getTenPhongMay();
                 String diaChiPM = arrPhongMay.get(row).getDiaChiPhongMay();
-                System.out.println("mapm: " + maPM);
-                System.out.println(tenPM);
-                System.out.println(diaChiPM);
-
                 Point locationOnScreen = this.getLocationOnScreen();
+                Thread thread = new Thread(() -> {
+                    DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM, locationOnScreen);
+                    dk.setVisible(true);
+                });
+                thread.start();
                 this.dispose();
-                DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM, locationOnScreen);
-                dk.setVisible(true);
+                isUsingProcess = false;
+                try {
+                    thread.join();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThongTinPhongMay.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                try {
+                    thread.join();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ThongTinPhongMay.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                evt.consume();
             }
-        } else {
-            evt.consume();
         }
+
+
     }//GEN-LAST:event_tableDanhSachPhongMouseClicked
 
     /**
@@ -332,15 +349,35 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> tinhTrang;
     // End of variables declaration//GEN-END:variables
     private String maGV;
-    private int soPhongMayTrong;
+    private int soPhongMayTrong = 0;
+    private boolean isUsingProcess = true;
     private ArrayList<PhongMay> arrPhongMay;
 
-    private void updateTable() {
+    private void autoRefresh() {
+        Thread thAutoRefresh = new Thread(() -> {
+            while (isUsingProcess) {
+                try {
+                    updateTable();
+                } catch (Exception e) {
+                }
+                try {
+                    Thread.sleep(10_000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(DangKiPhongMay.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        thAutoRefresh.start();
+    }
+
+    private synchronized void updateTable() {
+        System.out.println("update");
         // Xóa hết bảng 
         DefaultTableModel model = (DefaultTableModel) tableDanhSachPhong.getModel();
-        for (int i = model.getRowCount() - 1; i >= 0; i--) {
-            model.removeRow(i);
-        }
+
+//        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+//            model.removeRow(i);
+//        }
         // tạo lại bảng 
         String buoi = "";
         if (buoiSang.isSelected()) {
@@ -353,27 +390,24 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
             buoi += "T";
         }
         int selectedTinhTrang = tinhTrang.getSelectedIndex();
-
         arrPhongMay = null;
         if (selectedTinhTrang == 0) {
             // lay cac phong da dang ki
             arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(0, ngay.getSelectedItem().toString(), buoi);
             soPhongMayTrong = 0;
 
-            for (PhongMay phongMay : arrPhongMay) {
-                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrangPhong(), phongMay.getDanhSachPhanMem(), ""});
-            }
         } else if (selectedTinhTrang > 0) {
             arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(1, ngay.getSelectedItem().toString(), buoi);
-            soPhongMayTrong = arrPhongMay.size();
-            if (selectedTinhTrang == 2) {
-                arrPhongMay.addAll(DBQuanLyThucHanh.getPhongMayTheoTinhTrang(0, ngay.getSelectedItem().toString(), buoi));
+            if (arrPhongMay != null) {
+                soPhongMayTrong = arrPhongMay.size();
+            } else {
+                arrPhongMay = new ArrayList<>();
             }
-            for (int i = 0; i < arrPhongMay.size(); i++) {
-                if (i < soPhongMayTrong) {
-                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrangPhong(), arrPhongMay.get(i).getDanhSachPhanMem(), "Đăng kí"});
-                } else {
-                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrangPhong(), arrPhongMay.get(i).getDanhSachPhanMem(), ""});
+
+            if (selectedTinhTrang == 2) {
+                ArrayList arrPhongChuaDK = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(0, ngay.getSelectedItem().toString(), buoi);
+                if (arrPhongChuaDK != null) {
+                    arrPhongMay.addAll(arrPhongChuaDK);
                 }
             }
 
@@ -381,9 +415,24 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
             System.out.println("SOS!!!");
         }
 
-        TableColumn tColumn = tableDanhSachPhong.getColumnModel().getColumn(5);
-        tColumn.setCellRenderer(new ColumnColorRenderer(Color.blue));
+        if (arrPhongMay == null) {
+            return;
+        }
 
+        model.setRowCount(arrPhongMay.size());
+
+        for (int i = 0; i < arrPhongMay.size(); i++) {
+            model.setValueAt(arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), i, 0);
+            model.setValueAt(arrPhongMay.get(i).getSoMayChieu(), i, 1);
+            model.setValueAt(arrPhongMay.get(i).getSoMayTinh(), i, 2);
+            model.setValueAt(arrPhongMay.get(i).getTinhTrangPhong(), i, 3);
+            model.setValueAt(arrPhongMay.get(i).getDanhSachPhanMem(), i, 4);
+            if (i < soPhongMayTrong) {
+                model.setValueAt("Đăng kí", i, 5);
+            } else {
+                model.setValueAt("", i, 5);
+            }
+        }
     }
     // Customize the code to set the background and foreground color for each column of a JTable
 

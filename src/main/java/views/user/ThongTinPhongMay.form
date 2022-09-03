@@ -172,11 +172,10 @@
     <Component class="javax.swing.JComboBox" name="tinhTrang">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="3">
             <StringItem index="0" value="&#x110;&#xe3; &#x111;&#x103;ng k&#xed;"/>
             <StringItem index="1" value="Ch&#x1b0;a &#x111;&#x103;ng k&#xed;"/>
             <StringItem index="2" value="T&#x1ea5;t c&#x1ea3;"/>
-            <StringItem index="3" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -195,9 +194,10 @@
     <Component class="javax.swing.JComboBox" name="ngay">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="31/08/2022"/>
-            <StringItem index="1" value="1/09/2022"/>
+          <StringArray count="3">
+            <StringItem index="0" value=""/>
+            <StringItem index="1" value=""/>
+            <StringItem index="2" value=""/>
           </StringArray>
         </Property>
       </Properties>
