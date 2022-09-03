@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 public class GiangVien implements Serializable {
 
-    private int maGiangVien;
+    private String maGiangVien;
     private String tenGiangVien;
     private String soDT;
     private String diaChi;
@@ -23,7 +23,7 @@ public class GiangVien implements Serializable {
     public GiangVien() {
     }
 
-    public GiangVien(int maGiangVien, String tenGiangVien, String soDT, String diaChi, String email, String hocVi, String khoa) {
+    public GiangVien(String maGiangVien, String tenGiangVien, String soDT, String diaChi, String email, String hocVi, String khoa) {
         this.maGiangVien = maGiangVien;
         this.tenGiangVien = tenGiangVien;
         this.soDT = soDT;
@@ -33,16 +33,16 @@ public class GiangVien implements Serializable {
         this.khoa = khoa;
     }
 
-    public int getMaGiangVien() {
+    public String getMaGiangVien() {
         return maGiangVien;
     }
 
-    public GiangVien(String tenGiangVien, int maGiangVien) {
+    public GiangVien(String tenGiangVien, String maGiangVien) {
         this.tenGiangVien = tenGiangVien;
         this.maGiangVien = maGiangVien;
     }
 
-    public void setMaGiangVien(int maGiangVien) {
+    public void setMaGiangVien(String maGiangVien) {
         this.maGiangVien = maGiangVien;
     }
 

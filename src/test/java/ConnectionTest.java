@@ -4,6 +4,8 @@
  */
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ConnectionTest {
                     String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
                 //here sonoo is database name, root is username and password
                 Statement stmt = con.createStatement();
+
                 ResultSet rs = stmt.executeQuery("CALL get_list_mon('20226001');");
                 while (rs.next()) {
                     System.out.println(rs.getString(1) + "  " + rs.getString(2));
@@ -40,12 +43,34 @@ public class ConnectionTest {
         return true;
     }
 
-    public static void main(String args[]) {
-        if (ConnectionTest.test()) {
-            System.out.println("Connection is successful!");
-        } else {
-            System.out.println("Connection is not successful!");
+    public static void test2() {
+
+        try {
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            //here sonoo is database name, root is username and password
+            try ( Connection con = DriverManager.getConnection(
+                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
+                Statement stmt = con.createStatement();
+                for (int i = 0; i < 100; i++) {
+                    ResultSet rs = stmt.executeQuery("CALL get_list_mon('20226001');");
+                }
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public static void main(String args[]) {
+//        if (ConnectionTest.test()) {
+//            System.out.println("Connection is successful!");
+//        } else {
+//            System.out.println("Connection is not successful!");
+//        }
+        ConnectionTest.test2();
     }
 }

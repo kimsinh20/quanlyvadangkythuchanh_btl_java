@@ -139,7 +139,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         comboTuan.setSelectedIndex(0);
 
         // init ngay thang
-        ArrayList<String> bayNgayTrongTuan = DBQuanLyThucHanh.getBayNgayTrongTuan(currentTuan);
+        ArrayList<String> bayNgayTrongTuan = DBQuanLyThucHanh.getBayNgayTrongTuan(0);
         for (int i = 0; i < 7; i++) {
             ngayThang[i].setText(bayNgayTrongTuan.get(i));
         }
@@ -168,9 +168,9 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
                 // Đã đăng kí 
                 if (lichInCurrentCell != null) {
                     // Do giáo viên này đăng kí 
-                    System.out.println("current: " + maGV);
-                    System.out.println("access to: " + lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien());
-                    if (lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien() ==Integer.parseInt(maGV)) {
+//                    System.out.println("current: " + maGV);
+//                    System.out.println("access to: " + lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien());
+                    if (lichInCurrentCell.getLopHocPhan().getGiangVien().getMaGiangVien().equalsIgnoreCase(maGV)) {
                         thoiKhoaBieu[i][j].setComponentPopupMenu(menuHuy);
                         thoiKhoaBieu[i][j].setToolTipText("Nhấn phải chuột");
                     } else {
@@ -1189,7 +1189,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectedTuan = Integer.parseInt(comboTuan.getSelectedItem().toString());
         if (currentTuan != selectedTuan) {
-            ArrayList<String> bayNgayTrongTuan = DBQuanLyThucHanh.getBayNgayTrongTuan(selectedTuan);
+            ArrayList<String> bayNgayTrongTuan = DBQuanLyThucHanh.getBayNgayTrongTuan(comboTuan.getSelectedIndex());
 
             for (int i = 0; i < 7; i++) {
                 ngayThang[i].setText(bayNgayTrongTuan.get(i));
@@ -1429,9 +1429,11 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         System.out.println("Buoi can huy: " + buoiTH);
         System.out.println("Ngay can huy: " + ngayCanHuy);
 
-        boolean isDeletedLichThucHanh = DBQuanLyThucHanh.deleteLichThucHanh(maGV, buoiTH, ngayCanHuy);
+        boolean isDeletedLichThucHanh = DBQuanLyThucHanh.deleteLichThucHanh(maPM, buoiTH, ngayCanHuy);
         if (isDeletedLichThucHanh) {
             JOptionPane.showMessageDialog(this, "Hủy thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "Hủy không thành công!!!");
         }
 
         refreshData();
