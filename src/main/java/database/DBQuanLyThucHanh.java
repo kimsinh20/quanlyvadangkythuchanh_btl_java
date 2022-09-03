@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,24 +29,44 @@ public class DBQuanLyThucHanh {
     private static final String username = "sql6516524";
     private static final String password = "cfC9FxDEIG";
     private static final String port = "3306";
+    private static Connection conn;
+    private static Statement stmt;
+
+    public static final String DATABASE_USER = "user";
+    public static final String DATABASE_PASSWORD = "password";
+    public static final String MYSQL_AUTO_RECONNECT = "autoReconnect";
+    public static final String MYSQL_MAX_RECONNECTS = "maxReconnects";
+
+    public static boolean initConnection() {
+        try {
+            conn = DBQuanLyThucHanh.getConnection();
+            stmt = conn.createStatement();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(DBQuanLyThucHanh.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    public static Connection getConnection() throws Exception {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String dbURL = String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName);
+        java.util.Properties connProperties = new java.util.Properties();
+        connProperties.put(DATABASE_USER, username);
+        connProperties.put(DATABASE_PASSWORD, password);
+        connProperties.put(MYSQL_AUTO_RECONNECT, "true");
+        connProperties.put(MYSQL_MAX_RECONNECTS, "99999");
+        return DriverManager.getConnection(dbURL, connProperties);
+    }
 
     public static boolean insertThucHanh(int maPM, String maLopHP, String ngayTH, String buoiTH) {
-
-//        String ;
         // sql execute: CALL insert_thuc_hanh("maPM", malophp, ngayth, buoith) -> thoiGianDangKi sẽ tự thêm trong lúc insert
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL insert_thuc_hanh(" + maPM + ",'" + maLopHP + "','" + ngayTH + "','" + buoiTH + "');");
-                while (rs.next()) {
-                    return rs.getBoolean(1);
-                }
+            ResultSet rs = stmt.executeQuery("CALL insert_thuc_hanh(" + maPM + ",'" + maLopHP + "','" + ngayTH + "','" + buoiTH + "');");
+            while (rs.next()) {
+                return rs.getBoolean(1);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -55,19 +77,11 @@ public class DBQuanLyThucHanh {
         ArrayList<LopHocPhan> mon = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_list_mon('" + maGV + "');");
-                while (rs.next()) {
-                    mon.add(new LopHocPhan(rs.getString(1), new MonHoc(rs.getString(2))));
-//                    System.out.println(rs.getString(1) + "  " + rs.getString(2));
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_list_mon('" + maGV + "');");
+            while (rs.next()) {
+                mon.add(new LopHocPhan(rs.getString(1), new MonHoc(rs.getString(2))));
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -77,18 +91,11 @@ public class DBQuanLyThucHanh {
     public static int getTuanNay() {
         // sql execute: CALL get_tuan_nay()
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_tuan_nay();");
-                while (rs.next()) {
-                    return rs.getInt(1);
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_tuan_nay();");
+            while (rs.next()) {
+                return rs.getInt(1);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return 0;
@@ -97,18 +104,11 @@ public class DBQuanLyThucHanh {
     public static String getTenGV(String maGV) {
         // sql execute: CALL get_ten_gv(maGV)
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_ten_gv('" + maGV + "');");
-                while (rs.next()) {
-                    return rs.getString(1);
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_ten_gv('" + maGV + "');");
+            while (rs.next()) {
+                return rs.getString(1);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return "Nguyễn Thị Lỗi";
@@ -142,24 +142,17 @@ public class DBQuanLyThucHanh {
         ArrayList<String> returns = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_bay_ngay_trong_tuan(" + soTuanTiepTheo + ");");
-                while (rs.next()) {
-                    returns.add(rs.getString(1));
-                    returns.add(rs.getString(2));
-                    returns.add(rs.getString(3));
-                    returns.add(rs.getString(4));
-                    returns.add(rs.getString(5));
-                    returns.add(rs.getString(6));
-                    returns.add(rs.getString(7));
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_bay_ngay_trong_tuan(" + soTuanTiepTheo + ");");
+            while (rs.next()) {
+                returns.add(rs.getString(1));
+                returns.add(rs.getString(2));
+                returns.add(rs.getString(3));
+                returns.add(rs.getString(4));
+                returns.add(rs.getString(5));
+                returns.add(rs.getString(6));
+                returns.add(rs.getString(7));
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -169,18 +162,11 @@ public class DBQuanLyThucHanh {
     public static String getLyThuyet(String currentMaLop) {
         // sql execute: CALL get_ly_thuyet(malophp) -> return: lichDayLyThuyet, phongHocLyThuyet, tiethoc
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_ly_thuyet('" + currentMaLop + "');");
-                while (rs.next()) {
-                    return String.format("Lịch lý thuyết: %s, %s, tiết %s", rs.getString(1), rs.getString(2), rs.getString(3));
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_ly_thuyet('" + currentMaLop + "');");
+            while (rs.next()) {
+                return String.format("Lịch lý thuyết: %s, %s, tiết %s", rs.getString(1), rs.getString(2), rs.getString(3));
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return String.format("Lịch lý thuyết: %s, %s, tiết %s", "T8", "Tòa 999", "1,2,3,4,5,6");
@@ -189,18 +175,11 @@ public class DBQuanLyThucHanh {
     public static int getKhoa(String malophp) {
         // sql execute: CALL get_khoa(malophp) -> return: Khóa 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_khoa('" + malophp + "');");
-                while (rs.next()) {
-                    return rs.getInt(1);
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_khoa('" + malophp + "');");
+            while (rs.next()) {
+                return rs.getInt(1);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return 10;
@@ -213,31 +192,14 @@ public class DBQuanLyThucHanh {
         ArrayList<ThucHanh> daDangKi = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL get_danh_sach_da_dang_ki('" + ngayBatDau + "','" + ngayKetThuc + "'," + maPhongMay + ");");
-                while (rs.next()) {
-                    daDangKi.add(new ThucHanh(rs.getString(2), rs.getString(3), new LopHocPhan(rs.getString(1), new MonHoc(rs.getString(7)), new GiangVien(rs.getString(5), rs.getString(6))), rs.getString(4)));
-                }
+            ResultSet rs = stmt.executeQuery("CALL get_danh_sach_da_dang_ki('" + ngayBatDau + "','" + ngayKetThuc + "'," + maPhongMay + ");");
+            while (rs.next()) {
+                daDangKi.add(new ThucHanh(rs.getString(2), rs.getString(3), new LopHocPhan(rs.getString(1), new MonHoc(rs.getString(7)), new GiangVien(rs.getString(5), rs.getString(6))), rs.getString(4)));
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
-//        if ("1/9/2022".equalsIgnoreCase(ngayBatDau)) {
-//            daDangKi.add(new ThucHanh("1/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình hướng đối tượng"), new GiangVien("An Văn Minh", 3)), "1 phút trước"));
-//            daDangKi.add(new ThucHanh("2/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Mạng máy tính"), new GiangVien("Nguyễn Thị T", 1)), "29/08/2022"));
-//            daDangKi.add(new ThucHanh("5/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web"), new GiangVien("Phạm Thế Anh", 5)), "30/08/2022"));
-//        } else {
-//            daDangKi.add(new ThucHanh("8/9/2022", "C", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình căn bản"), new GiangVien("Nguyễn Thị T", 1)), "1 phút trước"));
-//            daDangKi.add(new ThucHanh("10/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình .net"), new GiangVien("Nguyễn Thế Vinh", 6)), "1 phút trước"));
-//            daDangKi.add(new ThucHanh("11/9/2022", "S", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình ASP.net"), new GiangVien("Nguyễn Ngọc Kí", 7)), "29/08/2022"));
-//            daDangKi.add(new ThucHanh("13/9/2022", "T", new LopHocPhan("2022IT6024002", new MonHoc("Lập trình web bằng PHP"), new GiangVien("Trần Thị Huyền", 8)), "30/08/2022"));
-//        }
         return daDangKi;
     }
 
@@ -259,18 +221,11 @@ public class DBQuanLyThucHanh {
     public static boolean deleteLichThucHanh(int maPM, String buoiTH, String ngayThucHanh) {
         // sql execute: CALL delete_lich_thuc_hanh(maPM, buoiTH, ngayThucHanh)
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //here sonoo is database name, root is username and password
-            try ( Connection con = DriverManager.getConnection(
-                    String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName), username, password)) {
-                //here sonoo is database name, root is username and password
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("CALL delete_lich_thuc_hanh(" + maPM + ",'" + buoiTH + "','" + ngayThucHanh + "');");
-                while (rs.next()) {
-                    return rs.getBoolean(1);
-                }
+            ResultSet rs = stmt.executeQuery("CALL delete_lich_thuc_hanh(" + maPM + ",'" + buoiTH + "','" + ngayThucHanh + "');");
+            while (rs.next()) {
+                return rs.getBoolean(1);
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return false;
