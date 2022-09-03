@@ -12,84 +12,51 @@ import java.io.Serializable;
  */
 public class LopHocPhan implements Serializable{
     private String maLopHocPhan;
-    private String caHoc;
-    private String phongHocLyThuyet;
-    private String lichHocLyThuyet;
-    private int soSV;
-    private MonHoc monHoc;
     private GiangVien giangVien;
+    private String tenMonHoc;
+    private int soLuongSv;
+    private String lichHocLyThuyet;
+    private String phongHocLyThuyet;
+    private String tietHocLyThuyet;
+    private int khoa;
+   
+    
 
     public LopHocPhan() {
     }
 
-    public LopHocPhan(String maLopHocPhan, String caHoc, String phongHocLyThuyet, String lichHocLyThuyet, int soSV, MonHoc monHoc, GiangVien giangVien) {
+    public LopHocPhan(String maLopHocPhan, GiangVien giangVien, String tenMonHoc, int soLuongSv, String lichHocLyThuyet, String phongHocLyThuyet, String tietHocLyThuyet, int khoa) {
         this.maLopHocPhan = maLopHocPhan;
-        this.caHoc = caHoc;
-        this.phongHocLyThuyet = phongHocLyThuyet;
-        this.lichHocLyThuyet = lichHocLyThuyet;
-        this.soSV = soSV;
-        this.monHoc = monHoc;
         this.giangVien = giangVien;
+        this.tenMonHoc = tenMonHoc;
+        this.soLuongSv = soLuongSv;
+        this.lichHocLyThuyet = lichHocLyThuyet;
+        this.phongHocLyThuyet = phongHocLyThuyet;
+        this.tietHocLyThuyet = tietHocLyThuyet;
+        this.khoa = khoa;
     }
-    public LopHocPhan(String maLopHocPhan, MonHoc monHoc) {
+
+    public LopHocPhan(String maLopHocPhan, String tenMonHoc) {
         this.maLopHocPhan = maLopHocPhan;
-        this.monHoc = monHoc;
+        this.tenMonHoc = tenMonHoc;
     }
+
     public LopHocPhan(String maLopHocPhan) {
         this.maLopHocPhan = maLopHocPhan;
     }
-    public LopHocPhan(String maLopHocPhan, MonHoc monHoc, GiangVien giangVien) {
+
+    public LopHocPhan(String maLopHocPhan, GiangVien giangVien, String tenMonHoc) {
         this.maLopHocPhan = maLopHocPhan;
-        this.monHoc = monHoc;
         this.giangVien = giangVien;
+        this.tenMonHoc = tenMonHoc;
     }
-    
+
     public String getMaLopHocPhan() {
         return maLopHocPhan;
     }
 
     public void setMaLopHocPhan(String maLopHocPhan) {
         this.maLopHocPhan = maLopHocPhan;
-    }
-
-    public String getCaHoc() {
-        return caHoc;
-    }
-
-    public void setCaHoc(String caHoc) {
-        this.caHoc = caHoc;
-    }
-
-    public String getPhongHocLyThuyet() {
-        return phongHocLyThuyet;
-    }
-
-    public void setPhongHocLyThuyet(String phongHocLyThuyet) {
-        this.phongHocLyThuyet = phongHocLyThuyet;
-    }
-
-    public String getLichHocLyThuyet() {
-        return lichHocLyThuyet;
-    }
-
-    public void setLichHocLyThuyet(String lichHocLyThuyet) {
-        this.lichHocLyThuyet = lichHocLyThuyet;
-    }
-
-    public int getSoSV() {
-        return soSV;
-    }
-
-    public void setSoSV(int soSV) {
-        this.soSV = soSV;
-    }
-
-    public MonHoc getMonHoc() {
-        return monHoc;
-    }
-
-    public void setMonHoc(MonHoc monHoc) {
-        this.monHoc = monHoc;
     }
 
     public GiangVien getGiangVien() {
@@ -100,9 +67,53 @@ public class LopHocPhan implements Serializable{
         this.giangVien = giangVien;
     }
 
-    @Override
-    public String toString() {
-        return "LopHocPhan{" + "maLopHocPhan=" + maLopHocPhan + ", caHoc=" + caHoc + ", phongHocLyThuyet=" + phongHocLyThuyet + ", lichHocLyThuyet=" + lichHocLyThuyet + ", soSV=" + soSV + ", monHoc=" + monHoc + ", giangVien=" + giangVien + '}';
+    public String getTenMonHoc() {
+        return tenMonHoc;
+    }
+
+    public void setTenMonHoc(String tenMonHoc) {
+        this.tenMonHoc = tenMonHoc;
+    }
+
+    public int getSoLuongSv() {
+        return soLuongSv;
+    }
+
+    public void setSoLuongSv(int soLuongSv) {
+        this.soLuongSv = soLuongSv;
+    }
+
+    public String getLichHocLyThuyet() {
+        return lichHocLyThuyet;
+    }
+
+    public void setLichHocLyThuyet(String lichHocLyThuyet) {
+        this.lichHocLyThuyet = lichHocLyThuyet;
+    }
+
+    public String getPhongHocLyThuyet() {
+        return phongHocLyThuyet;
+    }
+
+    public void setPhongHocLyThuyet(String phongHocLyThuyet) {
+        this.phongHocLyThuyet = phongHocLyThuyet;
+    }
+
+    public String getTietHocLyThuyet() {
+        return tietHocLyThuyet;
+    }
+
+    public void setTietHocLyThuyet(String tietHocLyThuyet) {
+        this.tietHocLyThuyet = tietHocLyThuyet;
+    }
+
+    public int getKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(int khoa) {
+        this.khoa = khoa;
     }
     
+      
 }

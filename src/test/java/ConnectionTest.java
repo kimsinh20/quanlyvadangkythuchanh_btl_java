@@ -3,7 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +34,8 @@ public class ConnectionTest {
     public static final String DATABASE_PASSWORD = "password";
     public static final String MYSQL_AUTO_RECONNECT = "autoReconnect";
     public static final String MYSQL_MAX_RECONNECTS = "maxReconnects";
-    
-    public static boolean initConnection(){
+
+    public static boolean initConnection() {
         try {
             conn = ConnectionTest.getConnection();
             stmt = conn.createStatement();
@@ -36,7 +45,7 @@ public class ConnectionTest {
             return false;
         }
     }
-    
+
     public static Connection getConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String dbURL = String.format("jdbc:mysql://%s:%s/%s", databaseHost, port, databaseName);
@@ -85,16 +94,29 @@ public class ConnectionTest {
 //        }
 //    }
     public static void main(String args[]) {
-        try {
-            ConnectionTest.initConnection();
-        } catch (Exception ex) {
-            Logger.getLogger(ConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (ConnectionTest.test()) {
-            System.out.println("Connection is successful!");
-        } else {
-            System.out.println("Connection is not successful!");
-        }
+//        try {
+//            ConnectionTest.initConnection();
+//        } catch (Exception ex) {
+//            Logger.getLogger(ConnectionTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        if (ConnectionTest.test()) {
+//            System.out.println("Connection is successful!");
+//        } else {
+//            System.out.println("Connection is not successful!");
+//        }
 //        ConnectionTest.test2();
+//        Date date = (Date) Calendar.getInstance().getTime();
+
+        Calendar c = Calendar.getInstance();
+
+        System.out.println(convertDateToString(c.getTime()));
+        c.add(Calendar.DATE, 1);
+        
+        
+    }
+
+    public static String convertDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
     }
 }

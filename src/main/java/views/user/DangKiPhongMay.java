@@ -12,6 +12,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,7 +106,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
             while (isUsingProcess) {
                 refreshData();
                 try {
-                    Thread.sleep(60_000);
+                    Thread.sleep(1_000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(DangKiPhongMay.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -116,12 +118,12 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private void initData() {
         // init lop
         ArrayList<LopHocPhan> mon_maLopHP = DBQuanLyThucHanh.getListMon(maGV);
-        if(mon_maLopHP == null){
+        if (mon_maLopHP == null) {
             System.out.println("SOS giao vien nay khong co lop hoc.");
         }
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         for (LopHocPhan mon_ma : mon_maLopHP) {
-            model.addElement(mon_ma.getMonHoc().getTenMH() + " - " + mon_ma.getMaLopHocPhan());
+            model.addElement(mon_ma.getTenMonHoc() + " - " + mon_ma.getMaLopHocPhan());
             arrMaLopHP.add(mon_ma.getMaLopHocPhan());
         }
         comboLop.setModel(model);
@@ -159,13 +161,16 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void refreshData() {
         System.out.println("refreshing");
-
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+        LocalDate today = LocalDate.now();
         ArrayList<ThucHanh> danhSachDaDangKi = DBQuanLyThucHanh.getDanhSachDaDangKi(ngayThang[0].getText(), ngayThang[6].getText(), maPM);
         ThucHanh lichInCurrentCell;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 7; j++) {
                 lichInCurrentCell = isInDanhSachDaDangKi(danhSachDaDangKi, i, j);
-                // Đã đăng kí 
+
+//                System.out.println(today.toString() + "->" + dateInCell.toString() + ": " + dateInCell.isAfter(today));
+                // khác null nếu đã đăng kí 
                 if (lichInCurrentCell != null) {
                     // Do giáo viên này đăng kí 
 //                    System.out.println("current: " + maGV);
@@ -175,15 +180,28 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
                         thoiKhoaBieu[i][j].setToolTipText("Nhấn phải chuột");
                     } else {
                         thoiKhoaBieu[i][j].setComponentPopupMenu(null);
+                        thoiKhoaBieu[i][j].setToolTipText(null);
                     }
-                    setDaDangKi(thoiKhoaBieu[i][j], lichInCurrentCell.getLopHocPhan().getMaLopHocPhan(), lichInCurrentCell.getLopHocPhan().getGiangVien().getTenGiangVien(), lichInCurrentCell.getLopHocPhan().getMonHoc().getTenMH(), lichInCurrentCell.getTietTH() + (j + 1), lichInCurrentCell.getThoiGianDangKi());
+                    setDaDangKi(thoiKhoaBieu[i][j], lichInCurrentCell.getLopHocPhan().getMaLopHocPhan(), lichInCurrentCell.getLopHocPhan().getGiangVien().getTenGiangVien(), lichInCurrentCell.getLopHocPhan().getTenMonHoc(), lichInCurrentCell.getTietTH() + (j + 1), lichInCurrentCell.getThoiGianDangKi());
+
                 } else {
+                    // chua dang ki
                     setChuaDangKi(thoiKhoaBieu[i][j]);
-                    thoiKhoaBieu[i][j].setComponentPopupMenu(null);
+                }
+
+                if (comboTuan.getSelectedIndex() == 0) {
+                    LocalDate dateInCell = LocalDate.parse(ngayThang[j].getText(), f);
+
+                    if (dateInCell.isBefore(today)) {
+                        thoiKhoaBieu[i][j].setComponentPopupMenu(null);
+                        thoiKhoaBieu[i][j].setEnabled(false);
+                        thoiKhoaBieu[i][j].setToolTipText(null);
+                    }
+                } else {
+                    thoiKhoaBieu[i][j].setEnabled(true);
                 }
             }
         }
-
     }
 
     private ThucHanh isInDanhSachDaDangKi(ArrayList<ThucHanh> danhSachDaDangKi, int i, int j) {
@@ -1045,31 +1063,24 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         thu2Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu2Ngay.setText("1/9/2022");
         jPanel2.add(thu2Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         thu3Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu3Ngay.setText("2/9/2022");
         jPanel2.add(thu3Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         thu4Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu4Ngay.setText("3/9/2022");
         jPanel2.add(thu4Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         thu5Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu5Ngay.setText("4/9/2022");
         jPanel2.add(thu5Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
         thu6Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu6Ngay.setText("5/9/2022");
         jPanel2.add(thu6Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         thu7Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu7Ngay.setText("6/9/2022");
         jPanel2.add(thu7Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
         thu8Ngay.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        thu8Ngay.setText("7/9/2022");
         jPanel2.add(thu8Ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -1158,7 +1169,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T8ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T8ContentMouseClicked
         // TODO add your handling code here:
-        if (T8Content.getText().contains("Đăng kí")) {
+        if (T8Content.getText().contains("Đăng kí") && T8Content.isEnabled()) {
             guiFormDangKi("T", thu8Ngay.getText());
         } else {
             evt.consume();
@@ -1203,7 +1214,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S2ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S2ContentMouseClicked
         // TODO add your handling code here:
-        if (S2Content.getText().contains("Đăng kí")) {
+        if (S2Content.getText().contains("Đăng kí") && S2Content.isEnabled()) {
             guiFormDangKi("S", thu2Ngay.getText());
         } else {
             evt.consume();
@@ -1212,7 +1223,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S3ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S3ContentMouseClicked
         // TODO add your handling code here:
-        if (S3Content.getText().contains("Đăng kí")) {
+        if (S3Content.getText().contains("Đăng kí") && S3Content.isEnabled()) {
             guiFormDangKi("S", thu3Ngay.getText());
         } else {
             evt.consume();
@@ -1221,7 +1232,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S4ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S4ContentMouseClicked
         // TODO add your handling code here:
-        if (S4Content.getText().contains("Đăng kí")) {
+        if (S4Content.getText().contains("Đăng kí") && S4Content.isEnabled()) {
             guiFormDangKi("S", thu4Ngay.getText());
         } else {
             evt.consume();
@@ -1230,7 +1241,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S5ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S5ContentMouseClicked
         // TODO add your handling code here:
-        if (S5Content.getText().contains("Đăng kí")) {
+        if (S5Content.getText().contains("Đăng kí") && S5Content.isEnabled()) {
             guiFormDangKi("S", thu5Ngay.getText());
         } else {
             evt.consume();
@@ -1239,7 +1250,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S6ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S6ContentMouseClicked
         // TODO add your handling code here:
-        if (S6Content.getText().contains("Đăng kí")) {
+        if (S6Content.getText().contains("Đăng kí") && S6Content.isEnabled()) {
             guiFormDangKi("S", thu6Ngay.getText());
         } else {
             evt.consume();
@@ -1248,7 +1259,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S7ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S7ContentMouseClicked
         // TODO add your handling code here:
-        if (S7Content.getText().contains("Đăng kí")) {
+        if (S7Content.getText().contains("Đăng kí") && S7Content.isEnabled()) {
             guiFormDangKi("S", thu7Ngay.getText());
         } else {
             evt.consume();
@@ -1257,7 +1268,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void S8ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_S8ContentMouseClicked
         // TODO add your handling code here:
-        if (S8Content.getText().contains("Đăng kí")) {
+        if (S8Content.getText().contains("Đăng kí") && S8Content.isEnabled()) {
             guiFormDangKi("S", thu8Ngay.getText());
         } else {
             evt.consume();
@@ -1266,7 +1277,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C2ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C2ContentMouseClicked
         // TODO add your handling code here:
-        if (C2Content.getText().contains("Đăng kí")) {
+        if (C2Content.getText().contains("Đăng kí") && C2Content.isEnabled()) {
             guiFormDangKi("C", thu2Ngay.getText());
         } else {
             evt.consume();
@@ -1275,7 +1286,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C3ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C3ContentMouseClicked
         // TODO add your handling code here:
-        if (C3Content.getText().contains("Đăng kí")) {
+        if (C3Content.getText().contains("Đăng kí") && C3Content.isEnabled()) {
             guiFormDangKi("C", thu3Ngay.getText());
         } else {
             evt.consume();
@@ -1284,7 +1295,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C4ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C4ContentMouseClicked
         // TODO add your handling code here:
-        if (C4Content.getText().contains("Đăng kí")) {
+        if (C4Content.getText().contains("Đăng kí") && C4Content.isEnabled()) {
             guiFormDangKi("C", thu4Ngay.getText());
         } else {
             evt.consume();
@@ -1293,7 +1304,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C5ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C5ContentMouseClicked
         // TODO add your handling code here:
-        if (C5Content.getText().contains("Đăng kí")) {
+        if (C5Content.getText().contains("Đăng kí") && C5Content.isEnabled()) {
             guiFormDangKi("C", thu5Ngay.getText());
         } else {
             evt.consume();
@@ -1302,7 +1313,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C6ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C6ContentMouseClicked
         // TODO add your handling code here:
-        if (C6Content.getText().contains("Đăng kí")) {
+        if (C6Content.getText().contains("Đăng kí") && C6Content.isEnabled()) {
             guiFormDangKi("C", thu6Ngay.getText());
         } else {
             evt.consume();
@@ -1311,7 +1322,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C7ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C7ContentMouseClicked
         // TODO add your handling code here:
-        if (C7Content.getText().contains("Đăng kí")) {
+        if (C7Content.getText().contains("Đăng kí") && C7Content.isEnabled()) {
             guiFormDangKi("C", thu7Ngay.getText());
         } else {
             evt.consume();
@@ -1320,7 +1331,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void C8ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_C8ContentMouseClicked
         // TODO add your handling code here:
-        if (C8Content.getText().contains("Đăng kí")) {
+        if (C8Content.getText().contains("Đăng kí") && C8Content.isEnabled()) {
             guiFormDangKi("C", thu8Ngay.getText());
         } else {
             evt.consume();
@@ -1329,7 +1340,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T2ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T2ContentMouseClicked
         // TODO add your handling code here:
-        if (T2Content.getText().contains("Đăng kí")) {
+        if (T2Content.getText().contains("Đăng kí") && T2Content.isEnabled()) {
             guiFormDangKi("T", thu2Ngay.getText());
         } else {
             evt.consume();
@@ -1338,7 +1349,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T3ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T3ContentMouseClicked
         // TODO add your handling code here:
-        if (T3Content.getText().contains("Đăng kí")) {
+        if (T3Content.getText().contains("Đăng kí") && T3Content.isEnabled()) {
             guiFormDangKi("T", thu3Ngay.getText());
         } else {
             evt.consume();
@@ -1347,7 +1358,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T4ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T4ContentMouseClicked
         // TODO add your handling code here:
-        if (T4Content.getText().contains("Đăng kí")) {
+        if (T4Content.getText().contains("Đăng kí") && T4Content.isEnabled()) {
             guiFormDangKi("T", thu4Ngay.getText());
         } else {
             evt.consume();
@@ -1356,7 +1367,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T5ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T5ContentMouseClicked
         // TODO add your handling code here:
-        if (T5Content.getText().contains("Đăng kí")) {
+        if (T5Content.getText().contains("Đăng kí") && T5Content.isEnabled()) {
             guiFormDangKi("T", thu5Ngay.getText());
         } else {
             evt.consume();
@@ -1365,7 +1376,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T6ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T6ContentMouseClicked
         // TODO add your handling code here:
-        if (T6Content.getText().contains("Đăng kí")) {
+        if (T6Content.getText().contains("Đăng kí") && T6Content.isEnabled()) {
             guiFormDangKi("T", thu6Ngay.getText());
         } else {
             evt.consume();
@@ -1374,7 +1385,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void T7ContentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_T7ContentMouseClicked
         // TODO add your handling code here:
-        if (T7Content.getText().contains("Đăng kí")) {
+        if (T7Content.getText().contains("Đăng kí") && T7Content.isEnabled()) {
             guiFormDangKi("T", thu7Ngay.getText());
         } else {
             evt.consume();
@@ -1432,7 +1443,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         boolean isDeletedLichThucHanh = DBQuanLyThucHanh.deleteLichThucHanh(maPM, buoiTH, ngayCanHuy);
         if (isDeletedLichThucHanh) {
             JOptionPane.showMessageDialog(this, "Hủy thành công");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Hủy không thành công!!!");
         }
 
@@ -1591,14 +1602,14 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
     private int maPM;
     private String maGV;
     private String tenPhong;
-    private final int soTuanDangDuocKiTruoc = 4;
+    public static final int soTuanDangDuocKiTruoc = 4;
     private String currentMaLop;
     private int currentTuan;
     private boolean isUsingProcess;
     private ArrayList<String> arrMaLopHP = new ArrayList<>();
     private final javax.swing.JEditorPane[][] thoiKhoaBieu = new javax.swing.JEditorPane[3][7];
     private final javax.swing.JLabel[] ngayThang = new javax.swing.JLabel[7];
-    
+
     private void guiFormDangKi(String buoi, String ngay) {
         if (JOptionPane.showConfirmDialog(rootPane, "Xác nhận đăng kí mã phòng: " + maPM + "\nCho lớp: " + currentMaLop + "\nVào ngày: " + ngay + "\nBuổi: " + buoi) == 0) {
             if (DBQuanLyThucHanh.insertThucHanh(maPM, currentMaLop, ngay, buoi)) {

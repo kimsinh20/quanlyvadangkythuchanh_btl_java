@@ -12,19 +12,20 @@ import java.io.Serializable;
  */
 public class ThucHanh implements Serializable {
 //    malophp, ngayThucHanh, buoiTH, thoiGianDangKi
-
-    private String ngayThucHanh;
-    private String tietTH;
-    private LopHocPhan lopHocPhan;
-    private String thoiGianDangKi;
     private PhongMay phongMay;
+    private LopHocPhan lopHocPhan;
+    private String ngayThucHanh;
+    private String buoiThucHanh;
+    
+    private String thoiGianDangKi;
+    
 
     public ThucHanh() {
     }
 
     public ThucHanh(String ngayThucHanh, String tietTH, LopHocPhan lopHocPhan, String thoiGianDangKi, PhongMay phongMay) {
         this.ngayThucHanh = ngayThucHanh;
-        this.tietTH = tietTH;
+        this.buoiThucHanh = tietTH;
         this.lopHocPhan = lopHocPhan;
         this.thoiGianDangKi = thoiGianDangKi;
         this.phongMay = phongMay;
@@ -32,7 +33,7 @@ public class ThucHanh implements Serializable {
 
     public ThucHanh(String ngayThucHanh, String tietTH, LopHocPhan lopHocPhan, String thoiGianDangKi) {
         this.ngayThucHanh = ngayThucHanh;
-        this.tietTH = tietTH;
+        this.buoiThucHanh = tietTH;
         this.lopHocPhan = lopHocPhan;
         this.thoiGianDangKi = thoiGianDangKi;
     }
@@ -46,11 +47,11 @@ public class ThucHanh implements Serializable {
     }
 
     public String getTietTH() {
-        return tietTH;
+        return buoiThucHanh;
     }
 
     public void setTietTH(String tietTH) {
-        this.tietTH = tietTH;
+        this.buoiThucHanh = tietTH;
     }
 
     public LopHocPhan getLopHocPhan() {
@@ -77,9 +78,5 @@ public class ThucHanh implements Serializable {
         this.phongMay = phongMay;
     }
 
-    @Override
-    public String toString() {
-        return "ThucHanh{" + "ngayThucHanh=" + ngayThucHanh + ", tietTH=" + tietTH + ", lopHocPhan=" + lopHocPhan + ", thoiGianDangKi=" + thoiGianDangKi + ", phongMay=" + phongMay + '}';
-    }
-
+   
 }

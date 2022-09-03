@@ -17,28 +17,20 @@ public class PhongMay implements Serializable {
     private String diaChiPhongMay;
     private int soMayChieu;
     private int soMayTinh;
-    private String tinhTrang;
-    private String cacPhanMem;
+    private String tinhTrangPhong;
+    private String danhSachPhanMem;
 
     public PhongMay() {
     }
 
-    public PhongMay(int maPhongMay, String tenPhongMay, String diaChiPhongMay, int soMayChieu, int soMayTinh, String tinhTrang, String cacPhanMem) {
+    public PhongMay(int maPhongMay, String tenPhongMay, String diaChiPhongMay, int soMayChieu, int soMayTinh, String tinhTrangPhong, String danhSachPhanMem) {
         this.maPhongMay = maPhongMay;
         this.tenPhongMay = tenPhongMay;
         this.diaChiPhongMay = diaChiPhongMay;
         this.soMayChieu = soMayChieu;
         this.soMayTinh = soMayTinh;
-        this.tinhTrang = tinhTrang;
-        this.cacPhanMem = cacPhanMem;
-    }
-
-    public String getCacPhanMem() {
-        return cacPhanMem;
-    }
-
-    public void setCacPhanMem(String cacPhanMem) {
-        this.cacPhanMem = cacPhanMem;
+        this.tinhTrangPhong = tinhTrangPhong;
+        this.danhSachPhanMem = danhSachPhanMem;
     }
 
     public int getMaPhongMay() {
@@ -81,17 +73,27 @@ public class PhongMay implements Serializable {
         this.soMayTinh = soMayTinh;
     }
 
-    public String getTinhTrang() {
-        return tinhTrang;
+    public String getTinhTrangPhong() {
+        return tinhTrangPhong;
     }
 
-    public void setTinhTrang(String tinhTrang) {
-        this.tinhTrang = tinhTrang;
+    public void setTinhTrangPhong(String tinhTrangPhong) {
+        this.tinhTrangPhong = tinhTrangPhong;
+    }
+
+    public String getDanhSachPhanMem() {
+        return danhSachPhanMem;
+    }
+
+    public void setDanhSachPhanMem(String danhSachPhanMem) {
+        this.danhSachPhanMem = danhSachPhanMem;
     }
 
     @Override
     public String toString() {
-        return "PhongMay{" + "maPhongMay=" + maPhongMay + ", tenPhongMay=" + tenPhongMay + ", diaChiPhongMay=" + diaChiPhongMay + ", soMayChieu=" + soMayChieu + ", soMayTinh=" + soMayTinh + ", tinhTrang=" + tinhTrang + '}';
+        return "PhongMay{" + "maPhongMay=" + maPhongMay + ", tenPhongMay=" + tenPhongMay + ", diaChiPhongMay=" + diaChiPhongMay + ", soMayChieu=" + soMayChieu + ", soMayTinh=" + soMayTinh + ", tinhTrangPhong=" + tinhTrangPhong + ", danhSachPhanMem=" + danhSachPhanMem + '}';
     }
+
+   
 
 }

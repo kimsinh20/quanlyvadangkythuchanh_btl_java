@@ -13,17 +13,15 @@ import java.io.Serializable;
 public class TaiKhoan implements Serializable{
     private String tenDangNhap; 
     private String matKhau;
-    private String vaiTro;
-    private GiangVien giangVien;
+    private String quyen;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String tenDangNhap, String matKhau, String vaiTro, GiangVien giangVien) {
+    public TaiKhoan(String tenDangNhap, String matKhau, String quyen) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
-        this.vaiTro = vaiTro;
-        this.giangVien = giangVien;
+        this.quyen = quyen;
     }
 
     public String getTenDangNhap() {
@@ -42,25 +40,17 @@ public class TaiKhoan implements Serializable{
         this.matKhau = matKhau;
     }
 
-    public String getVaiTro() {
-        return vaiTro;
+    public String getQuyen() {
+        return quyen;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
-    }
-
-    public GiangVien getGiangVien() {
-        return giangVien;
-    }
-
-    public void setGiangVien(GiangVien giangVien) {
-        this.giangVien = giangVien;
+    public void setQuyen(String quyen) {
+        this.quyen = quyen;
     }
 
     @Override
     public String toString() {
-        return "TaiKhoan{" + "tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + ", vaiTro=" + vaiTro + ", giangVien=" + giangVien + '}';
+        return "TaiKhoan{" + "tenDangNhap=" + tenDangNhap + ", matKhau=" + matKhau + ", quyen=" + quyen + '}';
     }
-    
+        
 }

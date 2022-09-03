@@ -11,7 +11,12 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -38,9 +43,23 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
         tableDanhSachPhong.getColumnModel().getColumn(4).setPreferredWidth(790);
         tableDanhSachPhong.getColumnModel().getColumn(5).setPreferredWidth(70);
         tinhTrang.setSelectedIndex(2);
+
+        Calendar c = Calendar.getInstance();
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (int i = 0; i <= DangKiPhongMay.soTuanDangDuocKiTruoc * 7; i++) {
+            model.addElement(convertDateToString(c.getTime()));
+            c.add(Calendar.DATE, 1);
+        }
+        ngay.setModel(model);
         ngay.setSelectedIndex(0);
 
         updateTable();
+    }
+
+    public static String convertDateToString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(date);
     }
 
     /**
@@ -248,12 +267,10 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
                 this.dispose();
                 DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM, locationOnScreen);
                 dk.setVisible(true);
-
             }
         } else {
             evt.consume();
         }
-
     }//GEN-LAST:event_tableDanhSachPhongMouseClicked
 
     /**
@@ -319,11 +336,12 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
     private ArrayList<PhongMay> arrPhongMay;
 
     private void updateTable() {
+        // Xóa hết bảng 
         DefaultTableModel model = (DefaultTableModel) tableDanhSachPhong.getModel();
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             model.removeRow(i);
         }
-
+        // tạo lại bảng 
         String buoi = "";
         if (buoiSang.isSelected()) {
             buoi += "S";
@@ -343,19 +361,19 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
             soPhongMayTrong = 0;
 
             for (PhongMay phongMay : arrPhongMay) {
-                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrang(), phongMay.getCacPhanMem(), ""});
+                model.addRow(new Object[]{phongMay.getTenPhongMay() + " - " + phongMay.getDiaChiPhongMay(), phongMay.getSoMayChieu(), phongMay.getSoMayTinh(), phongMay.getTinhTrangPhong(), phongMay.getDanhSachPhanMem(), ""});
             }
         } else if (selectedTinhTrang > 0) {
             arrPhongMay = DBQuanLyThucHanh.getPhongMayTheoTinhTrang(1, ngay.getSelectedItem().toString(), buoi);
             soPhongMayTrong = arrPhongMay.size();
             if (selectedTinhTrang == 2) {
-                arrPhongMay.addAll(DBQuanLyThucHanh.getPhongMayTheoTinhTrang(1, ngay.getSelectedItem().toString(), buoi));
+                arrPhongMay.addAll(DBQuanLyThucHanh.getPhongMayTheoTinhTrang(0, ngay.getSelectedItem().toString(), buoi));
             }
             for (int i = 0; i < arrPhongMay.size(); i++) {
                 if (i < soPhongMayTrong) {
-                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrang(), arrPhongMay.get(i).getCacPhanMem(), "Đăng kí"});
+                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrangPhong(), arrPhongMay.get(i).getDanhSachPhanMem(), "Đăng kí"});
                 } else {
-                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrang(), arrPhongMay.get(i).getCacPhanMem(), ""});
+                    model.addRow(new Object[]{arrPhongMay.get(i).getTenPhongMay() + " - " + arrPhongMay.get(i).getDiaChiPhongMay(), arrPhongMay.get(i).getSoMayChieu(), arrPhongMay.get(i).getSoMayTinh(), arrPhongMay.get(i).getTinhTrangPhong(), arrPhongMay.get(i).getDanhSachPhanMem(), ""});
                 }
             }
 

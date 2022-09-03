@@ -14,23 +14,20 @@ public class GiangVien implements Serializable {
 
     private String maGiangVien;
     private String tenGiangVien;
-    private String soDT;
-    private String diaChi;
-    private String email;
+    private String soDienThoai;
+    private String giangVienKhoa;
     private String hocVi;
-    private String khoa;
+    
 
     public GiangVien() {
     }
 
-    public GiangVien(String maGiangVien, String tenGiangVien, String soDT, String diaChi, String email, String hocVi, String khoa) {
+    public GiangVien(String maGiangVien, String tenGiangVien, String soDT, String diaChi, String email, String giangVienKhoa,String hocVi) {
         this.maGiangVien = maGiangVien;
         this.tenGiangVien = tenGiangVien;
-        this.soDT = soDT;
-        this.diaChi = diaChi;
-        this.email = email;
+        this.soDienThoai = soDT;
         this.hocVi = hocVi;
-        this.khoa = khoa;
+        this.giangVienKhoa = giangVienKhoa;
     }
 
     public String getMaGiangVien() {
@@ -55,29 +52,12 @@ public class GiangVien implements Serializable {
     }
 
     public String getSoDT() {
-        return soDT;
+        return soDienThoai;
     }
 
     public void setSoDT(String soDT) {
-        this.soDT = soDT;
+        this.soDienThoai = soDT;
     }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getHocVi() {
         return hocVi;
     }
@@ -87,15 +67,17 @@ public class GiangVien implements Serializable {
     }
 
     public String getKhoa() {
-        return khoa;
+        return giangVienKhoa;
     }
 
     public void setKhoa(String khoa) {
-        this.khoa = khoa;
+        this.giangVienKhoa = khoa;
     }
 
     @Override
     public String toString() {
-        return "GiangVien{" + "maGiangVien=" + maGiangVien + ", tenGiangVien=" + tenGiangVien + ", soDT=" + soDT + ", diaChi=" + diaChi + ", email=" + email + ", hocVi=" + hocVi + ", khoa=" + khoa + '}';
+        return "GiangVien{" + "maGiangVien=" + maGiangVien + ", tenGiangVien=" + tenGiangVien + ", soDienThoai=" + soDienThoai + ", giangVienKhoa=" + giangVienKhoa + ", hocVi=" + hocVi + '}';
     }
+
+   
 }
