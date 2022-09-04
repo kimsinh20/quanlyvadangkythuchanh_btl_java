@@ -154,7 +154,7 @@ public class viewLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String tenDangnhap = txtname.getText();
         String matKhau = String.valueOf(txtpassword.getPassword());
-        DBQuanLyThucHanh db=new DBQuanLyThucHanh();
+    
         if(tenDangnhap.equals("")) {
          JOptionPane.showMessageDialog(rootPane, "vui lòng nhập tên đăng nhập");
          return;
@@ -163,18 +163,21 @@ public class viewLogin extends javax.swing.JFrame {
           JOptionPane.showMessageDialog(rootPane, "vui lòng nhập mật khẩu"); 
           return;
         }
-        if(db.getLogin(tenDangnhap,matKhau)==2) {
-           this.dispose();
-           new AdminScreenMain().setVisible(true);
+        switch (DBQuanLyThucHanh.getLogin(tenDangnhap, matKhau)) {
+            case 2 -> {
+                new AdminScreenMain().setVisible(true);
+                this.dispose();
+            }
+            case 1 -> {
+                new UserScreenMain().setVisible(true);
+                this.dispose();
+            }
+            case 0 -> JOptionPane.showMessageDialog(rootPane, "tài khoản hoặc mật khẩu sai");
+
+            default -> {
+                JOptionPane.showMessageDialog(rootPane, "Kiểm tra kết nối mạng của bạn!!");
+            }
         }
-        if (db.getLogin(tenDangnhap,matKhau)==1) {
-            this.dispose();
-            new UserScreenMain().setVisible(true);
-        }       
-        if(db.getLogin(tenDangnhap,matKhau)==0) {
-            JOptionPane.showMessageDialog(rootPane, "tài khoản hoặc mật khẩu sai"); 
-            return;
-        }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
