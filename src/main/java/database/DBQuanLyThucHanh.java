@@ -4,10 +4,10 @@
  */
 package database;
 
-import com.mycompany.quanlythuchanh.model.GiangVien;
-import com.mycompany.quanlythuchanh.model.LopHocPhan;
-import com.mycompany.quanlythuchanh.model.PhongMay;
-import com.mycompany.quanlythuchanh.model.ThucHanh;
+import com.qlth.model.GiangVien;
+import com.qlth.model.LopHocPhan;
+import com.qlth.model.PhongMay;
+import com.qlth.model.ThucHanh;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -332,4 +332,28 @@ public class DBQuanLyThucHanh {
         }
         return false;
     }
+    public static int getLogin(String tenDangNhap,String matKhau) {
+     try {
+            if (conn == null || conn.isClosed()) {
+                DBQuanLyThucHanh.initConnection();
+            }
+        } catch (SQLException ex) {
+            DBQuanLyThucHanh.initConnection();
+            System.out.println("login");
+            Logger.getLogger(DBQuanLyThucHanh.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL login('" +tenDangNhap+ "','" + matKhau + "');");
+            while (rs.next()) {
+               return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("login faile");
+            System.out.println(e);
+        }
+        return 111;
+    }
+   
+    
 }

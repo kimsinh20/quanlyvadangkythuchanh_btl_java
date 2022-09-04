@@ -4,9 +4,7 @@
  */
 package com.mycompany.quanlythuchanh;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import views.user.ThongTinPhongMay;
+import com.qlth.views.login.viewLogin;
 
 /**
  *
@@ -18,15 +16,20 @@ public class Quanlythuchanh {
     }
 
     public static void main(String[] args) {
-        ThongTinPhongMay windowThongTinPhongMay = new ThongTinPhongMay("20226001");
-        windowThongTinPhongMay.setVisible(true);
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+//        ThongTinPhongMay windowThongTinPhongMay = new ThongTinPhongMay("20226001");
+//        windowThongTinPhongMay.setVisible(true);
+//        Toolkit toolkit = Toolkit.getDefaultToolkit();
+//        Dimension screenSize = toolkit.getScreenSize();
+//
+//        //Calculate the frame location  
+//        int x = (screenSize.width - windowThongTinPhongMay.getWidth()) / 2;
+//        int y = (screenSize.height - windowThongTinPhongMay.getHeight()) / 2;
+//
+ //       windowThongTinPhongMay.setLocation(x, y);
+         viewLogin login=new viewLogin();
+         login.setLocationRelativeTo(login);
+         login.setVisible(true);
 
-        //Calculate the frame location  
-        int x = (screenSize.width - windowThongTinPhongMay.getWidth()) / 2;
-        int y = (screenSize.height - windowThongTinPhongMay.getHeight()) / 2;
-
-        windowThongTinPhongMay.setLocation(x, y);
+   
     }
 }
