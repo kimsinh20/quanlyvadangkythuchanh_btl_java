@@ -5,7 +5,7 @@
 package com.qlth.views.login;
 
 
-import com.qlth.view.admin.AdminScreenMain;
+import com.qlth.views.admin.AdminScreenMain;
 import com.qlth.views.user.UserScreenMain;
 import database.DBQuanLyThucHanh;
 import java.awt.event.KeyEvent;
