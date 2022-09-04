@@ -352,7 +352,7 @@ public class DBQuanLyThucHanh {
             System.out.println("login faile");
             System.out.println(e);
         }
-        return 111;
+        return -1;
     }
    
     
