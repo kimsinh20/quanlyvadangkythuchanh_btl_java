@@ -6,6 +6,7 @@
 package com.qlth.views.admin;
 
 
+import com.qlth.share.ShareData;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +24,14 @@ public class AdminScreenMain extends javax.swing.JFrame {
     /**
      * Creates new form AdminScreenMain
      */
+    private String tenDangNhap;
     public AdminScreenMain() {
         initComponents();
     }
-      
+     public AdminScreenMain(String tenDangNhap) {
+         this.tenDangNhap=tenDangNhap;
+        initComponents();
+    } 
 //    public AdminScreenMain(String tenDangNhap) {
 //        nameaccount.setText("1233");
 //        initComponents();
@@ -290,7 +295,6 @@ public class AdminScreenMain extends javax.swing.JFrame {
         jLabel4.setText("tên tài khoản :");
 
         nameaccount.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        nameaccount.setText("admin");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -519,7 +523,8 @@ public class AdminScreenMain extends javax.swing.JFrame {
                 lbTime.setText(simpleTimeFormat.format(currentTime));
             }
         });
-        timerNow.start();                             
+        timerNow.start();  
+        nameaccount.setText(ShareData.nguoiDangNhap.getTenDangNhap());
     }//GEN-LAST:event_formWindowOpened
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed

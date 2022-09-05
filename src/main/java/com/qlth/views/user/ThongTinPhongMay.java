@@ -5,6 +5,7 @@
 package com.qlth.views.user;
 
 import com.qlth.model.PhongMay;
+import com.qlth.share.ShareData;
 import database.DBQuanLyThucHanh;
 import java.awt.Color;
 import java.awt.Component;
@@ -271,7 +272,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
                 String diaChiPM = arrPhongMay.get(row).getDiaChiPhongMay();
                 Point locationOnScreen = this.getLocationOnScreen();
                 Thread thread = new Thread(() -> {
-                    DangKiPhongMay dk = new DangKiPhongMay(maGV, maPM, tenPM, diaChiPM, locationOnScreen);
+                    DangKiPhongMay dk = new DangKiPhongMay(ShareData.nguoiDangNhap.getTenDangNhap(), maPM, tenPM, diaChiPM, locationOnScreen);
                     dk.setVisible(true);
                 });
                 thread.start();
@@ -333,7 +334,7 @@ public class ThongTinPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            ThongTinPhongMay ttpm = new ThongTinPhongMay("20226001");
+            ThongTinPhongMay ttpm = new ThongTinPhongMay(ShareData.nguoiDangNhap.getTenDangNhap());
             ttpm.setVisible(true);
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();

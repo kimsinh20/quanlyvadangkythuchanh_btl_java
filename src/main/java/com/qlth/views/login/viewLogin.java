@@ -5,6 +5,8 @@
 package com.qlth.views.login;
 
 
+import com.qlth.model.TaiKhoan;
+import com.qlth.share.ShareData;
 import com.qlth.views.admin.AdminScreenMain;
 import com.qlth.views.user.UserScreenMain;
 import database.DBQuanLyThucHanh;
@@ -165,10 +167,12 @@ public class viewLogin extends javax.swing.JFrame {
         }
         switch (DBQuanLyThucHanh.getLogin(tenDangnhap, matKhau)) {
             case 2 -> {
+                ShareData.nguoiDangNhap=new TaiKhoan(tenDangnhap,matKhau,"admin");
                 new AdminScreenMain().setVisible(true);
                 this.dispose();
             }
             case 1 -> {
+                ShareData.nguoiDangNhap=new TaiKhoan(tenDangnhap,matKhau,"user");
                 new UserScreenMain().setVisible(true);
                 this.dispose();
             }

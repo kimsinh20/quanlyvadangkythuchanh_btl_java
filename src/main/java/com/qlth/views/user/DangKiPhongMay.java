@@ -6,6 +6,7 @@ package com.qlth.views.user;
 
 import com.qlth.model.LopHocPhan;
 import com.qlth.model.ThucHanh;
+import com.qlth.share.ShareData;
 import database.DBQuanLyThucHanh;
 import java.awt.Color;
 import java.awt.Component;
@@ -1528,7 +1529,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 //        new Thread(() -> {
         this.isUsingProcess = false;
 //        }).start();
-        ThongTinPhongMay ttpm = new ThongTinPhongMay(maGV);
+        ThongTinPhongMay ttpm = new ThongTinPhongMay(ShareData.nguoiDangNhap.getTenDangNhap());
         ttpm.setLocation(locationOnScreen);
         ttpm.setVisible(true);
         this.dispose();
@@ -1536,7 +1537,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
-        this.dispose();
+       
         UserScreenMain ttpm = new UserScreenMain();
         ttpm.setLocationRelativeTo(ttpm);
         ttpm.setVisible(true);
@@ -1575,7 +1576,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            DangKiPhongMay dkPM = new DangKiPhongMay("20226001", 1, "PM02", "Tòa A4 - phòng 402");
+            DangKiPhongMay dkPM = new DangKiPhongMay(ShareData.nguoiDangNhap.getTenDangNhap(), 1, "PM02", "Tòa A4 - phòng 402");
             dkPM.setVisible(true);
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
