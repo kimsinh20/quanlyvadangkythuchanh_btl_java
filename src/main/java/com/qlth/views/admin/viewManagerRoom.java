@@ -5,8 +5,6 @@
 package com.qlth.views.admin;
 
 import com.qlth.model.PhongMay;
-import com.qlth.renderer.ComboBoxRenderer;
-import com.qlth.renderer.ItemComboBox;
 import database.DBQuanLyThucHanh;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
