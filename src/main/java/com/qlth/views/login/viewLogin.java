@@ -56,6 +56,9 @@ public class viewLogin extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/password32.png"))); // NOI18N
         jLabel3.setText("mật khẩu");
 
+        txtname.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        txtpassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtpassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtpasswordKeyPressed(evt);

@@ -326,14 +326,14 @@ public class DBQuanLyThucHanh {
 
         return mon;
     }
-    public static ArrayList<String> getDanhSachGiangVien() {
-        ArrayList<String> gv = new ArrayList<>();
+    public static ArrayList<GiangVien> getDanhSachGiangVien() {
+        ArrayList<GiangVien> gv = new ArrayList<>();
         DBQuanLyThucHanh.checkConnection();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("CALL get_danh_sach_giang_vien();");
             while (rs.next()) {
-                gv.add(rs.getString(1) + " - " + rs.getString(2));
+                gv.add(new GiangVien(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
             }
         } catch (SQLException e) {
             System.out.println("getDanhSachGiangVien: " + e);
@@ -363,21 +363,102 @@ public class DBQuanLyThucHanh {
             Statement stmt = conn.createStatement();
 //      call them_phong_may("PM12","Tòa A1 - phòng 701",1,40,"Sử dụng được","Visual Studio Code, Word 2019, Excel 2019, Power Point 2019, Dream Weaver");
            
-            ResultSet rs = stmt.executeQuery("CALL them_phong_may(" + tenPM + ",'" + diaChiPM + "','" + soMayChieu + "','" + soMayTinh+"','"+tinhTrang+"','"+dsPhanMem + "');");
+            ResultSet rs = stmt.executeQuery("CALL insert_phong_may('" + tenPM + "','" + diaChiPM + "'," + soMayChieu + "," + soMayTinh+",'"+tinhTrang+"','"+dsPhanMem + "');");
             while (rs.next()) {
                 return rs.getBoolean(1);
             }
         } catch (SQLException e) {
-            System.out.println("insertPhongMay: " + e);
+            System.out.println("insertPhongMay loi: " + e);
         }
 
         return false;
     }
+    public static void deletePhongMay(int maPhongMay) {
+        
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL delete_phong_may("+maPhongMay+");");
+        } catch (SQLException e) {
+            System.out.println("delete PhongMay loi: " + e);
+        }
+
+    }
+     public static void updatePhongMay(int maPhongMay,String tenPM, String diaChiPM, int soMayChieu,int soMayTinh,String tinhTrang,String dsPhanMem) {
+        
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL update_phong_may(" +maPhongMay+ ",'" + tenPM + "','" + diaChiPM + "'," + soMayChieu + "," + soMayTinh+",'"+tinhTrang+"','"+dsPhanMem + "');");
+        } catch (SQLException e) {
+            System.out.println("update Phong May loi: " + e);
+        }
+
+    }
+    public static ArrayList<PhongMay> searchPhongMay(String search) {
+         ArrayList<PhongMay> listpm = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL search_phong_may_theo_ten('" +search+ "');");
+             while (rs.next()) {
+                listpm.add(new PhongMay(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getString(7)));
+            }
+        } catch (SQLException e) {
+            System.out.println("search Phong May loi: " + e);
+        }
+        return listpm;
+    }
+    public static boolean insertGiangVien(String maGiangVien,String tenGiangVien,String soDienThoai,String hocVi,String khoa) {
+        
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL insert_giang_vien('" + maGiangVien + "','" + tenGiangVien + "','" + soDienThoai + "','"+hocVi+"','"+khoa + "');");
+            while (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("insert giang vien loi: " + e);
+        }
+
+        return false;
+    }
+      public static void deleteGiangVien(String maGiangVien) {
+        
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL delete_giang_vien('"+maGiangVien+"');");
+        } catch (SQLException e) {
+            System.out.println("delete giang vien loi: " + e);
+        }
+    }
+      public static void updateGiangVien(String maGiangVien,String tenGiangVien,String soDienThoai,String hocVi,String khoa) {
+        
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL update_giang_vien('" + maGiangVien + "','" + tenGiangVien + "','" + soDienThoai + "','"+hocVi+"','"+khoa + "');");
+        } catch (SQLException e) {
+            System.out.println("update giang vien loi: " + e);
+        }
+    }
+      public static ArrayList<GiangVien> searchGiangVien(String search) {
+         ArrayList<GiangVien> listgv = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL search_giang_vien('" +search+ "');");
+             while (rs.next()) {
+                listgv.add(new GiangVien(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+            }
+        } catch (SQLException e) {
+            System.out.println("search Phong May loi: " + e);
+        }
+        return listgv;
+    }
     public static void main(String[] args) {
-         if(DBQuanLyThucHanh.insertPhongMay("PM26", "acc", 1,30,"oke", "excel")){
-            System.out.println("da insert");  
-        } else {
-            System.out.println("sai roi");   
-        } 
+    //updatePhongMay(2,"PM1","Tòa A6 - phòng 701",1,40,"Sử dụng được","Visual Studio Code, Word 2019, Excel 2019, Power Point 2019, Dream Weaver");
     }
 }

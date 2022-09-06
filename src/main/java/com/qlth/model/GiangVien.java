@@ -15,14 +15,15 @@ public class GiangVien implements Serializable {
     private String maGiangVien;
     private String tenGiangVien;
     private String soDienThoai;
-    private String giangVienKhoa;
     private String hocVi;
+    private String giangVienKhoa;
+    
     
 
     public GiangVien() {
     }
 
-    public GiangVien(String maGiangVien, String tenGiangVien, String soDT, String diaChi, String email, String giangVienKhoa,String hocVi) {
+    public GiangVien(String maGiangVien, String tenGiangVien, String soDT,String hocVi, String giangVienKhoa) {
         this.maGiangVien = maGiangVien;
         this.tenGiangVien = tenGiangVien;
         this.soDienThoai = soDT;

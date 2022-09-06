@@ -5,7 +5,6 @@
  */
 package com.qlth.views.admin;
 
-
 import com.qlth.share.ShareData;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -25,18 +24,20 @@ public class AdminScreenMain extends javax.swing.JFrame {
      * Creates new form AdminScreenMain
      */
     private String tenDangNhap;
+
     public AdminScreenMain() {
         initComponents();
     }
-     public AdminScreenMain(String tenDangNhap) {
-         this.tenDangNhap=tenDangNhap;
+
+    public AdminScreenMain(String tenDangNhap) {
+        this.tenDangNhap = tenDangNhap;
         initComponents();
-    } 
+    }
 //    public AdminScreenMain(String tenDangNhap) {
 //        nameaccount.setText("1233");
 //        initComponents();
 //    }
-                                     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -486,17 +487,17 @@ public class AdminScreenMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
- 
+
     private void miExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExitActionPerformed
         // TODO add your handling code here:
-       this.dispose();
+        this.dispose();
         viewLogin signIn = new viewLogin();
         signIn.setVisible(true);
     }//GEN-LAST:event_miExitActionPerformed
 
     private void toolBtnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolBtnExitActionPerformed
         // TODO add your handling code here:
-       this.dispose();
+        this.dispose();
         viewLogin signIn = new viewLogin();
         signIn.setVisible(true);
     }//GEN-LAST:event_toolBtnExitActionPerformed
@@ -523,13 +524,13 @@ public class AdminScreenMain extends javax.swing.JFrame {
                 lbTime.setText(simpleTimeFormat.format(currentTime));
             }
         });
-        timerNow.start();  
+        timerNow.start();
         nameaccount.setText(ShareData.nguoiDangNhap.getTenDangNhap());
     }//GEN-LAST:event_formWindowOpened
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_formKeyPressed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -547,29 +548,33 @@ public class AdminScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         new viewManagerClass().setVisible(true);
-        
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new viewManagerRoom().setVisible(true);
+        viewManagerRoom viewManagerRoom = new viewManagerRoom();
+        viewManagerRoom.setLocationRelativeTo(viewManagerRoom);
+        viewManagerRoom.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-         this.dispose();
-        new viewStatistical().setVisible(true);
+        this.dispose();
+        viewStatistical viewStatistical = new viewStatistical();
+        viewStatistical.setLocationRelativeTo(viewStatistical);
+        viewStatistical.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_formMouseReleased
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
@@ -584,27 +589,27 @@ public class AdminScreenMain extends javax.swing.JFrame {
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void toolBtnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toolBtnNewActionPerformed
@@ -614,7 +619,9 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new viewManagerTeacher().setVisible(true);
+        viewManagerTeacher viewManagerTeacher = new viewManagerTeacher();
+        viewManagerTeacher.setLocationRelativeTo(viewManagerTeacher);
+        viewManagerTeacher.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     /**
@@ -648,7 +655,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new AdminScreenMain().setVisible(true);
             }
         });
