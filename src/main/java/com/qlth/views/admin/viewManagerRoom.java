@@ -745,7 +745,32 @@ public class viewManagerRoom extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        searchKeyPressed(null);
+         new Thread(() -> {
+            String keySearch = search.getText().trim();
+            if (keySearch.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
+            }
+            try {
+                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

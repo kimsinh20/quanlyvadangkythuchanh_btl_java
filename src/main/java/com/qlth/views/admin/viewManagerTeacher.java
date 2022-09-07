@@ -539,7 +539,30 @@ public class viewManagerTeacher extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        searchKeyPressed(null);
+        new Thread(() -> {
+            String keySearch = search.getText().trim();
+            if (keySearch.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
+            }
+            try {
+               ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+            }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+         }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
