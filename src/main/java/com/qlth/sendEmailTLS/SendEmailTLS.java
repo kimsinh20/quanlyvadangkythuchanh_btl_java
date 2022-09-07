@@ -60,7 +60,8 @@ public class SendEmailTLS {
     }
 
     public static void main(String[] args) {
-     SendEmailTLS.send("phankimsinh20@gmail","matkhau cua ban la 123456");
+    // SendEmailTLS.send("phankimsinh20@gmail","matkhau cua ban la 123456");
+    //chuc nang nay se gui mat khau cua admin cho cac email cua admin duoc luu trong database
     }
 
 }

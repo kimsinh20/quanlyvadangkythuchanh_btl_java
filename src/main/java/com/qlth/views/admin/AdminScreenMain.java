@@ -562,15 +562,17 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new viewManagerAccount().setVisible(true);
+        viewManagerAccount viewManagerAccount = new viewManagerAccount();
+        viewManagerAccount.setLocationRelativeTo(viewManagerAccount);
+        viewManagerAccount.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-       viewManagerClass viewManagerClass= new viewManagerClass();
-       viewManagerClass.setLocationRelativeTo(viewManagerClass);
-       viewManagerClass.setVisible(true);
+        viewManagerClass viewManagerClass = new viewManagerClass();
+        viewManagerClass.setLocationRelativeTo(viewManagerClass);
+        viewManagerClass.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -584,26 +586,26 @@ public class AdminScreenMain extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-         this.dispose();
-           ViewManagerPracticeRegistration dkPM = new ViewManagerPracticeRegistration();
-            dkPM.setVisible(true);
-            
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Dimension screenSize = toolkit.getScreenSize();
+        this.dispose();
+        ViewManagerPracticeRegistration dkPM = new ViewManagerPracticeRegistration();
+        dkPM.setVisible(true);
 
-            //Calculate the frame location  
-            int x = (screenSize.width - dkPM.getWidth()) / 2;
-            int y = (screenSize.height - dkPM.getHeight()) / 2;
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
 
-            dkPM.setLocation(x, y);
+        //Calculate the frame location  
+        int x = (screenSize.width - dkPM.getWidth()) / 2;
+        int y = (screenSize.height - dkPM.getHeight()) / 2;
+
+        dkPM.setLocation(x, y);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-       viewBaoCaoTheoTuan viewBaoCaoTheoTuan= new viewBaoCaoTheoTuan();
-       viewBaoCaoTheoTuan.setLocationRelativeTo(viewBaoCaoTheoTuan);
-       viewBaoCaoTheoTuan.setVisible(true);
+        viewBaoCaoTheoTuan viewBaoCaoTheoTuan = new viewBaoCaoTheoTuan();
+        viewBaoCaoTheoTuan.setLocationRelativeTo(viewBaoCaoTheoTuan);
+        viewBaoCaoTheoTuan.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -661,7 +663,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        viewBaoCaoTheoThang viewBaoCaoTheoThang= new viewBaoCaoTheoThang();
+        viewBaoCaoTheoThang viewBaoCaoTheoThang = new viewBaoCaoTheoThang();
         viewBaoCaoTheoThang.setLocationRelativeTo(viewBaoCaoTheoThang);
         viewBaoCaoTheoThang.setVisible(true);
     }//GEN-LAST:event_jMenuItem19ActionPerformed
@@ -669,7 +671,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        viewBaoCaoTheoKy viewBaoCaoTheoKy= new viewBaoCaoTheoKy();
+        viewBaoCaoTheoKy viewBaoCaoTheoKy = new viewBaoCaoTheoKy();
         viewBaoCaoTheoKy.setLocationRelativeTo(viewBaoCaoTheoKy);
         viewBaoCaoTheoKy.setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed

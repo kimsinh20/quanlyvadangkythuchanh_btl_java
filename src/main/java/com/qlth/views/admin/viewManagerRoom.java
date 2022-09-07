@@ -29,6 +29,13 @@ public class viewManagerRoom extends javax.swing.JFrame {
      */
     public viewManagerRoom() {
         initComponents();
+        table.getColumnModel().getColumn(0).setPreferredWidth(15);
+        table.getColumnModel().getColumn(1).setPreferredWidth(15);
+        table.getColumnModel().getColumn(2).setPreferredWidth(15);
+        table.getColumnModel().getColumn(4).setPreferredWidth(15);
+        table.getColumnModel().getColumn(5).setPreferredWidth(15);
+        table.getColumnModel().getColumn(6).setPreferredWidth(40);
+        table.getColumnModel().getColumn(7).setPreferredWidth(400);
     }
 
     /**

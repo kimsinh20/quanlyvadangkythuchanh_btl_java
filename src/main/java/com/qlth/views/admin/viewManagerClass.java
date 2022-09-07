@@ -46,8 +46,16 @@ public class viewManagerClass extends javax.swing.JFrame {
         new Thread(() -> {
             initdata();
         }).start();
+        tableLopHP.getColumnModel().getColumn(0).setPreferredWidth(15);
+        tableLopHP.getColumnModel().getColumn(1).setPreferredWidth(85);
+        tableLopHP.getColumnModel().getColumn(2).setPreferredWidth(105);
+        tableLopHP.getColumnModel().getColumn(3).setPreferredWidth(54);
+        tableLopHP.getColumnModel().getColumn(4).setPreferredWidth(57);
+        tableLopHP.getColumnModel().getColumn(5).setPreferredWidth(58);
+        tableLopHP.getColumnModel().getColumn(6).setPreferredWidth(23);
+        tableLopHP.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tableLopHP.getColumnModel().getColumn(8).setPreferredWidth(149);
     }
-
     private void initdata() {
         ArrayList<Integer> DSPhong = DBQuanLyThucHanh.getDanhSachPhong();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -603,7 +611,6 @@ public class viewManagerClass extends javax.swing.JFrame {
         this.dispose();
         AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
-
         admin.setVisible(true);
     }//GEN-LAST:event_buttonDongActionPerformed
 

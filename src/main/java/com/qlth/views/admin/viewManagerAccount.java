@@ -260,85 +260,85 @@ public class viewManagerAccount extends javax.swing.JFrame {
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         this.dispose();
-       AdminScreenMain admin=new AdminScreenMain();
-       admin.setLocationRelativeTo(admin);
-       
-       admin.setVisible(true);
+        AdminScreenMain admin = new AdminScreenMain();
+        admin.setLocationRelativeTo(admin);
+
+        admin.setVisible(true);
     }//GEN-LAST:event_exitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-            ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            try {
+                ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrTK.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrTK.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
-                model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
+                    model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         }).start();
     }//GEN-LAST:event_formWindowOpened
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
-         new Thread(() -> {
-         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        new Thread(() -> {
+            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
             Vector<Object> tkVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
-            TaiKhoan tk = new TaiKhoan(tkVector.get(1).toString(),tkVector.get(2).toString());
+            TaiKhoan tk = new TaiKhoan(tkVector.get(1).toString(), tkVector.get(2).toString());
             txttendn.setText(tk.getTenDangNhap());
             txtmk.setText(tk.getMatKhau());
-         }).start();
+        }).start();
     }//GEN-LAST:event_tableMouseClicked
 
     private void ressetpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ressetpasswordActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-            DBQuanLyThucHanh.resetMatKhau(txttendn.getText());
-            JOptionPane.showMessageDialog(rootPane, "reset thành công");
-             ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            try {
+                DBQuanLyThucHanh.resetMatKhau(txttendn.getText());
+                JOptionPane.showMessageDialog(rootPane, "reset thành công");
+                ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrTK.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrTK.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
-                model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
+                    model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
         }).start();
     }//GEN-LAST:event_ressetpasswordActionPerformed
 
     private void timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiemActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-             ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan(search.getText());
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            try {
+                ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan(search.getText());
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrTK.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrTK.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
-                model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
+                    model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         }).start();
     }//GEN-LAST:event_timkiemActionPerformed
 
@@ -372,7 +372,9 @@ public class viewManagerAccount extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewManagerAccount().setVisible(true);
+                viewManagerAccount viewManagerAccount = new viewManagerAccount();
+                viewManagerAccount.setLocationRelativeTo(viewManagerAccount);
+                viewManagerAccount.setVisible(true);
             }
         });
     }

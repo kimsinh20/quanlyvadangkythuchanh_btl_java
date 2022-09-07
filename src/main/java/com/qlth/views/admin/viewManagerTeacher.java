@@ -27,6 +27,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
      */
     public viewManagerTeacher() {
         initComponents();
+        table.getColumnModel().getColumn(0).setPreferredWidth(15);
     }
 
     /**
