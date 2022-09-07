@@ -48,19 +48,21 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         txttengv = new javax.swing.JTextField();
         khoa = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        sdt = new javax.swing.JTextField();
+        txtsdt = new javax.swing.JTextField();
         hocvi = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        buttonthemgiangvien = new javax.swing.JButton();
+        buttonsuagiangvien = new javax.swing.JButton();
+        buttonxoagiangvien = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        buttonresetgiangvien = new javax.swing.JButton();
+        buttonexit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("quản lý giảng viên");
@@ -103,7 +105,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                     .addComponent(khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtmagv, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
                     .addComponent(txttengv)
-                    .addComponent(sdt))
+                    .addComponent(txtsdt))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -120,7 +122,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtsdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hocvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,27 +137,27 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("quản lý giảng viên");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
-        jButton1.setText("thêm");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonthemgiangvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
+        buttonthemgiangvien.setText("thêm");
+        buttonthemgiangvien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 themgiangvien(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
-        jButton2.setText("sửa");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonsuagiangvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
+        buttonsuagiangvien.setText("sửa");
+        buttonsuagiangvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonsuagiangvienActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        jButton3.setText("xóa");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonxoagiangvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonxoagiangvien.setText("xóa");
+        buttonxoagiangvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                buttonxoagiangvienActionPerformed(evt);
             }
         });
 
@@ -168,11 +170,11 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        jButton5.setText("reset");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        buttonresetgiangvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonresetgiangvien.setText("reset");
+        buttonresetgiangvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                buttonresetgiangvienActionPerformed(evt);
             }
         });
 
@@ -187,15 +189,15 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                         .addComponent(jLabel7))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)))
+                        .addComponent(buttonthemgiangvien)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jButton2)
+                        .addComponent(buttonsuagiangvien)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(buttonxoagiangvien)
                         .addGap(12, 12, 12)
-                        .addComponent(jButton5))
+                        .addComponent(buttonresetgiangvien))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -206,10 +208,10 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
+                    .addComponent(buttonthemgiangvien)
+                    .addComponent(buttonsuagiangvien)
+                    .addComponent(buttonxoagiangvien)
+                    .addComponent(buttonresetgiangvien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -217,11 +219,11 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
-        jButton4.setText("thoát");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
+        buttonexit.setText("thoát");
+        buttonexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buttonexitActionPerformed(evt);
             }
         });
 
@@ -248,10 +250,20 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
+        jLabel11.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel11.setText("nhập dữ liệu");
+
+        jLabel12.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel12.setText("danh sách giảng viên");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(393, 393, 393))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -259,31 +271,39 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jButton4))
+                        .addComponent(buttonexit))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel11)))
                 .addGap(7, 7, 7)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(393, 393, 393))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4))
+                        .addComponent(buttonexit))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
@@ -307,14 +327,14 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void buttonexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonexitActionPerformed
         // TODO add your handling code here:
         this.dispose();
         AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
 
         admin.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_buttonexitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -350,7 +370,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             GiangVien gv = new GiangVien(teacherVector.get(1).toString(), teacherVector.get(2).toString(), teacherVector.get(3).toString(), teacherVector.get(4).toString(), teacherVector.get(5).toString());
             txtmagv.setText(gv.getMaGiangVien());
             txttengv.setText(gv.getTenGiangVien());
-            sdt.setText(gv.getSoDT());
+            txtsdt.setText(gv.getSoDT());
             DefaultComboBoxModel comboBoxModelHocVi = (DefaultComboBoxModel) hocvi.getModel();
             for (int i = 0; i < comboBoxModelHocVi.getSize(); i++) {
                 String itemComboBoxSelected = (String) comboBoxModelHocVi.getElementAt(i);
@@ -377,7 +397,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         try {
         String maGiangVien = (String) txtmagv.getText();
         String tenGiangVien=(String) txttengv.getText();
-        String soDienThoai=(String) sdt.getText();
+        String soDienThoai=(String) txtsdt.getText();
         String hocVi=String.valueOf(hocvi.getSelectedItem());
         String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
         if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
@@ -408,7 +428,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
          }).start();
     }//GEN-LAST:event_themgiangvien
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void buttonxoagiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonxoagiangvienActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
         try {
@@ -432,15 +452,15 @@ public class viewManagerTeacher extends javax.swing.JFrame {
            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex); 
         }
          }).start();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_buttonxoagiangvienActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonsuagiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuagiangvienActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
         try {
         String maGiangVien = (String) txtmagv.getText();
         String tenGiangVien=(String) txttengv.getText();
-        String soDienThoai=(String) sdt.getText();
+        String soDienThoai=(String) txtsdt.getText();
         String hocVi=String.valueOf(hocvi.getSelectedItem());
         String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
         if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
@@ -466,7 +486,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
          }).start();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonsuagiangvienActionPerformed
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         // TODO add your handling code here:
@@ -498,10 +518,10 @@ public class viewManagerTeacher extends javax.swing.JFrame {
          }).start();
     }//GEN-LAST:event_searchKeyPressed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void buttonresetgiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonresetgiangvienActionPerformed
         // TODO add your handling code here:
         resetform();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_buttonresetgiangvienActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,13 +561,15 @@ public class viewManagerTeacher extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonexit;
+    private javax.swing.JButton buttonresetgiangvien;
+    private javax.swing.JButton buttonsuagiangvien;
+    private javax.swing.JButton buttonthemgiangvien;
+    private javax.swing.JButton buttonxoagiangvien;
     private javax.swing.JComboBox<String> hocvi;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -559,18 +581,18 @@ public class viewManagerTeacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> khoa;
-    private javax.swing.JTextField sdt;
     private javax.swing.JTextField search;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtmagv;
+    private javax.swing.JTextField txtsdt;
     private javax.swing.JTextField txttengv;
     // End of variables declaration//GEN-END:variables
 
     private void resetform() {
-       txtmagv.setRequestFocusEnabled(true);
+       txtmagv.requestFocus();
        txtmagv.setText("");
        txttengv.setText("");
-       sdt.setText("");
+       txtsdt.setText("");
        hocvi.setSelectedIndex(0);
        khoa.setSelectedIndex(0);
     }

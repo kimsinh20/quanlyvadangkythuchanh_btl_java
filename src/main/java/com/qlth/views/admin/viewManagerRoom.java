@@ -52,7 +52,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         maychieu = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        maphongmay = new javax.swing.JTextField();
+        txtmaphongmay = new javax.swing.JTextField();
         somaychieu = new javax.swing.JSpinner();
         pm3 = new javax.swing.JCheckBox();
         pm1 = new javax.swing.JCheckBox();
@@ -64,18 +64,20 @@ public class viewManagerRoom extends javax.swing.JFrame {
         baotri = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         somaytinh = new javax.swing.JSpinner();
-        tenphongmay = new javax.swing.JTextField();
+        txttenphongmay = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        themphongmay = new javax.swing.JButton();
-        suaphongmay = new javax.swing.JButton();
-        xoaphongmay = new javax.swing.JButton();
+        buttonthemphongmay = new javax.swing.JButton();
+        buttonsuaphongmay = new javax.swing.JButton();
+        buttonxoaphongmay = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
-        exxit = new javax.swing.JButton();
-        ressetphongmay = new javax.swing.JButton();
+        buttonexit = new javax.swing.JButton();
+        buttonressetphongmay = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel21 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,9 +125,9 @@ public class viewManagerRoom extends javax.swing.JFrame {
 
         jLabel19.setText("các phần mềm sử dụng");
 
-        maphongmay.setEditable(false);
-        maphongmay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        maphongmay.setEnabled(false);
+        txtmaphongmay.setEditable(false);
+        txtmaphongmay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtmaphongmay.setEnabled(false);
 
         pm3.setText("Excel 2019");
         pm3.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +165,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(56, 56, 56)
-                        .addComponent(maphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtmaphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
@@ -176,7 +178,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
                                 .addComponent(phong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38)
                                 .addComponent(toa, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tenphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txttenphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -212,7 +214,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
-                            .addComponent(maphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtmaphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -224,7 +226,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
                         .addComponent(sudungduoc)
                         .addComponent(baotri)
                         .addComponent(jLabel18))
-                    .addComponent(tenphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttenphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,25 +248,25 @@ public class viewManagerRoom extends javax.swing.JFrame {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        themphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
-        themphongmay.setText("thêm");
-        themphongmay.addActionListener(new java.awt.event.ActionListener() {
+        buttonthemphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
+        buttonthemphongmay.setText("thêm");
+        buttonthemphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addroom(evt);
             }
         });
 
-        suaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
-        suaphongmay.setText("sửa");
-        suaphongmay.addActionListener(new java.awt.event.ActionListener() {
+        buttonsuaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
+        buttonsuaphongmay.setText("sửa");
+        buttonsuaphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatephongmay(evt);
             }
         });
 
-        xoaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        xoaphongmay.setText("xóa");
-        xoaphongmay.addActionListener(new java.awt.event.ActionListener() {
+        buttonxoaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonxoaphongmay.setText("xóa");
+        buttonxoaphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete(evt);
             }
@@ -278,19 +280,19 @@ public class viewManagerRoom extends javax.swing.JFrame {
             }
         });
 
-        exxit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
-        exxit.setText("đóng");
-        exxit.addActionListener(new java.awt.event.ActionListener() {
+        buttonexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
+        buttonexit.setText("đóng");
+        buttonexit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exxitActionPerformed(evt);
+                buttonexitActionPerformed(evt);
             }
         });
 
-        ressetphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        ressetphongmay.setText("reset");
-        ressetphongmay.addActionListener(new java.awt.event.ActionListener() {
+        buttonressetphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonressetphongmay.setText("reset");
+        buttonressetphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ressetphongmayActionPerformed(evt);
+                buttonressetphongmayActionPerformed(evt);
             }
         });
 
@@ -305,36 +307,34 @@ public class viewManagerRoom extends javax.swing.JFrame {
                         .addComponent(jLabel20))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(themphongmay)
+                        .addComponent(buttonthemphongmay)
                         .addGap(66, 66, 66)
-                        .addComponent(suaphongmay)))
+                        .addComponent(buttonsuaphongmay)))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(xoaphongmay)
+                        .addComponent(buttonxoaphongmay)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                        .addComponent(ressetphongmay)
-                        .addGap(49, 49, 49)
-                        .addComponent(exxit)
-                        .addGap(33, 33, 33))))
+                        .addComponent(buttonressetphongmay))
+                    .addComponent(search))
+                .addGap(49, 49, 49)
+                .addComponent(buttonexit)
+                .addGap(33, 33, 33))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(themphongmay)
-                    .addComponent(suaphongmay)
-                    .addComponent(xoaphongmay)
-                    .addComponent(exxit)
-                    .addComponent(ressetphongmay))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonthemphongmay)
+                    .addComponent(buttonsuaphongmay)
+                    .addComponent(buttonxoaphongmay)
+                    .addComponent(buttonexit)
+                    .addComponent(buttonressetphongmay))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -366,37 +366,52 @@ public class viewManagerRoom extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel21.setText("quản lý phòng máy");
 
+        jLabel11.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel11.setText("nhập dữ liệu");
+
+        jLabel12.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel12.setText("danh sách phòng máy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addGap(449, 449, 449))
             .addGroup(layout.createSequentialGroup()
+                .addGap(0, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel12)
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel21)
+                                .addGap(430, 430, 430))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel21)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel21)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -408,7 +423,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Thread(() -> {
             try {
-                DBQuanLyThucHanh.deletePhongMay(Integer.parseInt(maphongmay.getText()));
+                DBQuanLyThucHanh.deletePhongMay(Integer.parseInt(txtmaphongmay.getText()));
                 JOptionPane.showMessageDialog(rootPane, "xóa thành công");
                   ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -433,13 +448,13 @@ public class viewManagerRoom extends javax.swing.JFrame {
        
     }//GEN-LAST:event_delete
 
-    private void exxitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exxitActionPerformed
+    private void buttonexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonexitActionPerformed
         // TODO add your handling code here:
         this.dispose();
         AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
         admin.setVisible(true);
-    }//GEN-LAST:event_exxitActionPerformed
+    }//GEN-LAST:event_buttonexitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -487,7 +502,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Thread(() -> {
             try {
-                String tenPM = (String) tenphongmay.getText();
+                String tenPM = (String) txttenphongmay.getText();
                 String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
                 int soMT = (int) somaytinh.getValue();
                 int soMC = (int) somaychieu.getValue();
@@ -561,8 +576,8 @@ public class viewManagerRoom extends javax.swing.JFrame {
             p.setTenPhong(phongmay.getDiaChiPhongMay().split(" - ")[1].substring(6));
             String dspm = phongmay.getDanhSachPhanMem();
 
-            maphongmay.setText(String.valueOf(phongmay.getMaPhongMay()));
-            tenphongmay.setText(phongmay.getTenPhongMay());
+            txtmaphongmay.setText(String.valueOf(phongmay.getMaPhongMay()));
+            txttenphongmay.setText(phongmay.getTenPhongMay());
             somaychieu.setValue(phongmay.getSoMayChieu());
             somaytinh.setValue(phongmay.getSoMayTinh());
             if (phongmay.getTinhTrangPhong().equals(sudungduoc.getText())) {
@@ -624,7 +639,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Thread(() -> {
         try {
-            String tenPM = (String) tenphongmay.getText();
+            String tenPM = (String) txttenphongmay.getText();
             String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
             int soMT = (int) somaytinh.getValue();
             int soMC = (int) somaychieu.getValue();
@@ -653,7 +668,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
             dsPhanMem = listpm.stream().map((string) -> string + ", ").reduce(dsPhanMem, String::concat);
 
             dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
-            DBQuanLyThucHanh.updatePhongMay(Integer.parseInt(maphongmay.getText()), tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem);
+            DBQuanLyThucHanh.updatePhongMay(Integer.parseInt(txtmaphongmay.getText()), tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem);
             JOptionPane.showMessageDialog(rootPane, "sửa thành công");
              ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -709,10 +724,10 @@ public class viewManagerRoom extends javax.swing.JFrame {
         }).start();
     }//GEN-LAST:event_searchKeyPressed
 
-    private void ressetphongmayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ressetphongmayActionPerformed
+    private void buttonressetphongmayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonressetphongmayActionPerformed
         // TODO add your handling code here:
         resetform();
-    }//GEN-LAST:event_ressetphongmayActionPerformed
+    }//GEN-LAST:event_buttonressetphongmayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -730,8 +745,14 @@ public class viewManagerRoom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton baotri;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton exxit;
+    private javax.swing.JButton buttonexit;
+    private javax.swing.JButton buttonressetphongmay;
+    private javax.swing.JButton buttonsuaphongmay;
+    private javax.swing.JButton buttonthemphongmay;
+    private javax.swing.JButton buttonxoaphongmay;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -746,30 +767,26 @@ public class viewManagerRoom extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTextField maphongmay;
     private javax.swing.JLabel maychieu;
     private javax.swing.JComboBox<String> phong;
     private javax.swing.JCheckBox pm1;
     private javax.swing.JCheckBox pm2;
     private javax.swing.JCheckBox pm3;
     private javax.swing.JCheckBox pm4;
-    private javax.swing.JButton ressetphongmay;
     private javax.swing.JTextField search;
     private javax.swing.JSpinner somaychieu;
     private javax.swing.JSpinner somaytinh;
-    private javax.swing.JButton suaphongmay;
     private javax.swing.JRadioButton sudungduoc;
     private javax.swing.JTable table;
-    private javax.swing.JTextField tenphongmay;
-    private javax.swing.JButton themphongmay;
     private javax.swing.JComboBox<String> toa;
-    private javax.swing.JButton xoaphongmay;
+    private javax.swing.JTextField txtmaphongmay;
+    private javax.swing.JTextField txttenphongmay;
     // End of variables declaration//GEN-END:variables
 
     private void resetform() {
-        maphongmay.setRequestFocusEnabled(true);
-        maphongmay.setText("");
-        tenphongmay.setText("");
+        txtmaphongmay.requestFocus();
+        txtmaphongmay.setText("");
+        txttenphongmay.setText("");
         toa.setSelectedIndex(0);
         phong.setSelectedIndex(0);
         somaychieu.setValue(0);

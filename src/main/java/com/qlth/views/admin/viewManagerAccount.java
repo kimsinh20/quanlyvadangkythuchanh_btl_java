@@ -38,8 +38,8 @@ public class viewManagerAccount extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         ressetpassword = new javax.swing.JButton();
-        tendn = new javax.swing.JTextField();
-        mk = new javax.swing.JTextField();
+        txttendn = new javax.swing.JTextField();
+        txtmk = new javax.swing.JTextField();
         exit = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
@@ -73,13 +73,13 @@ public class viewManagerAccount extends javax.swing.JFrame {
             }
         });
 
-        tendn.setEditable(false);
-        tendn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tendn.setEnabled(false);
+        txttendn.setEditable(false);
+        txttendn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txttendn.setEnabled(false);
 
-        mk.setEditable(false);
-        mk.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        mk.setEnabled(false);
+        txtmk.setEditable(false);
+        txtmk.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtmk.setEnabled(false);
 
         exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
         exit.setText("ĐÓNG");
@@ -111,8 +111,8 @@ public class viewManagerAccount extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mk, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tendn))
+                            .addComponent(txtmk, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                            .addComponent(txttendn))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -135,11 +135,11 @@ public class viewManagerAccount extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tendn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttendn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mk, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ressetpassword)
@@ -293,8 +293,8 @@ public class viewManagerAccount extends javax.swing.JFrame {
          DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
             Vector<Object> tkVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
             TaiKhoan tk = new TaiKhoan(tkVector.get(1).toString(),tkVector.get(2).toString());
-            tendn.setText(tk.getTenDangNhap());
-            mk.setText(tk.getMatKhau());
+            txttendn.setText(tk.getTenDangNhap());
+            txtmk.setText(tk.getMatKhau());
          }).start();
     }//GEN-LAST:event_tableMouseClicked
 
@@ -302,7 +302,7 @@ public class viewManagerAccount extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Thread(() -> {
         try {
-            DBQuanLyThucHanh.resetMatKhau(tendn.getText());
+            DBQuanLyThucHanh.resetMatKhau(txttendn.getText());
             JOptionPane.showMessageDialog(rootPane, "reset thành công");
              ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
             DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -389,11 +389,11 @@ public class viewManagerAccount extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField mk;
     private javax.swing.JButton ressetpassword;
     private javax.swing.JTextField search;
     private javax.swing.JTable table;
-    private javax.swing.JTextField tendn;
     private javax.swing.JButton timkiem;
+    private javax.swing.JTextField txtmk;
+    private javax.swing.JTextField txttendn;
     // End of variables declaration//GEN-END:variables
 }

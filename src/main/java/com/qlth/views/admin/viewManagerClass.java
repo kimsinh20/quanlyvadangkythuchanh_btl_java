@@ -38,6 +38,10 @@ public class viewManagerClass extends javax.swing.JFrame {
         comboTiet[9] = tiet10;
         comboTiet[10] = tiet11;
         comboTiet[11] = tiet12;
+        comboTiet[12] = tiet13;
+        comboTiet[13] = tiet14;
+        comboTiet[14] = tiet15;
+        comboTiet[15] = tiet16;
 
         new Thread(() -> {
             initdata();
@@ -72,11 +76,14 @@ public class viewManagerClass extends javax.swing.JFrame {
         ArrayList<GiangVien> dsGiangVien = DBQuanLyThucHanh.getDanhSachGiangVien();
         model = new DefaultComboBoxModel();
         for (GiangVien gv : dsGiangVien) {
-            String thongTinGV=gv.getMaGiangVien()+" - "+gv.getTenGiangVien();
+            String thongTinGV = gv.getMaGiangVien() + " - " + gv.getTenGiangVien();
             model.addElement(thongTinGV);
         }
         comboGiangVien.setModel(model);
         comboGiangVien.setSelectedIndex(0);
+
+        comboLichHocActionPerformed(null);
+
         buttonThem.setEnabled(true);
     }
 
@@ -119,6 +126,10 @@ public class viewManagerClass extends javax.swing.JFrame {
         tiet9 = new javax.swing.JCheckBox();
         tiet8 = new javax.swing.JCheckBox();
         tiet10 = new javax.swing.JCheckBox();
+        tiet13 = new javax.swing.JCheckBox();
+        tiet14 = new javax.swing.JCheckBox();
+        tiet15 = new javax.swing.JCheckBox();
+        tiet16 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         buttonThem = new javax.swing.JButton();
@@ -151,6 +162,11 @@ public class viewManagerClass extends javax.swing.JFrame {
         comboPhongHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "307-A9", "209-A9", "309-A9", "404-A9", "701-A1", "702-A1" }));
 
         comboLichHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S2", "C2", "T2", "S3", "C3", "T3", "S4", "C4", "T4", "S5", "C5", "T5", "S6", "C6", "T6", "S7", "C7", "T7" }));
+        comboLichHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboLichHocActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Tiết học:");
 
@@ -208,24 +224,39 @@ public class viewManagerClass extends javax.swing.JFrame {
         tiet2.setText("2");
 
         tiet3.setText("3");
+        tiet3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tiet3ActionPerformed(evt);
+            }
+        });
 
         tiet4.setText("4");
 
         tiet5.setText("5");
 
         tiet6.setText("6");
+        tiet6.setEnabled(false);
 
         tiet11.setText("11");
 
         tiet7.setText("7");
 
         tiet12.setText("12");
+        tiet12.setEnabled(false);
 
         tiet9.setText("9");
 
         tiet8.setText("8");
 
         tiet10.setText("10");
+
+        tiet13.setText("13");
+
+        tiet14.setText("14");
+
+        tiet15.setText("15");
+
+        tiet16.setText("16");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -246,32 +277,45 @@ public class viewManagerClass extends javax.swing.JFrame {
                                     .addComponent(comboLichHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                                .addComponent(tiet10)
-                                                .addGap(35, 35, 35))
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(tiet4)
-                                                    .addComponent(tiet1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(tiet7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addComponent(tiet1)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                                            .addComponent(tiet8)
-                                                            .addGap(6, 6, 6))
-                                                        .addComponent(tiet11))
-                                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addComponent(tiet5)
-                                                            .addComponent(tiet2))
-                                                        .addGap(6, 6, 6)))))
+                                                .addComponent(tiet2))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                                .addComponent(tiet5)
+                                                .addGap(6, 6, 6)
+                                                .addComponent(tiet6)))
+                                        .addGap(12, 12, 12)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tiet12)
-                                            .addComponent(tiet9)
-                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(tiet6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(tiet3, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(tiet3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tiet4))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(tiet7)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tiet8))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGap(35, 35, 35)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(tiet12)
+                                                    .addComponent(tiet16))))
+                                        .addGap(41, 41, 41))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(tiet9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(tiet11)
+                                                .addGap(53, 53, 53))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(tiet14)
+                                                    .addComponent(tiet10))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tiet15)
+                                                .addGap(53, 53, 53))))
+                                    .addComponent(tiet13)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +325,7 @@ public class viewManagerClass extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(comboToaNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 112, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
@@ -304,7 +348,7 @@ public class viewManagerClass extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboSoSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(textFieldKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,31 +390,32 @@ public class viewManagerClass extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(tiet2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tiet5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tiet8)
-                                    .addComponent(tiet7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tiet11))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tiet1)
-                                    .addComponent(tiet3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tiet4)
-                                    .addComponent(tiet6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tiet9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tiet12)
-                                    .addComponent(tiet10))))))
-                .addGap(12, 12, 12))
+                            .addComponent(tiet2)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tiet1)
+                                .addComponent(tiet3)
+                                .addComponent(tiet4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tiet5)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tiet6)
+                                .addComponent(tiet8)
+                                .addComponent(tiet7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tiet9)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(tiet10)
+                                .addComponent(tiet11)
+                                .addComponent(tiet12)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tiet13)
+                    .addComponent(tiet14)
+                    .addComponent(tiet15)
+                    .addComponent(tiet16))
+                .addContainerGap())
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -531,7 +576,7 @@ public class viewManagerClass extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -725,30 +770,113 @@ public class viewManagerClass extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-         ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.searchLopHocPhan("");
-            DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+        ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.searchLopHocPhan("");
+        DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
 
-            numberRowsOfTable = arrLopHocPhan.size();
-            model.setRowCount(numberRowsOfTable);
+        numberRowsOfTable = arrLopHocPhan.size();
+        model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrLopHocPhan.get(i).getMaLopHocPhan(), i, 1);
-                model.setValueAt(arrLopHocPhan.get(i).getPhongHocLyThuyet(), i, 2);
-                model.setValueAt(arrLopHocPhan.get(i).getLichHocLyThuyet(), i, 3);
-                model.setValueAt(arrLopHocPhan.get(i).getTietHocLyThuyet(), i, 4);
-                model.setValueAt(arrLopHocPhan.get(i).getSoLuongSv(), i, 5);
-                model.setValueAt(arrLopHocPhan.get(i).getKhoa(), i, 6);
-                model.setValueAt(arrLopHocPhan.get(i).getTenMonHoc(), i, 7);
-                model.setValueAt(arrLopHocPhan.get(i).getGiangVien().getMaGiangVien() + " - " + arrLopHocPhan.get(i).getGiangVien().getTenGiangVien(), i, 8);
-            }
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            model.setValueAt(i, i, 0);
+            model.setValueAt(arrLopHocPhan.get(i).getMaLopHocPhan(), i, 1);
+            model.setValueAt(arrLopHocPhan.get(i).getPhongHocLyThuyet(), i, 2);
+            model.setValueAt(arrLopHocPhan.get(i).getLichHocLyThuyet(), i, 3);
+            model.setValueAt(arrLopHocPhan.get(i).getTietHocLyThuyet(), i, 4);
+            model.setValueAt(arrLopHocPhan.get(i).getSoLuongSv(), i, 5);
+            model.setValueAt(arrLopHocPhan.get(i).getKhoa(), i, 6);
+            model.setValueAt(arrLopHocPhan.get(i).getTenMonHoc(), i, 7);
+            model.setValueAt(arrLopHocPhan.get(i).getGiangVien().getMaGiangVien() + " - " + arrLopHocPhan.get(i).getGiangVien().getTenGiangVien(), i, 8);
+        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void comboLichHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboLichHocActionPerformed
+        // TODO add your handling code here:
+
+        String buoi = comboLichHoc.getSelectedItem().toString().substring(0, 1);
+        System.out.println("buoi: " + buoi);
+//        comboTiet
+        if (buoi.equalsIgnoreCase("S")) {
+            for (int i = 0; i < comboTiet.length; i++) {
+                switch (i + 1) {
+                    case 1 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 2 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 3 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 4 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 5 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    default -> {
+                        comboTiet[i].setEnabled(false);
+                    }
+                }
+            }
+        } else if (buoi.equalsIgnoreCase("C")) {
+            for (int i = 0; i < comboTiet.length; i++) {
+                switch (i + 1) {
+                    case 7 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 8 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 9 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 10 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 11 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    default -> {
+                        comboTiet[i].setEnabled(false);
+                    }
+                }
+            }
+        } else if (buoi.equalsIgnoreCase("T")) {
+            for (int i = 0; i < comboTiet.length; i++) {
+                switch (i + 1) {
+                    case 13 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 14 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 15 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    case 16 -> {
+                        comboTiet[i].setEnabled(true);
+                    }
+                    default -> {
+                        comboTiet[i].setEnabled(false);
+                    }
+                }
+            }
+        } else {
+
+        }
+
+
+    }//GEN-LAST:event_comboLichHocActionPerformed
+
+    private void tiet3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiet3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tiet3ActionPerformed
     private void resetForm() {
         textFieldMaLopHP.setText("");
         comboPhongHoc.setSelectedIndex(0);
         comboToaNha.setSelectedIndex(0);
         comboLichHoc.setSelectedIndex(0);
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < soTietMotNgay; i++) {
             comboTiet[i].setSelected(false);
         }
         comboSoSinhVien.setSelectedIndex(0);
@@ -791,6 +919,12 @@ public class viewManagerClass extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(viewManagerClass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -837,6 +971,10 @@ public class viewManagerClass extends javax.swing.JFrame {
     private javax.swing.JCheckBox tiet10;
     private javax.swing.JCheckBox tiet11;
     private javax.swing.JCheckBox tiet12;
+    private javax.swing.JCheckBox tiet13;
+    private javax.swing.JCheckBox tiet14;
+    private javax.swing.JCheckBox tiet15;
+    private javax.swing.JCheckBox tiet16;
     private javax.swing.JCheckBox tiet2;
     private javax.swing.JCheckBox tiet3;
     private javax.swing.JCheckBox tiet4;
@@ -846,26 +984,10 @@ public class viewManagerClass extends javax.swing.JFrame {
     private javax.swing.JCheckBox tiet8;
     private javax.swing.JCheckBox tiet9;
     // End of variables declaration//GEN-END:variables
-    private javax.swing.JCheckBox[] comboTiet = new javax.swing.JCheckBox[12];
+    private int soTietMotNgay = 16;
+    private javax.swing.JCheckBox[] comboTiet = new javax.swing.JCheckBox[soTietMotNgay];
     private int numberRowsOfTable = 0;
 
-//    private void setToForm(String maLHP, int soSV, int khoa, String tenMH, String GV, String tietHoc, String lichHocLyThuyet, String phongHocLT) {
-//        textFieldMaLopHP.setText(maLHP);
-//        comboSoSinhVien.setSelectedItem(soSV);
-//        textFieldKhoa.setText(String.valueOf(khoa));
-//        comboMonHoc.setSelectedItem(tenMH);
-//        comboGiangVien.setSelectedItem(GV);
-//        String[] tiet = tietHoc.split(",");
-//        for (String string : tiet) {
-//            comboTiet[Integer.parseInt(string) + 1].setSelected(true);
-//        }
-//        comboLichHoc.setSelectedItem(lichHocLyThuyet);
-//        String[] split = phongHocLT.split(" - ");
-//        int phong = Integer.parseInt(split[0]);
-//        int toa = Integer.parseInt(split[1]);
-//        comboPhongHoc.setSelectedItem(phong);
-//        comboToaNha.setSelectedItem(toa);
-//    }
     private void themLopHocPhan() {
         String maLHP = textFieldMaLopHP.getText();
         if (maLHP.isEmpty()) {
@@ -873,7 +995,7 @@ public class viewManagerClass extends javax.swing.JFrame {
             return;
         }
         String tietHoc = "";
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < soTietMotNgay; i++) {
             if (comboTiet[i].isSelected()) {
                 tietHoc += (i + 1) + ",";
             }
@@ -949,7 +1071,7 @@ public class viewManagerClass extends javax.swing.JFrame {
         }
 
         String tietHoc = "";
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < soTietMotNgay; i++) {
             if (comboTiet[i].isSelected()) {
                 tietHoc += (i + 1) + ",";
             }
