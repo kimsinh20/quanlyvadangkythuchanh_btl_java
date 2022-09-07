@@ -651,6 +651,35 @@ public class DBQuanLyThucHanh {
             System.out.println(e);
         }
     }
+     public static ArrayList<String> getDanhSachemail() {
+        ArrayList<String> email = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_admin_mail ();");
+            while (rs.next()) {
+                email.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.out.println("getDanhSachToaNha: " + e);
+        }
+
+        return email;
+    }
+      public static String getadminpassword() {
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_admin_password();");
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("getDanhSachToaNha: " + e);
+        }
+
+        return "no";
+    }
     public static void main(String[] args) {
    //test db
         
