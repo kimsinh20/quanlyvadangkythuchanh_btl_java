@@ -180,6 +180,7 @@ public class viewLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new Thread(() -> {
         String tenDangnhap = txtname.getText();
         String matKhau = String.valueOf(txtpassword.getPassword());
     
@@ -208,6 +209,7 @@ public class viewLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Kiểm tra kết nối mạng của bạn!!");
             }
         }
+        }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtpasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasswordKeyPressed
@@ -219,11 +221,13 @@ public class viewLogin extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        new Thread(() -> {
         ArrayList<String> listEmailAdmin=DBQuanLyThucHanh.getDanhSachemail();
         for (String email : listEmailAdmin) {
             SendEmailTLS.send(email,"your password is : "+DBQuanLyThucHanh.getadminpassword());
         }
         JOptionPane.showMessageDialog(rootPane, "kiểm tra email của bạn");
+        }).start();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
