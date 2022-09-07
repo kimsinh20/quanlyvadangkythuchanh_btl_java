@@ -3,6 +3,7 @@ package database;
 import com.qlth.model.GiangVien;
 import com.qlth.model.LopHocPhan;
 import com.qlth.model.PhongMay;
+import com.qlth.model.TaiKhoan;
 import com.qlth.model.ThucHanh;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -265,7 +266,22 @@ public class DBQuanLyThucHanh {
         }
         return false;
     }
-
+      public static boolean deleteLichThucHanhByAdmin(int maPM, String buoiTH, String ngayThucHanh) {
+        // sql execute: CALL delete_lich_thuc_hanh_by_admin(maPM, buoiTH, ngayThucHanh)
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+//            System.out.println("CALL delete_lich_thuc_hanh_by_admin(" + maPM + ",'" + buoiTH + "','" + ngayThucHanh + "');");
+            ResultSet rs = stmt.executeQuery("CALL delete_lich_thuc_hanh_by_admin(" + maPM + ",'" + buoiTH + "','" + ngayThucHanh + "');");
+            while (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("deleteLichThucHanhByAdmin");
+            System.out.println(e);
+        }
+        return false;
+    }
     public static int getLogin(String tenDangNhap, String matKhau) {
         DBQuanLyThucHanh.checkConnection();
         try {
@@ -458,7 +474,99 @@ public class DBQuanLyThucHanh {
         }
         return listgv;
     }
+  
+    public static boolean insertLopHocPhan(String maLopHocPhan, String maGV, String tenMH, int soLuongSV, String lichHocLT, String phongHocLT, String tietHLT, int khoa) {
+        // sql execute: CALL insert_lop_hoc_phan(maLopHocPhan, maGiangVien, tenMonHoc , soluongsv, lichHocLyThuyet, phongHocLyThuyet, tietHocLyThuyet, khoaHoc
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL insert_lop_hoc_phan('" + maLopHocPhan + "', '" + maGV + "', '" + tenMH + "' , " + soLuongSV + ", '" + lichHocLT + "', '" + phongHocLT + "', '" + tietHLT + "', " + khoa + ");");
+            while (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("insertLopHocPhan: " + e);
+        }
+        return false;
+    }
+
+    public static void updateLopHocPhan(String maLopHocPhan, String maGV, String tenMH, int soLuongSV, String lichHocLT, String phongHocLT, String tietHLT, int khoa) {
+//        update_lop_hoc_phan
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("CALL update_lop_hoc_phan('" + maLopHocPhan + "', '" + maGV + "', '" + tenMH + "' , " + soLuongSV + ", '" + lichHocLT + "', '" + phongHocLT + "', '" + tietHLT + "', " + khoa + ");");
+        } catch (SQLException e) {
+            System.out.println("updateLopHocPhan: " + e);
+        }
+    }
+
+    public static void deleteLopHocPhan(String maLopHocPhan) {
+//       delete_lop_hoc_phan
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("CALL delete_lop_hoc_phan('" + maLopHocPhan + "');");
+        } catch (SQLException e) {
+            System.out.println("deleteLopHocPhan: " + e);
+        }
+    }
+
+    public static ArrayList<LopHocPhan> searchLopHocPhan(String searchTerm) {
+        ArrayList<LopHocPhan> arrLopHocPhan = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL search_lop_hoc_phan('" + searchTerm + "');");
+            while (rs.next()) {
+                String[] split = rs.getString(2).split(" - ");
+                arrLopHocPhan.add(new LopHocPhan(rs.getString(1), new GiangVien(split[1], split[0]), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8)));
+            }
+        } catch (SQLException e) {
+            System.out.println("searchLopHocPhan: " + e);
+        }
+        return arrLopHocPhan;
+    }
+     public static ArrayList<LopHocPhan> getDanhSachLopHocPhan() {
+        ArrayList<LopHocPhan> listlhp = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_danh_sach_lop_hoc_phan();");
+            while (rs.next()) {
+                listlhp.add(new LopHocPhan(rs.getString(1),new GiangVien(rs.getString(2)),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getInt(8)));
+            }
+        } catch (SQLException e) {
+            System.out.println("getDanhSachphongmay: " + e);
+        }
+
+        return listlhp;
+    }
+      public static ArrayList<TaiKhoan> searchTaiKhoan(String search) {
+         ArrayList<TaiKhoan> listtk = new ArrayList<>();
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();     
+            ResultSet rs = stmt.executeQuery("CALL search_tai_khoan('" +search+ "');");
+             while (rs.next()) {
+                listtk.add(new TaiKhoan(rs.getString(1),rs.getString(2)));
+            }
+        } catch (SQLException e) {
+            System.out.println("search  loi: " + e);
+        }
+        return listtk;
+    }
+       public static void resetMatKhau(String tenTaiKhoan) {
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("CALL reset_mat_khau('" + tenTaiKhoan+"');");
+        } catch (SQLException e) {
+            System.out.println("reset mk: " + e);
+        }
+    }
     public static void main(String[] args) {
-    //updatePhongMay(2,"PM1","Tòa A6 - phòng 701",1,40,"Sử dụng được","Visual Studio Code, Word 2019, Excel 2019, Power Point 2019, Dream Weaver");
+   //test db
+        System.out.println(searchTaiKhoan(""));
     }
 }

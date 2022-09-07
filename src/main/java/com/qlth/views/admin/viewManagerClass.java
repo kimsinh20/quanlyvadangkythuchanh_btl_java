@@ -4,9 +4,19 @@
  */
 package com.qlth.views.admin;
 
+import com.qlth.model.GiangVien;
+import com.qlth.model.LopHocPhan;
+import com.qlth.model.PhongMay;
+import database.DBQuanLyThucHanh;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author Sinh
+ * @author
  */
 public class viewManagerClass extends javax.swing.JFrame {
 
@@ -15,6 +25,59 @@ public class viewManagerClass extends javax.swing.JFrame {
      */
     public viewManagerClass() {
         initComponents();
+
+        comboTiet[0] = tiet1;
+        comboTiet[1] = tiet2;
+        comboTiet[2] = tiet3;
+        comboTiet[3] = tiet4;
+        comboTiet[4] = tiet5;
+        comboTiet[5] = tiet6;
+        comboTiet[6] = tiet7;
+        comboTiet[7] = tiet8;
+        comboTiet[8] = tiet9;
+        comboTiet[9] = tiet10;
+        comboTiet[10] = tiet11;
+        comboTiet[11] = tiet12;
+
+        new Thread(() -> {
+            initdata();
+        }).start();
+    }
+
+    private void initdata() {
+        ArrayList<Integer> DSPhong = DBQuanLyThucHanh.getDanhSachPhong();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (Integer phong : DSPhong) {
+            model.addElement(phong);
+        }
+        comboPhongHoc.setModel(model);
+        comboPhongHoc.setSelectedIndex(0);
+
+        ArrayList<String> DSToa = DBQuanLyThucHanh.getDanhSachToaNha();
+        model = new DefaultComboBoxModel();
+        for (String toa : DSToa) {
+            model.addElement(toa);
+        }
+        comboToaNha.setModel(model);
+        comboToaNha.setSelectedIndex(0);
+
+        ArrayList<String> dsMon = DBQuanLyThucHanh.getDanhSachMonHoc();
+        model = new DefaultComboBoxModel();
+        for (String mon : dsMon) {
+            model.addElement(mon);
+        }
+        comboMonHoc.setModel(model);
+        comboMonHoc.setSelectedIndex(0);
+
+        ArrayList<GiangVien> dsGiangVien = DBQuanLyThucHanh.getDanhSachGiangVien();
+        model = new DefaultComboBoxModel();
+        for (GiangVien gv : dsGiangVien) {
+            String thongTinGV=gv.getMaGiangVien()+" - "+gv.getTenGiangVien();
+            model.addElement(thongTinGV);
+        }
+        comboGiangVien.setModel(model);
+        comboGiangVien.setSelectedIndex(0);
+        buttonThem.setEnabled(true);
     }
 
     /**
@@ -29,60 +92,140 @@ public class viewManagerClass extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textFieldMaLopHP = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboPhongHoc = new javax.swing.JComboBox<>();
+        comboLichHoc = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        textFieldKhoa = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        comboGiangVien = new javax.swing.JComboBox<>();
+        comboMonHoc = new javax.swing.JComboBox<>();
+        comboSoSinhVien = new javax.swing.JComboBox<>();
+        tiet1 = new javax.swing.JCheckBox();
+        comboToaNha = new javax.swing.JComboBox<>();
+        tiet2 = new javax.swing.JCheckBox();
+        tiet3 = new javax.swing.JCheckBox();
+        tiet4 = new javax.swing.JCheckBox();
+        tiet5 = new javax.swing.JCheckBox();
+        tiet6 = new javax.swing.JCheckBox();
+        tiet11 = new javax.swing.JCheckBox();
+        tiet7 = new javax.swing.JCheckBox();
+        tiet12 = new javax.swing.JCheckBox();
+        tiet9 = new javax.swing.JCheckBox();
+        tiet8 = new javax.swing.JCheckBox();
+        tiet10 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        buttonThem = new javax.swing.JButton();
+        buttonSua = new javax.swing.JButton();
+        buttonXoa = new javax.swing.JButton();
+        buttonDong = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        textFieldTimKiem = new javax.swing.JTextField();
+        buttonTimKiem = new javax.swing.JToggleButton();
+        buttonReset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableLopHP = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("quản lý lớp học phần");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jLabel2.setText("mã lớp học phần");
+        jLabel2.setText("Mã lớp học phần:");
 
-        jLabel3.setText("phòng học lý thuyết");
+        jLabel3.setText("Phòng học lý thuyết:");
 
-        jLabel4.setText("lịch học lý thuyết");
+        jLabel4.setText("Lịch học lý thuyết:");
 
-        jLabel5.setText("Số sinh viên");
+        jLabel5.setText("Số sinh viên:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "307-A9", "209-A9", "309-A9", "404-A9", "701-A1", "702-A1" }));
+        comboPhongHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "307-A9", "209-A9", "309-A9", "404-A9", "701-A1", "702-A1" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S2", "C2", "T2", "S3", "C3", "T3", "S4", "C4", "T4", "S5", "C5", "T5", "S6", "C6", "T6", "S7", "C7", "T7" }));
+        comboLichHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "S2", "C2", "T2", "S3", "C3", "T3", "S4", "C4", "T4", "S5", "C5", "T5", "S6", "C6", "T6", "S7", "C7", "T7" }));
 
-        jLabel6.setText("tiết học");
+        jLabel6.setText("Tiết học:");
 
-        jLabel7.setText("khóa");
+        jLabel7.setText("Khóa:");
 
-        jLabel8.setText("tên môn học");
+        jLabel8.setText("Tên môn học:");
 
-        jTextField3.setText("15");
+        textFieldKhoa.setText("15");
+        textFieldKhoa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textFieldKhoaFocusLost(evt);
+            }
+        });
+        textFieldKhoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textFieldKhoaKeyTyped(evt);
+            }
+        });
 
-        jLabel9.setText("Giảng viên");
+        jLabel9.setText("Giảng viên:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nguyễn văn a", "lê thị b" }));
+        comboGiangVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nguyễn văn a", "lê thị b" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cơ sở dữ liệu", "thiết ké web" }));
+        comboMonHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "cơ sở dữ liệu", "thiết ké web" }));
+
+        comboSoSinhVien.setEditable(true);
+        comboSoSinhVien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75" }));
+        comboSoSinhVien.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboSoSinhVienItemStateChanged(evt);
+            }
+        });
+        comboSoSinhVien.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                comboSoSinhVienFocusLost(evt);
+            }
+        });
+        comboSoSinhVien.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                comboSoSinhVienInputMethodTextChanged(evt);
+            }
+        });
+        comboSoSinhVien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                comboSoSinhVienKeyTyped(evt);
+            }
+        });
+
+        tiet1.setText("1");
+
+        comboToaNha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tiet2.setText("2");
+
+        tiet3.setText("3");
+
+        tiet4.setText("4");
+
+        tiet5.setText("5");
+
+        tiet6.setText("6");
+
+        tiet11.setText("11");
+
+        tiet7.setText("7");
+
+        tiet12.setText("12");
+
+        tiet9.setText("9");
+
+        tiet8.setText("8");
+
+        tiet10.setText("10");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -91,21 +234,54 @@ public class viewManagerClass extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboLichHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                                .addComponent(tiet10)
+                                                .addGap(35, 35, 35))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(tiet4)
+                                                    .addComponent(tiet1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(tiet7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                                            .addComponent(tiet8)
+                                                            .addGap(6, 6, 6))
+                                                        .addComponent(tiet11))
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(tiet5)
+                                                            .addComponent(tiet2))
+                                                        .addGap(6, 6, 6)))))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tiet12)
+                                            .addComponent(tiet9)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(tiet6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(tiet3, javax.swing.GroupLayout.Alignment.TRAILING))))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textFieldMaLopHP, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(comboPhongHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(comboToaNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 112, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
@@ -119,16 +295,16 @@ public class viewManagerClass extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(204, Short.MAX_VALUE))
+                            .addComponent(comboMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboSoSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,63 +312,119 @@ public class viewManagerClass extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(textFieldMaLopHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(comboSoSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboPhongHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboToaNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboLichHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textFieldKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comboMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(comboGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(tiet2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tiet5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tiet8)
+                                    .addComponent(tiet7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tiet11))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tiet1)
+                                    .addComponent(tiet3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tiet4)
+                                    .addComponent(tiet6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tiet9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tiet12)
+                                    .addComponent(tiet10))))))
+                .addGap(12, 12, 12))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("quản lý lớp học phần");
+        jLabel1.setText("QUẢN LÝ LỚP HỌC PHẦN");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
-        jButton1.setText("thêm");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
-        jButton2.setText("sửa");
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        jButton3.setText("xóa");
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
-        jButton4.setText("đóng");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buttonThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
+        buttonThem.setText("Thêm");
+        buttonThem.setEnabled(false);
+        buttonThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buttonThemActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("tìm kiếm lớp học phần");
+        buttonSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
+        buttonSua.setText("Sửa");
+        buttonSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSuaActionPerformed(evt);
+            }
+        });
+
+        buttonXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonXoa.setText("Xóa");
+        buttonXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonXoaActionPerformed(evt);
+            }
+        });
+
+        buttonDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
+        buttonDong.setText("Đóng");
+        buttonDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonDongActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Tìm kiếm lớp học phần:");
+
+        buttonTimKiem.setText("Tìm");
+        buttonTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTimKiemActionPerformed(evt);
+            }
+        });
+
+        buttonReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        buttonReset.setText("Reset");
+        buttonReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,7 +434,7 @@ public class viewManagerClass extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(jButton1)
+                        .addComponent(buttonThem)
                         .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
@@ -210,41 +442,48 @@ public class viewManagerClass extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(52, 52, 52)
-                        .addComponent(jButton3)
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton4))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(textFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(buttonSua)
+                        .addGap(50, 50, 50)
+                        .addComponent(buttonXoa)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addComponent(buttonReset)
+                        .addGap(38, 38, 38)
+                        .addComponent(buttonDong))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(buttonTimKiem)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(buttonThem)
+                    .addComponent(buttonSua)
+                    .addComponent(buttonXoa)
+                    .addComponent(buttonDong)
+                    .addComponent(buttonReset))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonTimKiem))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableLopHP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "stt", "mã lớp học", "phòng học lt", "lịch học lt", "tiết học", "số sinh viên", "khóa", "môn học", "giảng viên"
+                "STT", "Mã lớp học", "Phòng học LT", "Lịch học LT", "Tiết học", "Số sinh viên", "Khóa", "Môn học", "Giảng viên"
             }
         ) {
             Class[] types = new Class [] {
@@ -255,40 +494,46 @@ public class viewManagerClass extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tableLopHP.setEnabled(false);
+        tableLopHP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableLopHPMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableLopHP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 25, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(288, 288, 288))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(288, 288, 288)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -299,7 +544,7 @@ public class viewManagerClass extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -308,14 +553,218 @@ public class viewManagerClass extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void buttonDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDongActionPerformed
         // TODO add your handling code here:
-      this.dispose();
-       AdminScreenMain admin=new AdminScreenMain();
-       admin.setLocationRelativeTo(admin);
-       
-       admin.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+        this.dispose();
+        AdminScreenMain admin = new AdminScreenMain();
+        admin.setLocationRelativeTo(admin);
+
+        admin.setVisible(true);
+    }//GEN-LAST:event_buttonDongActionPerformed
+
+    private void buttonThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonThemActionPerformed
+        // TODO add your handling code here:
+        new Thread(() -> {
+            themLopHocPhan();
+        }).start();
+    }//GEN-LAST:event_buttonThemActionPerformed
+
+    private void buttonSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSuaActionPerformed
+        // TODO add your handling code here:
+        new Thread(() -> {
+            suaLopHocPhan();
+        }).start();
+    }//GEN-LAST:event_buttonSuaActionPerformed
+
+    private void buttonXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonXoaActionPerformed
+        // TODO add your handling code here:
+        new Thread(() -> {
+            xoaLopHocPhan();
+        }).start();
+
+    }//GEN-LAST:event_buttonXoaActionPerformed
+
+    private void buttonTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTimKiemActionPerformed
+        // TODO add your handling code here:
+        new Thread(() -> {
+            ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.searchLopHocPhan(textFieldTimKiem.getText());
+            DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+            numberRowsOfTable = arrLopHocPhan.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrLopHocPhan.get(i).getMaLopHocPhan(), i, 1);
+                model.setValueAt(arrLopHocPhan.get(i).getPhongHocLyThuyet(), i, 2);
+                model.setValueAt(arrLopHocPhan.get(i).getLichHocLyThuyet(), i, 3);
+                model.setValueAt(arrLopHocPhan.get(i).getTietHocLyThuyet(), i, 4);
+                model.setValueAt(arrLopHocPhan.get(i).getSoLuongSv(), i, 5);
+                model.setValueAt(arrLopHocPhan.get(i).getKhoa(), i, 6);
+                model.setValueAt(arrLopHocPhan.get(i).getTenMonHoc(), i, 7);
+                model.setValueAt(arrLopHocPhan.get(i).getGiangVien().getMaGiangVien() + " - " + arrLopHocPhan.get(i).getGiangVien().getTenGiangVien(), i, 8);
+            }
+        }).start();
+    }//GEN-LAST:event_buttonTimKiemActionPerformed
+
+    private void tableLopHPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableLopHPMouseClicked
+        // TODO add your handling code here:
+        new Thread(() -> {
+            int row = tableLopHP.rowAtPoint(evt.getPoint());
+            int col = tableLopHP.columnAtPoint(evt.getPoint());
+            System.out.println("row: " + row);
+//        System.out.println(col);
+            if (row >= 0 && col >= 0) {
+                DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+                String maLHP = model.getValueAt(row, 1).toString();
+                String phongHocLT = model.getValueAt(row, 2).toString();
+                String lichHocLT = model.getValueAt(row, 3).toString();
+                String tiet = model.getValueAt(row, 4).toString();
+                int soSV = Integer.parseInt(model.getValueAt(row, 5).toString());
+                int khoa = Integer.parseInt(model.getValueAt(row, 6).toString());
+                String monHoc = model.getValueAt(row, 7).toString();
+                String GV = model.getValueAt(row, 8).toString();
+
+//            System.out.println("ma lop hp"+ maLHP);
+                // update mã lớp hp 
+                textFieldMaLopHP.setText(maLHP);
+
+//            System.out.println("phong hoc"+phongHocLT);
+                // update phòng học 
+                String[] split = phongHocLT.split(" - ");
+                String toa = split[0];
+                String phong = split[1];
+
+                toa = toa.split("Tòa ")[1];
+                phong = phong.split("phòng ")[1];
+
+//            System.out.println("toa: "+toa);
+                comboToaNha.setSelectedItem(toa);
+//            System.out.println("phong:'"+phong+"'");
+                comboPhongHoc.setSelectedItem(Integer.parseInt(phong));
+
+                // update lịch lý thuyết 
+//            System.out.println("lich hoc lt"+lichHocLT);
+                comboLichHoc.setSelectedItem(lichHocLT);
+
+                // update tiết học 
+                for (JCheckBox jCheckBox : comboTiet) {
+                    jCheckBox.setSelected(false);
+                }
+
+                String[] tietsSplited = tiet.split(",");
+                for (String string : tietsSplited) {
+                    comboTiet[Integer.parseInt(string) - 1].setSelected(true);
+                }
+
+                // update số sinh viên 
+                comboSoSinhVien.setSelectedItem(soSV);
+
+                // update khóa 
+                textFieldKhoa.setText(String.valueOf(khoa));
+
+                // update ten mh 
+                comboMonHoc.setSelectedItem(monHoc);
+                // update giang vien 
+                comboGiangVien.setSelectedItem(GV);
+//            System.out.println("done");
+            }
+        }).start();
+    }//GEN-LAST:event_tableLopHPMouseClicked
+
+    private void textFieldKhoaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textFieldKhoaKeyTyped
+        char testChar = evt.getKeyChar();
+        if (!Character.isDigit(testChar)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_textFieldKhoaKeyTyped
+
+    private void comboSoSinhVienKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comboSoSinhVienKeyTyped
+        char testChar = evt.getKeyChar();
+
+        System.out.println(testChar);
+        if (!Character.isDigit(testChar)) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_comboSoSinhVienKeyTyped
+
+    private void textFieldKhoaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldKhoaFocusLost
+        // TODO add your handling code here:
+        if (textFieldKhoa.getText().isEmpty()) {
+            textFieldKhoa.setText("15");
+        }
+    }//GEN-LAST:event_textFieldKhoaFocusLost
+
+    private void comboSoSinhVienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_comboSoSinhVienFocusLost
+
+    }//GEN-LAST:event_comboSoSinhVienFocusLost
+
+    private void comboSoSinhVienInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_comboSoSinhVienInputMethodTextChanged
+
+    }//GEN-LAST:event_comboSoSinhVienInputMethodTextChanged
+
+    private void comboSoSinhVienItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboSoSinhVienItemStateChanged
+        // TODO add your handling code here:
+        try {
+            Integer.parseInt(comboSoSinhVien.getSelectedItem().toString());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            comboSoSinhVien.setSelectedItem("60");
+        }
+    }//GEN-LAST:event_comboSoSinhVienItemStateChanged
+
+    private void buttonResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResetActionPerformed
+        // TODO add your handling code here:
+        new Thread(() -> {
+            resetForm();
+            resetTable();
+        }).start();
+    }//GEN-LAST:event_buttonResetActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+         ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.getDanhSachLopHocPhan();
+            DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+            numberRowsOfTable = arrLopHocPhan.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrLopHocPhan.get(i).getMaLopHocPhan(), i, 1);
+                model.setValueAt(arrLopHocPhan.get(i).getPhongHocLyThuyet(), i, 2);
+                model.setValueAt(arrLopHocPhan.get(i).getLichHocLyThuyet(), i, 3);
+                model.setValueAt(arrLopHocPhan.get(i).getTietHocLyThuyet(), i, 4);
+                model.setValueAt(arrLopHocPhan.get(i).getSoLuongSv(), i, 5);
+                model.setValueAt(arrLopHocPhan.get(i).getKhoa(), i, 6);
+                model.setValueAt(arrLopHocPhan.get(i).getTenMonHoc(), i, 7);
+                model.setValueAt(arrLopHocPhan.get(i).getGiangVien().getMaGiangVien() + " - " + arrLopHocPhan.get(i).getGiangVien().getTenGiangVien(), i, 8);
+            }
+    }//GEN-LAST:event_formWindowOpened
+    private void resetForm() {
+        textFieldMaLopHP.setText("");
+        comboPhongHoc.setSelectedIndex(0);
+        comboToaNha.setSelectedIndex(0);
+        comboLichHoc.setSelectedIndex(0);
+        for (int i = 0; i < 12; i++) {
+            comboTiet[i].setSelected(false);
+        }
+        comboSoSinhVien.setSelectedIndex(0);
+        textFieldKhoa.setText("15");
+        comboMonHoc.setSelectedIndex(0);
+        comboGiangVien.setSelectedIndex(0);
+    }
+
+    private void resetTable() {
+        DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            model.removeRow(0);
+        }
+        numberRowsOfTable = 0;
+    }
 
     /**
      * @param args the command line arguments
@@ -343,6 +792,7 @@ public class viewManagerClass extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(viewManagerClass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -353,14 +803,18 @@ public class viewManagerClass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JButton buttonDong;
+    private javax.swing.JButton buttonReset;
+    private javax.swing.JButton buttonSua;
+    private javax.swing.JButton buttonThem;
+    private javax.swing.JToggleButton buttonTimKiem;
+    private javax.swing.JButton buttonXoa;
+    private javax.swing.JComboBox<String> comboGiangVien;
+    private javax.swing.JComboBox<String> comboLichHoc;
+    private javax.swing.JComboBox<String> comboMonHoc;
+    private javax.swing.JComboBox<String> comboPhongHoc;
+    private javax.swing.JComboBox<String> comboSoSinhVien;
+    private javax.swing.JComboBox<String> comboToaNha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -375,11 +829,198 @@ public class viewManagerClass extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tableLopHP;
+    private javax.swing.JTextField textFieldKhoa;
+    private javax.swing.JTextField textFieldMaLopHP;
+    private javax.swing.JTextField textFieldTimKiem;
+    private javax.swing.JCheckBox tiet1;
+    private javax.swing.JCheckBox tiet10;
+    private javax.swing.JCheckBox tiet11;
+    private javax.swing.JCheckBox tiet12;
+    private javax.swing.JCheckBox tiet2;
+    private javax.swing.JCheckBox tiet3;
+    private javax.swing.JCheckBox tiet4;
+    private javax.swing.JCheckBox tiet5;
+    private javax.swing.JCheckBox tiet6;
+    private javax.swing.JCheckBox tiet7;
+    private javax.swing.JCheckBox tiet8;
+    private javax.swing.JCheckBox tiet9;
     // End of variables declaration//GEN-END:variables
+    private javax.swing.JCheckBox[] comboTiet = new javax.swing.JCheckBox[12];
+    private int numberRowsOfTable = 0;
+
+//    private void setToForm(String maLHP, int soSV, int khoa, String tenMH, String GV, String tietHoc, String lichHocLyThuyet, String phongHocLT) {
+//        textFieldMaLopHP.setText(maLHP);
+//        comboSoSinhVien.setSelectedItem(soSV);
+//        textFieldKhoa.setText(String.valueOf(khoa));
+//        comboMonHoc.setSelectedItem(tenMH);
+//        comboGiangVien.setSelectedItem(GV);
+//        String[] tiet = tietHoc.split(",");
+//        for (String string : tiet) {
+//            comboTiet[Integer.parseInt(string) + 1].setSelected(true);
+//        }
+//        comboLichHoc.setSelectedItem(lichHocLyThuyet);
+//        String[] split = phongHocLT.split(" - ");
+//        int phong = Integer.parseInt(split[0]);
+//        int toa = Integer.parseInt(split[1]);
+//        comboPhongHoc.setSelectedItem(phong);
+//        comboToaNha.setSelectedItem(toa);
+//    }
+    private void themLopHocPhan() {
+        String maLHP = textFieldMaLopHP.getText();
+        if (maLHP.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống mã lớp.");
+            return;
+        }
+        String tietHoc = "";
+        for (int i = 0; i < 12; i++) {
+            if (comboTiet[i].isSelected()) {
+                tietHoc += (i + 1) + ",";
+            }
+        }
+        if (tietHoc.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống tiết học.");
+            return;
+        }
+        try {
+            Integer.parseInt(comboSoSinhVien.getSelectedItem().toString());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            comboSoSinhVien.setSelectedItem("60");
+        }
+        int soSV = Integer.parseInt(comboSoSinhVien.getSelectedItem().toString());
+
+        int khoa = Integer.parseInt(textFieldKhoa.getText());
+        String tenMH = comboMonHoc.getSelectedItem().toString();
+        String GV = comboGiangVien.getSelectedItem().toString();
+
+        tietHoc = tietHoc.substring(0, tietHoc.length() - 1);
+
+        String lichHocLyThuyet = comboLichHoc.getSelectedItem().toString();
+
+        int phong = Integer.parseInt(comboPhongHoc.getSelectedItem().toString());
+        String toa = comboToaNha.getSelectedItem().toString();
+
+        String phongHocLT = "Tòa " + toa + " - phòng " + phong;
+
+        DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
+                JOptionPane.showMessageDialog(rootPane, "Không cho phép lặp mã lớp học phần!");
+                return;
+            }
+        }
+
+        boolean isInsertedLopHocPhan = DBQuanLyThucHanh.insertLopHocPhan(maLHP, GV.split(" - ")[0], tenMH, soSV, lichHocLyThuyet, "Tòa " + toa + " - phòng " + phong, tietHoc, khoa);
+//        boolean isInsertedLopHocPhan = true;
+
+        if (!isInsertedLopHocPhan) {
+            JOptionPane.showMessageDialog(rootPane, "Lỗi, hãy xem lại mã lớp!!!");
+        } else {
+            numberRowsOfTable++;
+            model.setRowCount(numberRowsOfTable);
+            model.setValueAt(numberRowsOfTable, numberRowsOfTable - 1, 0);
+            model.setValueAt(maLHP, numberRowsOfTable - 1, 1);
+            model.setValueAt(phongHocLT, numberRowsOfTable - 1, 2);
+            model.setValueAt(lichHocLyThuyet, numberRowsOfTable - 1, 3);
+            model.setValueAt(tietHoc, numberRowsOfTable - 1, 4);
+            model.setValueAt(soSV, numberRowsOfTable - 1, 5);
+            model.setValueAt(khoa, numberRowsOfTable - 1, 6);
+            model.setValueAt(tenMH, numberRowsOfTable - 1, 7);
+            model.setValueAt(GV, numberRowsOfTable - 1, 8);
+        }
+        resetForm();
+    }
+
+    private void suaLopHocPhan() {
+        String maLHP = textFieldMaLopHP.getText();
+        DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+        boolean flag = false;
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            JOptionPane.showMessageDialog(rootPane, "Không tồn tại lớp học phần cần sửa!");
+            return;
+        }
+
+        String tietHoc = "";
+        for (int i = 0; i < 12; i++) {
+            if (comboTiet[i].isSelected()) {
+                tietHoc += (i + 1) + ",";
+            }
+        }
+        if (tietHoc.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Không được để trống tiết học.");
+            return;
+        }
+        try {
+            Integer.parseInt(comboSoSinhVien.getSelectedItem().toString());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            comboSoSinhVien.setSelectedItem("60");
+        }
+        int soSV = Integer.parseInt(comboSoSinhVien.getSelectedItem().toString());
+
+        int khoa = Integer.parseInt(textFieldKhoa.getText());
+        String tenMH = comboMonHoc.getSelectedItem().toString();
+        String GV = comboGiangVien.getSelectedItem().toString();
+
+        tietHoc = tietHoc.substring(0, tietHoc.length() - 1);
+
+        String lichHocLyThuyet = comboLichHoc.getSelectedItem().toString();
+
+        int phong = Integer.parseInt(comboPhongHoc.getSelectedItem().toString());
+        String toa = comboToaNha.getSelectedItem().toString();
+
+        String phongHocLT = "Tòa " + toa + " - phòng " + phong;
+
+        DBQuanLyThucHanh.updateLopHocPhan(maLHP, GV.split(" - ")[0], tenMH, soSV, lichHocLyThuyet, phongHocLT, tietHoc, khoa);
+//        boolean isUpdatedLopHocPhan = true;
+
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
+                model.setValueAt(phongHocLT, i, 2);
+                model.setValueAt(lichHocLyThuyet, i, 3);
+                model.setValueAt(tietHoc, i, 4);
+                model.setValueAt(soSV, i, 5);
+                model.setValueAt(khoa, i, 6);
+                model.setValueAt(tenMH, i, 7);
+                model.setValueAt(GV, i, 8);
+                resetForm();
+                return;
+            }
+        }
+    }
+
+    private void xoaLopHocPhan() {
+        String maLHP = textFieldMaLopHP.getText();
+        DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
+
+        boolean flag = false;
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            JOptionPane.showMessageDialog(rootPane, "Không tồn tại lớp học phần cần xóa!");
+            return;
+        }
+
+        DBQuanLyThucHanh.deleteLopHocPhan(maLHP);
+
+        for (int i = 0; i < numberRowsOfTable; i++) {
+            if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
+                model.removeRow(i);
+                numberRowsOfTable--;
+                resetForm();
+                return;
+            }
+        }
+    }
 }

@@ -16,6 +16,8 @@ import java.awt.Toolkit;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -203,11 +205,12 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
                 if (Integer.parseInt(comboTuan.getSelectedItem().toString()) == tuanNay) {
                     LocalDate dateInCell = LocalDate.parse(ngayThang[j].getText(), f);
 
-                    if (dateInCell.isBefore(today)) {
+                    if (dateInCell.isBefore(today) || (dateInCell.isEqual(today ) && getBuoiTrongNgay() > i)) {
                         thoiKhoaBieu[i][j].setComponentPopupMenu(null);
                         thoiKhoaBieu[i][j].setEnabled(false);
                         thoiKhoaBieu[i][j].setToolTipText(null);
                     }
+                    
                 } else {
                     thoiKhoaBieu[i][j].setEnabled(true);
                 }
@@ -1529,7 +1532,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 //        new Thread(() -> {
         this.isUsingProcess = false;
 //        }).start();
-        ThongTinPhongMay ttpm = new ThongTinPhongMay(ShareData.nguoiDangNhap.getTenDangNhap());
+        ThongTinPhongMay ttpm = new ThongTinPhongMay(maGV);
         ttpm.setLocation(locationOnScreen);
         ttpm.setVisible(true);
         this.dispose();
@@ -1537,7 +1540,7 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         // TODO add your handling code here:
-       
+        this.dispose();
         UserScreenMain ttpm = new UserScreenMain();
         ttpm.setLocationRelativeTo(ttpm);
         ttpm.setVisible(true);
@@ -1569,6 +1572,10 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DangKiPhongMay.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1710,5 +1717,23 @@ public final class DangKiPhongMay extends javax.swing.JFrame {
             }
         }
         refreshData();
+    }
+
+    private int getBuoiTrongNgay() {
+        Date dt = new Date();
+        int hours = dt.getHours();
+        int mins = dt.getMinutes();
+//        System.out.println("hours: " + hours);
+//        System.out.println("mins: " + mins);
+
+        if ((hours < 7 && mins <= 59) || (hours < 6)) {
+            return 0;
+        } else if ((hours <= 12 && mins <= 30) || (hours < 12)) {
+            return 1;
+        } else if ((hours <= 17 && mins <= 30) || (hours < 17)) {
+            return 2;
+        } else {
+            return 3;
+        }
     }
 }

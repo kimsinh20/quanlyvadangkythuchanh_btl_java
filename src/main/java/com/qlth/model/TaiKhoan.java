@@ -18,6 +18,11 @@ public class TaiKhoan implements Serializable{
     public TaiKhoan() {
     }
 
+    public TaiKhoan(String tenDangNhap, String matKhau) {
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+    }
+
     public TaiKhoan(String tenDangNhap, String matKhau, String quyen) {
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;

@@ -16,6 +16,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import com.qlth.views.login.viewLogin;
+import java.awt.Dimension;
 //import views.SignIn;
 
 public class AdminScreenMain extends javax.swing.JFrame {
@@ -547,7 +548,9 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new viewManagerClass().setVisible(true);
+       viewManagerClass viewManagerClass= new viewManagerClass();
+       viewManagerClass.setLocationRelativeTo(viewManagerClass);
+       viewManagerClass.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -561,7 +564,18 @@ public class AdminScreenMain extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
+         this.dispose();
+           ViewManagerPracticeRegistration dkPM = new ViewManagerPracticeRegistration();
+            dkPM.setVisible(true);
+            
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Dimension screenSize = toolkit.getScreenSize();
 
+            //Calculate the frame location  
+            int x = (screenSize.width - dkPM.getWidth()) / 2;
+            int y = (screenSize.height - dkPM.getHeight()) / 2;
+
+            dkPM.setLocation(x, y);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

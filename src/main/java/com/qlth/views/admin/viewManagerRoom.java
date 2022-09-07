@@ -4,6 +4,7 @@
  */
 package com.qlth.views.admin;
 
+import com.qlth.model.LopHocPhan;
 import com.qlth.model.Phong;
 import com.qlth.model.PhongMay;
 import com.qlth.model.ToaNha;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Sinh
+ * @author 
  */
 public class viewManagerRoom extends javax.swing.JFrame {
 
@@ -65,12 +66,13 @@ public class viewManagerRoom extends javax.swing.JFrame {
         somaytinh = new javax.swing.JSpinner();
         tenphongmay = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        themphongmay = new javax.swing.JButton();
+        suaphongmay = new javax.swing.JButton();
+        xoaphongmay = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        exxit = new javax.swing.JButton();
+        ressetphongmay = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel21 = new javax.swing.JLabel();
@@ -122,6 +124,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         jLabel19.setText("các phần mềm sử dụng");
 
         maphongmay.setEditable(false);
+        maphongmay.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         maphongmay.setEnabled(false);
 
         pm3.setText("Excel 2019");
@@ -171,8 +174,8 @@ public class viewManagerRoom extends javax.swing.JFrame {
                             .addComponent(somaychieu, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(phong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(toa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addComponent(toa, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tenphongmay, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,25 +246,25 @@ public class viewManagerRoom extends javax.swing.JFrame {
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
-        jButton5.setText("thêm");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        themphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/add2.png"))); // NOI18N
+        themphongmay.setText("thêm");
+        themphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addroom(evt);
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
-        jButton6.setText("sửa");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        suaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
+        suaphongmay.setText("sửa");
+        suaphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatephongmay(evt);
             }
         });
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
-        jButton7.setText("xóa");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        xoaphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        xoaphongmay.setText("xóa");
+        xoaphongmay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete(evt);
             }
@@ -275,11 +278,19 @@ public class viewManagerRoom extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
-        jButton8.setText("đóng");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        exxit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/return.png"))); // NOI18N
+        exxit.setText("đóng");
+        exxit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                exxitActionPerformed(evt);
+            }
+        });
+
+        ressetphongmay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        ressetphongmay.setText("reset");
+        ressetphongmay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ressetphongmayActionPerformed(evt);
             }
         });
 
@@ -288,36 +299,43 @@ public class viewManagerRoom extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(jLabel20)
-                .addGap(102, 102, 102)
-                .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(jButton5)
-                .addGap(88, 88, 88)
-                .addComponent(jButton6)
-                .addGap(85, 85, 85)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jButton8)
-                .addGap(73, 73, 73))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel20))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(themphongmay)
+                        .addGap(66, 66, 66)
+                        .addComponent(suaphongmay)))
+                .addGap(72, 72, 72)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(xoaphongmay)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addComponent(ressetphongmay)
+                        .addGap(49, 49, 49)
+                        .addComponent(exxit)
+                        .addGap(33, 33, 33))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(themphongmay)
+                    .addComponent(suaphongmay)
+                    .addComponent(xoaphongmay)
+                    .addComponent(exxit)
+                    .addComponent(ressetphongmay))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         table.setModel(new javax.swing.table.DefaultTableModel(
@@ -388,110 +406,150 @@ public class viewManagerRoom extends javax.swing.JFrame {
 
     private void delete(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete
         // TODO add your handling code here:
-        try {
-            DBQuanLyThucHanh.deletePhongMay(Integer.parseInt(maphongmay.getText()));
-            JOptionPane.showMessageDialog(rootPane, "xóa thành công");
+        new Thread(() -> {
+            try {
+                DBQuanLyThucHanh.deletePhongMay(Integer.parseInt(maphongmay.getText()));
+                JOptionPane.showMessageDialog(rootPane, "xóa thành công");
+                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachPhongMay().size(); i++) {
-                PhongMay pm = DBQuanLyThucHanh.getDanhSachPhongMay().get(i);
-                model.addRow(new Object[]{i + 1, pm.getMaPhongMay(), pm.getTenPhongMay(), pm.getDiaChiPhongMay(), pm.getSoMayChieu(), pm.getSoMayTinh(), pm.getTinhTrangPhong(), pm.getDanhSachPhanMem()});
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+       
     }//GEN-LAST:event_delete
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void exxitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exxitActionPerformed
         // TODO add your handling code here:
         this.dispose();
         AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
         admin.setVisible(true);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_exxitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         //get líst table
-        try {
-            sudungduoc.setSelected(true);
+        new Thread(() -> {
+            try {
+                sudungduoc.setSelected(true);
+                
+                //get list combobox
+                if (DBQuanLyThucHanh.getDanhSachPhong().size() != 0) {
+                    DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) phong.getModel();
+                    for (int p : DBQuanLyThucHanh.getDanhSachPhong()) {
+                        defaultComboBoxModel.addElement(p);
+                    }
+                }
+                if (DBQuanLyThucHanh.getDanhSachToaNha().size() != 0) {
+                    DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) toa.getModel();
+                    for (String toa : DBQuanLyThucHanh.getDanhSachToaNha()) {
+                        defaultComboBoxModel.addElement(toa);
+                    }
+                }
+                ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachPhongMay().size(); i++) {
-                PhongMay pm = DBQuanLyThucHanh.getDanhSachPhongMay().get(i);
-                model.addRow(new Object[]{i + 1, pm.getMaPhongMay(), pm.getTenPhongMay(), pm.getDiaChiPhongMay(), pm.getSoMayChieu(), pm.getSoMayTinh(), pm.getTinhTrangPhong(), pm.getDanhSachPhanMem()});
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
             }
-            //get list combobox
-            if (DBQuanLyThucHanh.getDanhSachPhong().size() != 0) {
-                DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) phong.getModel();
-                for (int p : DBQuanLyThucHanh.getDanhSachPhong()) {
-                    defaultComboBoxModel.addElement(p);
-                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (DBQuanLyThucHanh.getDanhSachToaNha().size() != 0) {
-                DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) toa.getModel();
-                for (String toa : DBQuanLyThucHanh.getDanhSachToaNha()) {
-                    defaultComboBoxModel.addElement(toa);
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }).start();
     }//GEN-LAST:event_formWindowOpened
 
     private void addroom(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addroom
         // TODO add your handling code here:
-        try {
-            String tenPM = (String) tenphongmay.getText();
-            String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
-            int soMT = (int) somaytinh.getValue();
-            int soMC = (int) somaychieu.getValue();
-            String tinhTrang = "";
-            if (sudungduoc.isSelected()) {
-                tinhTrang = "Sử dụng được";
-            }
-            if (baotri.isSelected()) {
-                tinhTrang = "bảo trì";
-            }
-            String dsPhanMem = "";
-            ArrayList<String> listpm = new ArrayList();
-            if (pm1.isSelected()) {
-                listpm.add(pm1.getText());
-            }
-            if (pm2.isSelected()) {
-                listpm.add(pm2.getText());
-            }
-            if (pm3.isSelected()) {
-                listpm.add(pm3.getText());
-            }
-            if (pm4.isSelected()) {
-                listpm.add(pm4.getText());
-            }
+        new Thread(() -> {
+            try {
+                String tenPM = (String) tenphongmay.getText();
+                String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
+                int soMT = (int) somaytinh.getValue();
+                int soMC = (int) somaychieu.getValue();
+                String tinhTrang = "";
+                if (sudungduoc.isSelected()) {
+                    tinhTrang = "Sử dụng được";
+                }
+                if (baotri.isSelected()) {
+                    tinhTrang = "bảo trì";
+                }
+                String dsPhanMem = "";
+                ArrayList<String> listpm = new ArrayList();
+                if (pm1.isSelected()) {
+                    listpm.add(pm1.getText());
+                }
+                if (pm2.isSelected()) {
+                    listpm.add(pm2.getText());
+                }
+                if (pm3.isSelected()) {
+                    listpm.add(pm3.getText());
+                }
+                if (pm4.isSelected()) {
+                    listpm.add(pm4.getText());
+                }
 
-            dsPhanMem = listpm.stream().map((string) -> string + ", ").reduce(dsPhanMem, String::concat);
+                dsPhanMem = listpm.stream().map((string) -> string + ", ").reduce(dsPhanMem, String::concat);
 
-            dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
+                dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
 
-            if (tenPM.equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
-            }
-            if (DBQuanLyThucHanh.insertPhongMay(tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem)) {
-                JOptionPane.showMessageDialog(rootPane, "thêm thành công");
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
-            }
+                if (tenPM.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
+                }
+                if (DBQuanLyThucHanh.insertPhongMay(tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem)) {
+                    JOptionPane.showMessageDialog(rootPane, "thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
+                }
+                ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachPhongMay().size(); i++) {
-                PhongMay pm = DBQuanLyThucHanh.getDanhSachPhongMay().get(i);
-                model.addRow(new Object[]{i + 1, pm.getMaPhongMay(), pm.getTenPhongMay(), pm.getDiaChiPhongMay(), pm.getSoMayChieu(), pm.getSoMayTinh(), pm.getTinhTrangPhong(), pm.getDanhSachPhanMem()});
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
     }//GEN-LAST:event_addroom
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
             // TODO add your handling code here:
             DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -520,16 +578,16 @@ public class viewManagerRoom extends javax.swing.JFrame {
             for (String txt : text) {
                 if (txt.trim().equals(pm1.getText().trim())) {
                     pm1.setSelected(true);
-                } 
+                }
                 if (txt.trim().equals(pm2.getText().trim())) {
                     pm2.setSelected(true);
                 }
                 if (txt.trim().equals(pm3.getText().trim())) {
                     pm3.setSelected(true);
-                } 
+                }
                 if (txt.trim().equals(pm4.getText().trim())) {
                     pm4.setSelected(true);
-                } 
+                }
             }
             DefaultComboBoxModel comboBoxModelBuilding = (DefaultComboBoxModel) toa.getModel();
             for (int i = 0; i < comboBoxModelBuilding.getSize(); i++) {
@@ -551,6 +609,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }).start();
     }//GEN-LAST:event_tableMouseClicked
 
     private void pm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pm1ActionPerformed
@@ -563,6 +622,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
 
     private void updatephongmay(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatephongmay
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
             String tenPM = (String) tenphongmay.getText();
             String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
@@ -595,36 +655,64 @@ public class viewManagerRoom extends javax.swing.JFrame {
             dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
             DBQuanLyThucHanh.updatePhongMay(Integer.parseInt(maphongmay.getText()), tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem);
             JOptionPane.showMessageDialog(rootPane, "sửa thành công");
+             ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachPhongMay().size(); i++) {
-                PhongMay pm = DBQuanLyThucHanh.getDanhSachPhongMay().get(i);
-                model.addRow(new Object[]{i + 1, pm.getMaPhongMay(), pm.getTenPhongMay(), pm.getDiaChiPhongMay(), pm.getSoMayChieu(), pm.getSoMayTinh(), pm.getTinhTrangPhong(), pm.getDanhSachPhanMem()});
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
             }
         } catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }).start();
     }//GEN-LAST:event_updatephongmay
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         // TODO add your handling code here:e
+        new Thread(() -> {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String keySearch = search.getText().trim();
             if (keySearch.compareTo("") == 0) {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
             }
             try {
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.setRowCount(0);
-                for (int i = 0; i < DBQuanLyThucHanh.searchPhongMay(keySearch).size(); i++) {
-                    PhongMay pm = DBQuanLyThucHanh.searchPhongMay(keySearch).get(i);
-                    model.addRow(new Object[]{i + 1, pm.getMaPhongMay(), pm.getTenPhongMay(), pm.getDiaChiPhongMay(), pm.getSoMayChieu(), pm.getSoMayTinh(), pm.getTinhTrangPhong(), pm.getDanhSachPhanMem()});
-                }
+                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrPM.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+            }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        }).start();
     }//GEN-LAST:event_searchKeyPressed
+
+    private void ressetphongmayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ressetphongmayActionPerformed
+        // TODO add your handling code here:
+        resetform();
+    }//GEN-LAST:event_ressetphongmayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -642,10 +730,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton baotri;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton exxit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -668,12 +753,31 @@ public class viewManagerRoom extends javax.swing.JFrame {
     private javax.swing.JCheckBox pm2;
     private javax.swing.JCheckBox pm3;
     private javax.swing.JCheckBox pm4;
+    private javax.swing.JButton ressetphongmay;
     private javax.swing.JTextField search;
     private javax.swing.JSpinner somaychieu;
     private javax.swing.JSpinner somaytinh;
+    private javax.swing.JButton suaphongmay;
     private javax.swing.JRadioButton sudungduoc;
     private javax.swing.JTable table;
     private javax.swing.JTextField tenphongmay;
+    private javax.swing.JButton themphongmay;
     private javax.swing.JComboBox<String> toa;
+    private javax.swing.JButton xoaphongmay;
     // End of variables declaration//GEN-END:variables
+
+    private void resetform() {
+        maphongmay.setRequestFocusEnabled(true);
+        maphongmay.setText("");
+        tenphongmay.setText("");
+        toa.setSelectedIndex(0);
+        phong.setSelectedIndex(0);
+        somaychieu.setValue(0);
+        somaytinh.setValue(0);
+        sudungduoc.setSelected(true);
+        pm1.setSelected(false);
+        pm2.setSelected(false);
+        pm3.setSelected(false);
+        pm4.setSelected(false);
+    }
 }

@@ -35,7 +35,6 @@ public class LopHocPhan implements Serializable{
         this.tietHocLyThuyet = tietHocLyThuyet;
         this.khoa = khoa;
     }
-
     public LopHocPhan(String maLopHocPhan, String tenMonHoc) {
         this.maLopHocPhan = maLopHocPhan;
         this.tenMonHoc = tenMonHoc;

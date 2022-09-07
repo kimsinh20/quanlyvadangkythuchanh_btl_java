@@ -8,6 +8,7 @@ import com.qlth.model.GiangVien;
 import com.qlth.model.PhongMay;
 import database.DBQuanLyThucHanh;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Sinh
+ * @author
  */
 public class viewManagerTeacher extends javax.swing.JFrame {
 
@@ -56,6 +57,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -166,23 +168,39 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/delete.png"))); // NOI18N
+        jButton5.setText("reset");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel7))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(search)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addComponent(jButton2)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton3))
-                    .addComponent(search))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5)
+                        .addGap(0, 11, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +209,8 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -240,12 +259,12 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(68, 68, 68)
-                        .addComponent(jButton4)))
-                .addGap(18, 18, 18)
+                        .addComponent(jButton4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 674, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -276,7 +295,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,20 +319,32 @@ public class viewManagerTeacher extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
+              ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachGiangVien().size(); i++) {
-                GiangVien gv = DBQuanLyThucHanh.getDanhSachGiangVien().get(i);
-                model.addRow(new Object[]{i + 1, gv.getMaGiangVien(), gv.getTenGiangVien(), gv.getSoDT(), gv.getHocVi(), gv.getKhoa()});
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
             }
             //get list combobox
         } catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }).start();
     }//GEN-LAST:event_formWindowOpened
 
     private void xemthongtingv(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xemthongtingv
         // TODO add your handling code here:
+       new Thread(() -> {
         try {
             DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
             Vector<Object> teacherVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
@@ -338,17 +369,19 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+       }).start();
     }//GEN-LAST:event_xemthongtingv
 
     private void themgiangvien(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themgiangvien
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
         String maGiangVien = (String) txtmagv.getText();
         String tenGiangVien=(String) txttengv.getText();
         String soDienThoai=(String) sdt.getText();
         String hocVi=String.valueOf(hocvi.getSelectedItem());
         String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
-        if (maGiangVien.equals("")) {
+        if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
             }
             if (DBQuanLyThucHanh.insertGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa)) {
@@ -356,76 +389,120 @@ public class viewManagerTeacher extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
             }
+            ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachGiangVien().size(); i++) {
-                GiangVien gv = DBQuanLyThucHanh.getDanhSachGiangVien().get(i);
-                model.addRow(new Object[]{i + 1, gv.getMaGiangVien(), gv.getTenGiangVien(), gv.getSoDT(), gv.getHocVi(), gv.getKhoa()});
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
             }
         }catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+         }).start();
     }//GEN-LAST:event_themgiangvien
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
             DBQuanLyThucHanh.deleteGiangVien(txtmagv.getText());
              JOptionPane.showMessageDialog(rootPane, "xóa thành công");
-              DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachGiangVien().size(); i++) {
-                GiangVien gv = DBQuanLyThucHanh.getDanhSachGiangVien().get(i);
-                model.addRow(new Object[]{i + 1, gv.getMaGiangVien(), gv.getTenGiangVien(), gv.getSoDT(), gv.getHocVi(), gv.getKhoa()});
+            ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
             }
         } catch (Exception ex) {
            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex); 
         }
+         }).start();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        new Thread(() -> {
         try {
         String maGiangVien = (String) txtmagv.getText();
         String tenGiangVien=(String) txttengv.getText();
         String soDienThoai=(String) sdt.getText();
         String hocVi=String.valueOf(hocvi.getSelectedItem());
         String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
-        if (maGiangVien.equals("")) {
+        if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
             }
             DBQuanLyThucHanh.updateGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa);
                 JOptionPane.showMessageDialog(rootPane, "sửa thành công");
+           ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            for (int i = 0; i < DBQuanLyThucHanh.getDanhSachGiangVien().size(); i++) {
-                GiangVien gv = DBQuanLyThucHanh.getDanhSachGiangVien().get(i);
-                model.addRow(new Object[]{i + 1, gv.getMaGiangVien(), gv.getTenGiangVien(), gv.getSoDT(), gv.getHocVi(), gv.getKhoa()});
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
             }
         }catch (Exception ex) {
             Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
         }
+         }).start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         // TODO add your handling code here:
+        new Thread(() -> {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String keySearch = search.getText().trim();
             if (keySearch.compareTo("") == 0) {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
             }
             try {
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.setRowCount(0);
-                for (int i = 0; i < DBQuanLyThucHanh.searchGiangVien(keySearch).size(); i++) {
-                    GiangVien gv = DBQuanLyThucHanh.searchGiangVien(keySearch).get(i);
-                    model.addRow(new Object[]{i + 1, gv.getMaGiangVien(),gv.getTenGiangVien(),gv.getSoDT(),gv.getHocVi(),gv.getKhoa()});
-                }
+               ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrGV.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+            }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+         }).start();
     }//GEN-LAST:event_searchKeyPressed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        resetform();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,6 +547,7 @@ public class viewManagerTeacher extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -488,4 +566,13 @@ public class viewManagerTeacher extends javax.swing.JFrame {
     private javax.swing.JTextField txtmagv;
     private javax.swing.JTextField txttengv;
     // End of variables declaration//GEN-END:variables
+
+    private void resetform() {
+       txtmagv.setRequestFocusEnabled(true);
+       txtmagv.setText("");
+       txttengv.setText("");
+       sdt.setText("");
+       hocvi.setSelectedIndex(0);
+       khoa.setSelectedIndex(0);
+    }
 }

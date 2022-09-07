@@ -23,6 +23,10 @@ public class GiangVien implements Serializable {
     public GiangVien() {
     }
 
+    public GiangVien(String maGiangVien) {
+        this.maGiangVien = maGiangVien;
+    }
+
     public GiangVien(String maGiangVien, String tenGiangVien, String soDT,String hocVi, String giangVienKhoa) {
         this.maGiangVien = maGiangVien;
         this.tenGiangVien = tenGiangVien;
