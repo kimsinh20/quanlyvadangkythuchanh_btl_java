@@ -103,6 +103,8 @@ public class AdminScreenMain extends javax.swing.JFrame {
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
@@ -431,15 +433,31 @@ public class AdminScreenMain extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
-        jMenu12.setText("thống kê");
+        jMenu12.setText("xuất báo cáo");
 
-        jMenuItem6.setText("thống kê");
+        jMenuItem6.setText("theo tuần");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
         jMenu12.add(jMenuItem6);
+
+        jMenuItem19.setText("theo tháng");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu12.add(jMenuItem19);
+
+        jMenuItem18.setText("theo học kỳ");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
+        jMenu12.add(jMenuItem18);
 
         jMenuBar1.add(jMenu12);
 
@@ -493,6 +511,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         viewLogin signIn = new viewLogin();
+        signIn.setLocationRelativeTo(signIn);
         signIn.setVisible(true);
     }//GEN-LAST:event_miExitActionPerformed
 
@@ -500,6 +519,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         viewLogin signIn = new viewLogin();
+        signIn.setLocationRelativeTo(signIn);
         signIn.setVisible(true);
     }//GEN-LAST:event_toolBtnExitActionPerformed
 
@@ -581,9 +601,9 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        viewStatistical viewStatistical = new viewStatistical();
-        viewStatistical.setLocationRelativeTo(viewStatistical);
-        viewStatistical.setVisible(true);
+       viewBaoCaoTheoTuan viewBaoCaoTheoTuan= new viewBaoCaoTheoTuan();
+       viewBaoCaoTheoTuan.setLocationRelativeTo(viewBaoCaoTheoTuan);
+       viewBaoCaoTheoTuan.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -637,6 +657,22 @@ public class AdminScreenMain extends javax.swing.JFrame {
         viewManagerTeacher.setLocationRelativeTo(viewManagerTeacher);
         viewManagerTeacher.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        viewBaoCaoTheoThang viewBaoCaoTheoThang= new viewBaoCaoTheoThang();
+        viewBaoCaoTheoThang.setLocationRelativeTo(viewBaoCaoTheoThang);
+        viewBaoCaoTheoThang.setVisible(true);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        viewBaoCaoTheoKy viewBaoCaoTheoKy= new viewBaoCaoTheoKy();
+        viewBaoCaoTheoKy.setLocationRelativeTo(viewBaoCaoTheoKy);
+        viewBaoCaoTheoKy.setVisible(true);
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -706,6 +742,8 @@ public class AdminScreenMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

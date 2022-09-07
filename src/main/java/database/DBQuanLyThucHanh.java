@@ -565,8 +565,94 @@ public class DBQuanLyThucHanh {
             System.out.println("reset mk: " + e);
         }
     }
+       public static String getNgayBatDauHocKy(int nam, int ky) {
+        DBQuanLyThucHanh.checkConnection();
+
+        String str = "";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_danh_sach_hoc_ky(" + nam + ", " + ky + ");");
+
+            for (int i = 0; i < ky; i++) {
+                if (!rs.next()) {
+                    if (str.isEmpty()) {
+                        return "2022-04-28";
+                    } else {
+                        break;
+                    }
+                } else {
+                    str = rs.getString(1);
+                }
+            }
+            return str;
+        } catch (SQLException e) {
+            System.out.println("getNgayBatDauHocKy");
+            System.out.println(e);
+        }
+
+        return "2022-04-28";
+    }
+
+    public static String getThoiGianBatDauDenKetThucTuan(String ngayBatDauKy, int tuan) {
+        DBQuanLyThucHanh.checkConnection();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_thoi_gian_bat_dau_den_ket_thuc_tuan('" + ngayBatDauKy + "', " + tuan + ");");
+            while (rs.next()) {
+                return rs.getString(1) + "|" + rs.getString(2) + "|" + rs.getString(3) + "|" + rs.getString(4) + "|" + rs.getString(5) + "|" + rs.getString(6) + "|" + rs.getString(7);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("getThoiGianBatDauDenKetThucTuan");
+            System.out.println(e);
+        }
+
+        return "2022-04-25|2022-04-26|2022-04-27|2022-04-28|2022-04-29|2022-04-30|2022-05-01";
+    }
+
+    public static ArrayList<Integer> getListMaPhongMay() {
+        DBQuanLyThucHanh.checkConnection();
+        ArrayList<Integer> myList = new ArrayList<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_list_ma_phong_may();");
+            while (rs.next()) {
+                myList.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            System.out.println("getListMaPhongMay");
+            System.out.println(e);
+        }
+        return myList;
+    }
+
+    public static String getTenPhongMay(int maPM) {
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("CALL get_ten_phong_may(" + maPM + ");");
+            while (rs.next()) {
+                return rs.getString(1) + " - " + rs.getString(2);
+            }
+        } catch (SQLException e) {
+            System.out.println("getTenPhongMay");
+            System.out.println(e);
+        }
+        return "PM99 - Tòa 999 - phòng 999";
+    }
+     public static void updateMatKhau(String maGV, String matKhauMoi) {
+        DBQuanLyThucHanh.checkConnection();
+        try {
+            Statement stmt = conn.createStatement();
+             stmt.execute("CALL update_mat_khau('" + maGV + "','" + matKhauMoi + "');");
+        } catch (SQLException e) {
+            System.out.println("updateMatKhau");
+            System.out.println(e);
+        }
+    }
     public static void main(String[] args) {
    //test db
-        System.out.println(searchTaiKhoan(""));
+        
     }
 }

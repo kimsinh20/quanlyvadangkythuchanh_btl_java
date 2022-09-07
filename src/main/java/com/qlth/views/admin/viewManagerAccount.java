@@ -4,8 +4,6 @@
  */
 package com.qlth.views.admin;
 
-import com.qlth.model.GiangVien;
-import com.qlth.model.PhongMay;
 import com.qlth.model.TaiKhoan;
 import database.DBQuanLyThucHanh;
 import java.util.ArrayList;
@@ -306,6 +304,17 @@ public class viewManagerAccount extends javax.swing.JFrame {
         try {
             DBQuanLyThucHanh.resetMatKhau(tendn.getText());
             JOptionPane.showMessageDialog(rootPane, "reset thành công");
+             ArrayList<TaiKhoan> arrTK = DBQuanLyThucHanh.searchTaiKhoan("");
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            int numberRowsOfTable = arrTK.size();
+            model.setRowCount(numberRowsOfTable);
+
+            for (int i = 0; i < numberRowsOfTable; i++) {
+                model.setValueAt(i, i, 0);
+                model.setValueAt(arrTK.get(i).getTenDangNhap(), i, 1);
+                model.setValueAt(arrTK.get(i).getMatKhau(), i, 2);
+            }
         } catch (Exception e) {
             System.out.println(e);
         }

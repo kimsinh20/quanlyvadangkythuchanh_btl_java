@@ -62,6 +62,7 @@ public class UserScreenMain extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu10 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jToolBar1 = new javax.swing.JToolBar();
         toolBtnNew = new javax.swing.JButton();
         toolBtnOpen = new javax.swing.JButton();
@@ -87,6 +88,8 @@ public class UserScreenMain extends javax.swing.JFrame {
         miSave = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         miExit = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -178,6 +181,8 @@ public class UserScreenMain extends javax.swing.JFrame {
 
         jMenu11.setText("Edit");
         jMenuBar2.add(jMenu11);
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CHƯƠNG TRÌNH QUẢN LÝ THỰC HÀNH KHOA CNTT");
@@ -301,9 +306,7 @@ public class UserScreenMain extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(77, 77, 77))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5))))
+                            .addComponent(jLabel5)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -361,6 +364,18 @@ public class UserScreenMain extends javax.swing.JFrame {
         jMenu1.add(miExit);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("đổi mật khẩu");
+
+        jMenuItem5.setText("đổi mật khẩu");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        jMenuBar1.add(jMenu4);
 
         jMenu3.setText("xem phòng thực hành");
 
@@ -436,6 +451,7 @@ public class UserScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         viewLogin signIn = new viewLogin();
+        signIn.setLocationRelativeTo(signIn);
         signIn.setVisible(true);
        
     }//GEN-LAST:event_miExitActionPerformed
@@ -444,6 +460,7 @@ public class UserScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
        this.dispose();
         viewLogin signIn = new viewLogin();
+        signIn.setLocationRelativeTo(signIn);
         signIn.setVisible(true);
     }//GEN-LAST:event_toolBtnExitActionPerformed
 
@@ -550,6 +567,14 @@ public class UserScreenMain extends javax.swing.JFrame {
             dkPM.setLocation(x, y);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        DoiMatKhau DoiMatKhau=new DoiMatKhau(ShareData.nguoiDangNhap.getTenDangNhap());
+        DoiMatKhau.setLocationRelativeTo(DoiMatKhau);
+        DoiMatKhau.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -613,6 +638,7 @@ public class UserScreenMain extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
@@ -628,6 +654,8 @@ public class UserScreenMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
