@@ -725,7 +725,7 @@ public class viewManagerClass extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-         ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.getDanhSachLopHocPhan();
+         ArrayList<LopHocPhan> arrLopHocPhan = DBQuanLyThucHanh.searchLopHocPhan("");
             DefaultTableModel model = (DefaultTableModel) tableLopHP.getModel();
 
             numberRowsOfTable = arrLopHocPhan.size();
