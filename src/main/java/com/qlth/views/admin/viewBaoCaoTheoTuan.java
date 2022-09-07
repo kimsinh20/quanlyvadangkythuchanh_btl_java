@@ -162,7 +162,7 @@ public class viewBaoCaoTheoTuan extends javax.swing.JFrame {
             int tuan = Integer.parseInt(comboTuan.getSelectedItem().toString());
 
             String ngay = DBQuanLyThucHanh.getNgayBatDauHocKy(nam, ky);
-            xuatBaoCaoTheoTuan(ngay, tuan, "D:/BaoCao_Nam" + nam + "_ky" + ky + "_Tuan" + tuan + "_ThoiGianXuat_"+LocalDate.now()+".xlsx");
+            xuatBaoCaoTheoTuan(ngay, tuan, "D:/BaoCao_Nam" + nam + "_ky" + ky + "_Tuan" + tuan + "_ThoiGianXuat_" + LocalDate.now() + ".xlsx");
         }).start();
     }//GEN-LAST:event_buttonXuatBaoCaoActionPerformed
 
@@ -343,7 +343,9 @@ public class viewBaoCaoTheoTuan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewBaoCaoTheoTuan().setVisible(true);
+                viewBaoCaoTheoTuan viewBaoCaoTheoTuan = new viewBaoCaoTheoTuan();
+                viewBaoCaoTheoTuan.setLocationRelativeTo(viewBaoCaoTheoTuan);
+                viewBaoCaoTheoTuan.setVisible(true);
             }
         });
     }

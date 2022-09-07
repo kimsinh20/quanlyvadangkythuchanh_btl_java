@@ -529,11 +529,11 @@ DELIMITER ;
 
 call get_danh_sach_toa();
 
-
+drop PROCEDURE get_danh_sach_mon_hoc;
 DELIMITER //
 CREATE PROCEDURE get_danh_sach_mon_hoc()
 BEGIN
-	select tenMonHoc from LopHocPhan;
+	select distinct tenMonHoc from LopHocPhan;
 END //
 DELIMITER ;
 
@@ -773,6 +773,7 @@ BEGIN
     from LopHocPhan inner join GiangVien
     on GiangVien.maGiangVien = LopHocPhan.maGiangVien
     where LopHocPhan.maLopHocPhan like concat("%",searchTerm,"%") or 
+    tenGiangVien like concat("%",searchTerm,"%") or 
     LopHocPhan.maGiangVien like concat("%",searchTerm,"%") or 
     LopHocPhan.tenMonHoc like concat("%",searchTerm,"%") or 
     LopHocPhan.soluongsv like concat("%",searchTerm,"%") or 
@@ -783,10 +784,14 @@ BEGIN
 END //
 DELIMITER ;
 
-call search_lop_hoc_phan('khai');
+select tenGiangVien from GiangVien where 
+GiangVien.maGiangVien not in (select maGiangVien from LopHocPhan);
 
+call search_lop_hoc_phan('');
+
+drop PROCEDURE get_danh_sach_hoc_ky;
 DELIMITER //
-CREATE PROCEDURE get_danh_sach_hoc_ky (nam_hoc int)
+CREATE PROCEDURE get_danh_sach_hoc_ky (nam_hoc int, ky int)
 BEGIN
 	SELECT 
 		ngayBatDauHocKi, @rownum:=@rownum + 1 AS rank
@@ -794,64 +799,107 @@ BEGIN
 		HocKy,
 		(SELECT @rownum:=0) r
 	where nam_hoc = year(ngayBatDauHocKi)
-	ORDER BY ngayBatDauHocKi;
+	ORDER BY ngayBatDauHocKi
+    limit ky;
+END //
+DELIMITER ;
+
+call get_danh_sach_hoc_ky(2022, 3);
+
+DELIMITER //
+CREATE PROCEDURE get_danh_sach_lop_hoc_phan ()
+BEGIN
+	select * from LopHocPhan;
 END //
 DELIMITER ;
 
 
-
 DELIMITER //
-CREATE PROCEDURE search_ ()
+CREATE PROCEDURE get_ ()
 BEGIN
 	
 END //
 DELIMITER ;
 
 
+
 DELIMITER //
-CREATE PROCEDURE search_ ()
+CREATE PROCEDURE search_tai_khoan (searchTerm VARCHAR(20)CHARACTER SET UTF8MB4)
 BEGIN
-	
+	select tenDangNhap, matKhau
+    from TaiKhoan
+    where quyen = "user" and tenDangNhap like concat("%",searchTerm,"%");
+END //
+DELIMITER ;
+call search_tai_khoan("");
+
+DELIMITER //
+CREATE PROCEDURE reset_mat_khau (tendn VARCHAR(20)CHARACTER SET UTF8MB4)
+BEGIN
+	update TaiKhoan
+    set matKhau = "123456"
+    where tendn = tenDangNhap;
 END //
 DELIMITER ;
 
+call reset_mat_khau('20226001');
+
+
+-- CREATE function get_ngay_bat_dau_hoc_ky (nam int, ky int)
+--  RETURNS date
+--  begin
+-- 	SELECT 
+-- 		ngayBatDauHocKi, @rownum:=@rownum + 1 AS rank
+-- 	FROM
+-- 		HocKy,
+-- 		(SELECT @rownum:=0) r
+-- 	where nam = year(ngayBatDauHocKi)
+-- 	ORDER BY ngayBatDauHocKi
+-- end
+
+drop PROCEDURE get_thoi_gian_bat_dau_den_ket_thuc_tuan;
 
 DELIMITER //
-CREATE PROCEDURE search_ ()
+CREATE PROCEDURE get_thoi_gian_bat_dau_den_ket_thuc_tuan(ngayBatDau date, tuan int)
 BEGIN
-	
+	select WEEKDAY(ngayBatDau) into @thu;
+    -- tro ve dau tuan và dịch đến tuần cần lấy
+    select ngayBatDau - interval @thu day + interval (tuan - 1) week 
+    into @ngayBatDau;
+	select @ngayBatDau as Mo,
+    @ngayBatDau + interval 1 day as Tu, 
+    @ngayBatDau + interval 2 day as We, 
+    @ngayBatDau + interval 3 day as Th, 
+    @ngayBatDau + interval 4 day as Fr, 
+    @ngayBatDau + interval 5 day as Sa, 
+    @ngayBatDau + interval 6 day as Su;
 END //
 DELIMITER ;
 
+call get_thoi_gian_bat_dau_den_ket_thuc_tuan("2022-04-28",1);
 
 DELIMITER //
-CREATE PROCEDURE search_ ()
+CREATE PROCEDURE get_list_ma_phong_may ()
 BEGIN
-	
+	select maPhongMay from PhongMay;
 END //
 DELIMITER ;
 
+call get_list_ma_phong_may ();
 
+
+tenDangNhap VARCHAR(20)CHARACTER SET UTF8MB4,
+matKhau VARCHAR(20)CHARACTER SET UTF8MB4,
+    
+    
 DELIMITER //
-CREATE PROCEDURE search_ ()
+CREATE PROCEDURE update_mat_khau (
+						tenDangNhap VARCHAR(20)CHARACTER SET UTF8MB4,
+						matKhau VARCHAR(20)CHARACTER SET UTF8MB4)
 BEGIN
-	
-END //
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE search_ ()
-BEGIN
-	
-END //
-DELIMITER ;
-
-
-DELIMITER //
-CREATE PROCEDURE search_ ()
-BEGIN
-	
+	update TaiKhoan
+    set TaiKhoan.matKhau = matKhau
+    where TaiKhoan.tenDangNhap = tenDangNhap;
 END //
 DELIMITER ;
 

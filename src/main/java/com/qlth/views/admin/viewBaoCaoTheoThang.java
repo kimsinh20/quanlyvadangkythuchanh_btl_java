@@ -132,7 +132,7 @@ public class viewBaoCaoTheoThang extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        AdminScreenMain admin=new AdminScreenMain();
+        AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
 
         admin.setVisible(true);
@@ -158,7 +158,7 @@ public class viewBaoCaoTheoThang extends javax.swing.JFrame {
 
         for (int tuan = 1; tuan <= 5; tuan++) {
             XSSFSheet spreadsheet = workbook.createSheet("Tuần " + tuan);
-            buttonXuatBaoCao.setText(String.format("%3.2f",((float)tuan / 5)*100) + "%");
+            buttonXuatBaoCao.setText(String.format("%3.2f", ((float) tuan / 5) * 100) + "%");
             rowid = 0;
             String ngayBatDau_ketThuc = DBQuanLyThucHanh.getThoiGianBatDauDenKetThucTuan(ngay, tuan);
 
@@ -331,7 +331,9 @@ public class viewBaoCaoTheoThang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewBaoCaoTheoThang().setVisible(true);
+                viewBaoCaoTheoThang viewBaoCaoTheoThang = new viewBaoCaoTheoThang();
+                viewBaoCaoTheoThang.setLocationRelativeTo(viewBaoCaoTheoThang);
+                viewBaoCaoTheoThang.setVisible(true);
             }
         });
     }

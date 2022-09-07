@@ -171,7 +171,7 @@ public class viewBaoCaoTheoKy extends javax.swing.JFrame {
 
         for (int tuan = 1; tuan <= soTuanMotKy; tuan++) {
             XSSFSheet spreadsheet = workbook.createSheet("Tuần " + tuan);
-            buttonXuatBaoCao.setText(String.format("%3.2f",((float)tuan / soTuanMotKy)*100) + "%");
+            buttonXuatBaoCao.setText(String.format("%3.2f", ((float) tuan / soTuanMotKy) * 100) + "%");
             rowid = 0;
             String ngayBatDau_ketThuc = DBQuanLyThucHanh.getThoiGianBatDauDenKetThucTuan(ngay, tuan);
 
@@ -346,7 +346,9 @@ public class viewBaoCaoTheoKy extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewBaoCaoTheoKy().setVisible(true);
+                viewBaoCaoTheoKy viewBaoCaoTheoKy = new viewBaoCaoTheoKy();
+                viewBaoCaoTheoKy.setLocationRelativeTo(viewBaoCaoTheoKy);
+                viewBaoCaoTheoKy.setVisible(true);
             }
         });
     }

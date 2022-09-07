@@ -136,16 +136,12 @@
                                                       </Group>
                                                   </Group>
                                               </Group>
-                                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="tiet9" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="tiet11" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                                  </Group>
+                                                  <Component id="tiet11" alignment="1" min="-2" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Group type="103" groupAlignment="1" attributes="0">
                                                           <Component id="tiet14" min="-2" max="-2" attributes="0"/>
@@ -153,7 +149,6 @@
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="tiet15" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -175,7 +170,7 @@
                           </Group>
                           <Component id="jLabel6" alignment="0" min="-2" pref="63" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="130" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>

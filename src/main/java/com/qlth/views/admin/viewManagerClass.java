@@ -857,6 +857,7 @@ public class viewManagerClass extends javax.swing.JFrame {
                         comboTiet[i].setEnabled(true);
                     }
                     default -> {
+                        comboTiet[i].setSelected(false);
                         comboTiet[i].setEnabled(false);
                     }
                 }

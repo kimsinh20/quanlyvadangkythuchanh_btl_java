@@ -19,7 +19,5 @@ public class Quanlythuchanh {
          viewLogin login=new viewLogin();
          login.setLocationRelativeTo(login);
          login.setVisible(true);
-
-   
     }
 }
