@@ -56,6 +56,7 @@ public class viewManagerClass extends javax.swing.JFrame {
         tableLopHP.getColumnModel().getColumn(7).setPreferredWidth(150);
         tableLopHP.getColumnModel().getColumn(8).setPreferredWidth(149);
     }
+
     private void initdata() {
         ArrayList<Integer> DSPhong = DBQuanLyThucHanh.getDanhSachPhong();
         DefaultComboBoxModel model = new DefaultComboBoxModel();

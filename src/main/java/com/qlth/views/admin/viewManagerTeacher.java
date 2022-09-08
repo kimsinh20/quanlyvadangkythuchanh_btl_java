@@ -5,7 +5,6 @@
 package com.qlth.views.admin;
 
 import com.qlth.model.GiangVien;
-import com.qlth.model.PhongMay;
 import database.DBQuanLyThucHanh;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -347,190 +346,190 @@ public class viewManagerTeacher extends javax.swing.JFrame {
         this.dispose();
         AdminScreenMain admin = new AdminScreenMain();
         admin.setLocationRelativeTo(admin);
-
+        
         admin.setVisible(true);
     }//GEN-LAST:event_buttonexitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-              ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+            try {
+                ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                int numberRowsOfTable = arrGV.size();
+                model.setRowCount(numberRowsOfTable);
+                
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                    model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                    model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                    model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                    model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                }
+                //get list combobox
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //get list combobox
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }).start();
     }//GEN-LAST:event_formWindowOpened
 
     private void xemthongtingv(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xemthongtingv
         // TODO add your handling code here:
-       new Thread(() -> {
-        try {
-            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-            Vector<Object> teacherVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
-            GiangVien gv = new GiangVien(teacherVector.get(1).toString(), teacherVector.get(2).toString(), teacherVector.get(3).toString(), teacherVector.get(4).toString(), teacherVector.get(5).toString());
-            txtmagv.setText(gv.getMaGiangVien());
-            txttengv.setText(gv.getTenGiangVien());
-            txtsdt.setText(gv.getSoDT());
-            DefaultComboBoxModel comboBoxModelHocVi = (DefaultComboBoxModel) hocvi.getModel();
-            for (int i = 0; i < comboBoxModelHocVi.getSize(); i++) {
-                String itemComboBoxSelected = (String) comboBoxModelHocVi.getElementAt(i);
-                if (itemComboBoxSelected.equals(gv.getHocVi())) {
-                    comboBoxModelHocVi.setSelectedItem(itemComboBoxSelected);
+        new Thread(() -> {
+            try {
+                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                Vector<Object> teacherVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
+                GiangVien gv = new GiangVien(teacherVector.get(1).toString(), teacherVector.get(2).toString(), teacherVector.get(3).toString(), teacherVector.get(4).toString(), teacherVector.get(5).toString());
+                txtmagv.setText(gv.getMaGiangVien());
+                txttengv.setText(gv.getTenGiangVien());
+                txtsdt.setText(gv.getSoDT());
+                DefaultComboBoxModel comboBoxModelHocVi = (DefaultComboBoxModel) hocvi.getModel();
+                for (int i = 0; i < comboBoxModelHocVi.getSize(); i++) {
+                    String itemComboBoxSelected = (String) comboBoxModelHocVi.getElementAt(i);
+                    if (itemComboBoxSelected.equals(gv.getHocVi())) {
+                        comboBoxModelHocVi.setSelectedItem(itemComboBoxSelected);
+                    }
                 }
-            }
-            DefaultComboBoxModel comboBoxModelKhoa = (DefaultComboBoxModel) khoa.getModel();
-            for (int i = 0; i < comboBoxModelKhoa.getSize(); i++) {
-                String itemComboBoxSelected = (String) comboBoxModelKhoa.getElementAt(i);
-                if (itemComboBoxSelected.equals(gv.getKhoa())) {
-                    comboBoxModelKhoa.setSelectedItem(itemComboBoxSelected);
+                DefaultComboBoxModel comboBoxModelKhoa = (DefaultComboBoxModel) khoa.getModel();
+                for (int i = 0; i < comboBoxModelKhoa.getSize(); i++) {
+                    String itemComboBoxSelected = (String) comboBoxModelKhoa.getElementAt(i);
+                    if (itemComboBoxSelected.equals(gv.getKhoa())) {
+                        comboBoxModelKhoa.setSelectedItem(itemComboBoxSelected);
+                    }
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       }).start();
+        }).start();
     }//GEN-LAST:event_xemthongtingv
 
     private void themgiangvien(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themgiangvien
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-        String maGiangVien = (String) txtmagv.getText();
-        String tenGiangVien=(String) txttengv.getText();
-        String soDienThoai=(String) txtsdt.getText();
-        String hocVi=String.valueOf(hocvi.getSelectedItem());
-        String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
-        if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
+            try {
+                String maGiangVien = (String) txtmagv.getText();
+                String tenGiangVien = (String) txttengv.getText();
+                String soDienThoai = (String) txtsdt.getText();
+                String hocVi = String.valueOf(hocvi.getSelectedItem());
+                String giangVienKhoa = String.valueOf(khoa.getSelectedItem());
+                if (maGiangVien.equals("") || tenGiangVien.equals("") || soDienThoai.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
+                }
+                if (DBQuanLyThucHanh.insertGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa)) {
+                    JOptionPane.showMessageDialog(rootPane, "thêm thành công");
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
+                }
+                ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                int numberRowsOfTable = arrGV.size();
+                model.setRowCount(numberRowsOfTable);
+                
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                    model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                    model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                    model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                    model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (DBQuanLyThucHanh.insertGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa)) {
-                JOptionPane.showMessageDialog(rootPane, "thêm thành công");
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
-            }
-            ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
-            }
-        }catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         }).start();
+        }).start();
     }//GEN-LAST:event_themgiangvien
 
     private void buttonxoagiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonxoagiangvienActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-            DBQuanLyThucHanh.deleteGiangVien(txtmagv.getText());
-             JOptionPane.showMessageDialog(rootPane, "xóa thành công");
-            ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+            try {
+                DBQuanLyThucHanh.deleteGiangVien(txtmagv.getText());
+                JOptionPane.showMessageDialog(rootPane, "xóa thành công");
+                ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                int numberRowsOfTable = arrGV.size();
+                model.setRowCount(numberRowsOfTable);
+                
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                    model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                    model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                    model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                    model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);                
             }
-        } catch (Exception ex) {
-           Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex); 
-        }
-         }).start();
+        }).start();
     }//GEN-LAST:event_buttonxoagiangvienActionPerformed
 
     private void buttonsuagiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonsuagiangvienActionPerformed
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-        String maGiangVien = (String) txtmagv.getText();
-        String tenGiangVien=(String) txttengv.getText();
-        String soDienThoai=(String) txtsdt.getText();
-        String hocVi=String.valueOf(hocvi.getSelectedItem());
-        String giangVienKhoa=String.valueOf(khoa.getSelectedItem());
-        if (maGiangVien.equals("")|| tenGiangVien.equals("")|| soDienThoai.equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
-            }
-            DBQuanLyThucHanh.updateGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa);
+            try {
+                String maGiangVien = (String) txtmagv.getText();
+                String tenGiangVien = (String) txttengv.getText();
+                String soDienThoai = (String) txtsdt.getText();
+                String hocVi = String.valueOf(hocvi.getSelectedItem());
+                String giangVienKhoa = String.valueOf(khoa.getSelectedItem());
+                if (maGiangVien.equals("") || tenGiangVien.equals("") || soDienThoai.equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "vui lòng nhập đủ thông tin");
+                }
+                DBQuanLyThucHanh.updateGiangVien(maGiangVien, tenGiangVien, soDienThoai, hocVi, giangVienKhoa);
                 JOptionPane.showMessageDialog(rootPane, "sửa thành công");
-           ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.getDanhSachGiangVien();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                int numberRowsOfTable = arrGV.size();
+                model.setRowCount(numberRowsOfTable);
+                
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                    model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                    model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                    model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                    model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         }).start();
+        }).start();
     }//GEN-LAST:event_buttonsuagiangvienActionPerformed
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         // TODO add your handling code here:
         new Thread(() -> {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String keySearch = search.getText().trim();
-            if (keySearch.compareTo("") == 0) {
-                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                String keySearch = search.getText().trim();
+                if (keySearch.compareTo("") == 0) {
+                    JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
+                }
+                try {
+                    ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    
+                    int numberRowsOfTable = arrGV.size();
+                    model.setRowCount(numberRowsOfTable);
+                    
+                    for (int i = 0; i < numberRowsOfTable; i++) {
+                        model.setValueAt(i, i, 0);
+                        model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                        model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                        model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                        model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                        model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-               ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
-            }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-         }).start();
+        }).start();
     }//GEN-LAST:event_searchKeyPressed
 
     private void buttonresetgiangvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonresetgiangvienActionPerformed
@@ -546,24 +545,24 @@ public class viewManagerTeacher extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
             }
             try {
-               ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-            int numberRowsOfTable = arrGV.size();
-            model.setRowCount(numberRowsOfTable);
-
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
-                model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
-                model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
-                model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
-                model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
-            }
+                ArrayList<GiangVien> arrGV = DBQuanLyThucHanh.searchGiangVien(search.getText());
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                
+                int numberRowsOfTable = arrGV.size();
+                model.setRowCount(numberRowsOfTable);
+                
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrGV.get(i).getMaGiangVien(), i, 1);
+                    model.setValueAt(arrGV.get(i).getTenGiangVien(), i, 2);
+                    model.setValueAt(arrGV.get(i).getSoDT(), i, 3);
+                    model.setValueAt(arrGV.get(i).getHocVi(), i, 4);
+                    model.setValueAt(arrGV.get(i).getKhoa(), i, 5);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-         }).start();
+        }).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -633,11 +632,11 @@ public class viewManagerTeacher extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void resetform() {
-       txtmagv.requestFocus();
-       txtmagv.setText("");
-       txttengv.setText("");
-       txtsdt.setText("");
-       hocvi.setSelectedIndex(0);
-       khoa.setSelectedIndex(0);
+        txtmagv.requestFocus();
+        txtmagv.setText("");
+        txttengv.setText("");
+        txtsdt.setText("");
+        hocvi.setSelectedIndex(0);
+        khoa.setSelectedIndex(0);
     }
 }

@@ -25,11 +25,11 @@ public class AdminScreenMain extends javax.swing.JFrame {
      * Creates new form AdminScreenMain
      */
     private String tenDangNhap;
-
+    
     public AdminScreenMain() {
         initComponents();
     }
-
+    
     public AdminScreenMain(String tenDangNhap) {
         this.tenDangNhap = tenDangNhap;
         initComponents();
@@ -67,10 +67,10 @@ public class AdminScreenMain extends javax.swing.JFrame {
         jMenu10 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
         jToolBar1 = new javax.swing.JToolBar();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         toolBtnNew = new javax.swing.JButton();
         toolBtnOpen = new javax.swing.JButton();
         toolBtnSave = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         toolBtnExit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lbStatusCaps = new javax.swing.JLabel();
@@ -84,6 +84,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         nameaccount = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miNew = new javax.swing.JMenuItem();
@@ -212,6 +213,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
         });
 
         jToolBar1.setRollover(true);
+        jToolBar1.add(jSeparator2);
 
         toolBtnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/new.png"))); // NOI18N
         toolBtnNew.setFocusable(false);
@@ -235,7 +237,6 @@ public class AdminScreenMain extends javax.swing.JFrame {
         toolBtnSave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         toolBtnSave.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(toolBtnSave);
-        jToolBar1.add(jSeparator2);
 
         toolBtnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/logout.png"))); // NOI18N
         toolBtnExit.setFocusable(false);
@@ -300,6 +301,16 @@ public class AdminScreenMain extends javax.swing.JFrame {
 
         nameaccount.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 255));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/qlth/icons/edit.png"))); // NOI18N
+        jButton1.setText("đổi mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -308,10 +319,6 @@ public class AdminScreenMain extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,7 +326,16 @@ public class AdminScreenMain extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(nameaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(17, 17, 17))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,14 +343,17 @@ public class AdminScreenMain extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(38, 38, 38)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(nameaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(nameaccount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jMenu1.setMnemonic('H');
@@ -499,7 +518,7 @@ public class AdminScreenMain extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -528,15 +547,15 @@ public class AdminScreenMain extends javax.swing.JFrame {
         // TODO add your handling code here:
         isCapsOn = Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK);
         lbStatusCaps.setEnabled(isCapsOn);
-
+        
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm:ss");
-
+        
         Calendar calendar = Calendar.getInstance();
         Date currentTime = calendar.getTime();
         lbDate.setText(simpleDateFormat.format(currentTime));
         lbTime.setText(simpleTimeFormat.format(currentTime));
-
+        
         timerNow = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -589,14 +608,14 @@ public class AdminScreenMain extends javax.swing.JFrame {
         this.dispose();
         ViewManagerPracticeRegistration dkPM = new ViewManagerPracticeRegistration();
         dkPM.setVisible(true);
-
+        
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenSize = toolkit.getScreenSize();
 
         //Calculate the frame location  
         int x = (screenSize.width - dkPM.getWidth()) / 2;
         int y = (screenSize.height - dkPM.getHeight()) / 2;
-
+        
         dkPM.setLocation(x, y);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -676,6 +695,14 @@ public class AdminScreenMain extends javax.swing.JFrame {
         viewBaoCaoTheoKy.setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        DoiMatKhauAdmin DoiMatKhauAdmin = new DoiMatKhauAdmin();
+        DoiMatKhauAdmin.setLocationRelativeTo(DoiMatKhauAdmin);
+        DoiMatKhauAdmin.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -707,15 +734,16 @@ public class AdminScreenMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
+                
                 new AdminScreenMain().setVisible(true);
             }
         });
     }
-
+    
     private boolean isCapsOn;
     private Timer timerNow;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

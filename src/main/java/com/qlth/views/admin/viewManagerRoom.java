@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author
  */
 public class viewManagerRoom extends javax.swing.JFrame {
 
@@ -446,27 +446,27 @@ public class viewManagerRoom extends javax.swing.JFrame {
             try {
                 DBQuanLyThucHanh.deletePhongMay(Integer.parseInt(txtmaphongmay.getText()));
                 JOptionPane.showMessageDialog(rootPane, "xóa thành công");
-                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrPM.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
-            }
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                    model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                    model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                    model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                    model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                    model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                    model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
         }).start();
-       
+
     }//GEN-LAST:event_delete
 
     private void buttonexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonexitActionPerformed
@@ -483,7 +483,7 @@ public class viewManagerRoom extends javax.swing.JFrame {
         new Thread(() -> {
             try {
                 sudungduoc.setSelected(true);
-                
+
                 //get list combobox
                 if (DBQuanLyThucHanh.getDanhSachPhong().size() != 0) {
                     DefaultComboBoxModel defaultComboBoxModel = (DefaultComboBoxModel) phong.getModel();
@@ -498,21 +498,21 @@ public class viewManagerRoom extends javax.swing.JFrame {
                     }
                 }
                 ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrPM.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
-            }
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                    model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                    model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                    model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                    model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                    model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                    model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -562,21 +562,21 @@ public class viewManagerRoom extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "chưa thêm thành công");
                 }
                 ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrPM.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
-            }
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                    model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                    model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                    model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                    model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                    model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                    model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -586,65 +586,65 @@ public class viewManagerRoom extends javax.swing.JFrame {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-            // TODO add your handling code here:
-            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-            Vector<Object> roomVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
-            PhongMay phongmay = new PhongMay(Integer.parseInt(roomVector.get(1).toString()), roomVector.get(2).toString(), roomVector.get(3).toString(), Integer.parseInt(roomVector.get(4).toString()), Integer.parseInt(roomVector.get(5).toString()), roomVector.get(6).toString(), roomVector.get(7).toString());
-            ToaNha toaNha = new ToaNha();
-            Phong p = new Phong();
-            toaNha.setToa(phongmay.getDiaChiPhongMay().split(" - ")[0].split(" ")[1]);
-            p.setTenPhong(phongmay.getDiaChiPhongMay().split(" - ")[1].substring(6));
-            String dspm = phongmay.getDanhSachPhanMem();
+            try {
+                // TODO add your handling code here:
+                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+                Vector<Object> roomVector = (Vector<Object>) tableModel.getDataVector().elementAt(table.getSelectedRow());
+                PhongMay phongmay = new PhongMay(Integer.parseInt(roomVector.get(1).toString()), roomVector.get(2).toString(), roomVector.get(3).toString(), Integer.parseInt(roomVector.get(4).toString()), Integer.parseInt(roomVector.get(5).toString()), roomVector.get(6).toString(), roomVector.get(7).toString());
+                ToaNha toaNha = new ToaNha();
+                Phong p = new Phong();
+                toaNha.setToa(phongmay.getDiaChiPhongMay().split(" - ")[0].split(" ")[1]);
+                p.setTenPhong(phongmay.getDiaChiPhongMay().split(" - ")[1].substring(6));
+                String dspm = phongmay.getDanhSachPhanMem();
 
-            txtmaphongmay.setText(String.valueOf(phongmay.getMaPhongMay()));
-            txttenphongmay.setText(phongmay.getTenPhongMay());
-            somaychieu.setValue(phongmay.getSoMayChieu());
-            somaytinh.setValue(phongmay.getSoMayTinh());
-            if (phongmay.getTinhTrangPhong().equals(sudungduoc.getText())) {
-                sudungduoc.setSelected(true);
-            } else {
-                sudungduoc.setSelected(false);
-            }
-            pm1.setSelected(false);
-            pm2.setSelected(false);
-            pm3.setSelected(false);
-            pm4.setSelected(false);
-            String[] text = dspm.split(", ");
-            for (String txt : text) {
-                if (txt.trim().equals(pm1.getText().trim())) {
-                    pm1.setSelected(true);
+                txtmaphongmay.setText(String.valueOf(phongmay.getMaPhongMay()));
+                txttenphongmay.setText(phongmay.getTenPhongMay());
+                somaychieu.setValue(phongmay.getSoMayChieu());
+                somaytinh.setValue(phongmay.getSoMayTinh());
+                if (phongmay.getTinhTrangPhong().equals(sudungduoc.getText())) {
+                    sudungduoc.setSelected(true);
+                } else {
+                    sudungduoc.setSelected(false);
                 }
-                if (txt.trim().equals(pm2.getText().trim())) {
-                    pm2.setSelected(true);
+                pm1.setSelected(false);
+                pm2.setSelected(false);
+                pm3.setSelected(false);
+                pm4.setSelected(false);
+                String[] text = dspm.split(", ");
+                for (String txt : text) {
+                    if (txt.trim().equals(pm1.getText().trim())) {
+                        pm1.setSelected(true);
+                    }
+                    if (txt.trim().equals(pm2.getText().trim())) {
+                        pm2.setSelected(true);
+                    }
+                    if (txt.trim().equals(pm3.getText().trim())) {
+                        pm3.setSelected(true);
+                    }
+                    if (txt.trim().equals(pm4.getText().trim())) {
+                        pm4.setSelected(true);
+                    }
                 }
-                if (txt.trim().equals(pm3.getText().trim())) {
-                    pm3.setSelected(true);
-                }
-                if (txt.trim().equals(pm4.getText().trim())) {
-                    pm4.setSelected(true);
-                }
-            }
-            DefaultComboBoxModel comboBoxModelBuilding = (DefaultComboBoxModel) toa.getModel();
-            for (int i = 0; i < comboBoxModelBuilding.getSize(); i++) {
-                String itemComboBoxSelected = (String) comboBoxModelBuilding.getElementAt(i);
-                if (itemComboBoxSelected.equals(toaNha.getToa().toString())) {
-                    comboBoxModelBuilding.setSelectedItem(itemComboBoxSelected);
-                    //System.out.println(itemComboBoxSelected);
-                }
+                DefaultComboBoxModel comboBoxModelBuilding = (DefaultComboBoxModel) toa.getModel();
+                for (int i = 0; i < comboBoxModelBuilding.getSize(); i++) {
+                    String itemComboBoxSelected = (String) comboBoxModelBuilding.getElementAt(i);
+                    if (itemComboBoxSelected.equals(toaNha.getToa().toString())) {
+                        comboBoxModelBuilding.setSelectedItem(itemComboBoxSelected);
+                        //System.out.println(itemComboBoxSelected);
+                    }
 
-            }
-            DefaultComboBoxModel comboBoxModelRoom = (DefaultComboBoxModel) phong.getModel();
-            for (int i = 0; i < comboBoxModelRoom.getSize(); i++) {
-                int itemComboBoxSelected = (int) comboBoxModelRoom.getElementAt(i);
-                if (itemComboBoxSelected == Integer.parseInt(p.getTenPhong())) {
-                    comboBoxModelRoom.setSelectedItem(itemComboBoxSelected);
-                    //System.out.println(itemComboBoxSelected);
                 }
+                DefaultComboBoxModel comboBoxModelRoom = (DefaultComboBoxModel) phong.getModel();
+                for (int i = 0; i < comboBoxModelRoom.getSize(); i++) {
+                    int itemComboBoxSelected = (int) comboBoxModelRoom.getElementAt(i);
+                    if (itemComboBoxSelected == Integer.parseInt(p.getTenPhong())) {
+                        comboBoxModelRoom.setSelectedItem(itemComboBoxSelected);
+                        //System.out.println(itemComboBoxSelected);
+                    }
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }).start();
     }//GEN-LAST:event_tableMouseClicked
 
@@ -659,89 +659,89 @@ public class viewManagerRoom extends javax.swing.JFrame {
     private void updatephongmay(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatephongmay
         // TODO add your handling code here:
         new Thread(() -> {
-        try {
-            String tenPM = (String) txttenphongmay.getText();
-            String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
-            int soMT = (int) somaytinh.getValue();
-            int soMC = (int) somaychieu.getValue();
-            String tinhTrang = "";
-            if (sudungduoc.isSelected()) {
-                tinhTrang = "Sử dụng được";
-            }
-            if (baotri.isSelected()) {
-                tinhTrang = "bảo trì";
-            }
-            String dsPhanMem = "";
-            ArrayList<String> listpm = new ArrayList();
-            if (pm1.isSelected()) {
-                listpm.add(pm1.getText());
-            }
-            if (pm2.isSelected()) {
-                listpm.add(pm2.getText());
-            }
-            if (pm3.isSelected()) {
-                listpm.add(pm3.getText());
-            }
-            if (pm4.isSelected()) {
-                listpm.add(pm4.getText());
-            }
+            try {
+                String tenPM = (String) txttenphongmay.getText();
+                String diaChiPM = "Tòa " + String.valueOf(toa.getSelectedItem()) + " - phòng" + String.valueOf(phong.getSelectedItem());
+                int soMT = (int) somaytinh.getValue();
+                int soMC = (int) somaychieu.getValue();
+                String tinhTrang = "";
+                if (sudungduoc.isSelected()) {
+                    tinhTrang = "Sử dụng được";
+                }
+                if (baotri.isSelected()) {
+                    tinhTrang = "bảo trì";
+                }
+                String dsPhanMem = "";
+                ArrayList<String> listpm = new ArrayList();
+                if (pm1.isSelected()) {
+                    listpm.add(pm1.getText());
+                }
+                if (pm2.isSelected()) {
+                    listpm.add(pm2.getText());
+                }
+                if (pm3.isSelected()) {
+                    listpm.add(pm3.getText());
+                }
+                if (pm4.isSelected()) {
+                    listpm.add(pm4.getText());
+                }
 
-            dsPhanMem = listpm.stream().map((string) -> string + ", ").reduce(dsPhanMem, String::concat);
+                dsPhanMem = listpm.stream().map((string) -> string + ", ").reduce(dsPhanMem, String::concat);
 
-            dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
-            DBQuanLyThucHanh.updatePhongMay(Integer.parseInt(txtmaphongmay.getText()), tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem);
-            JOptionPane.showMessageDialog(rootPane, "sửa thành công");
-             ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                dsPhanMem = dsPhanMem.substring(0, dsPhanMem.length() - 2);
+                DBQuanLyThucHanh.updatePhongMay(Integer.parseInt(txtmaphongmay.getText()), tenPM, diaChiPM, soMC, soMT, tinhTrang, dsPhanMem);
+                JOptionPane.showMessageDialog(rootPane, "sửa thành công");
+                ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.getDanhSachPhongMay();
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrPM.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                    model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                    model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                    model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                    model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                    model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                    model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (Exception ex) {
-            Logger.getLogger(viewManagerRoom.class.getName()).log(Level.SEVERE, null, ex);
-        }
         }).start();
     }//GEN-LAST:event_updatephongmay
 
     private void searchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyPressed
         // TODO add your handling code here:e
         new Thread(() -> {
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String keySearch = search.getText().trim();
-            if (keySearch.compareTo("") == 0) {
-                JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
-            }
-            try {
-                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                String keySearch = search.getText().trim();
+                if (keySearch.compareTo("") == 0) {
+                    JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
+                }
+                try {
+                    ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                    int numberRowsOfTable = arrPM.size();
+                    model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                    for (int i = 0; i < numberRowsOfTable; i++) {
+                        model.setValueAt(i, i, 0);
+                        model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                        model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                        model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                        model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                        model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                        model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                        model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
         }).start();
     }//GEN-LAST:event_searchKeyPressed
 
@@ -752,28 +752,28 @@ public class viewManagerRoom extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         new Thread(() -> {
+        new Thread(() -> {
             String keySearch = search.getText().trim();
             if (keySearch.compareTo("") == 0) {
                 JOptionPane.showMessageDialog(rootPane, "vui lòng nhập từ khóa muốn tìm kiếm");
             }
             try {
-                  ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+                ArrayList<PhongMay> arrPM = DBQuanLyThucHanh.searchPhongMay(search.getText());
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
 
-            int numberRowsOfTable = arrPM.size();
-            model.setRowCount(numberRowsOfTable);
+                int numberRowsOfTable = arrPM.size();
+                model.setRowCount(numberRowsOfTable);
 
-            for (int i = 0; i < numberRowsOfTable; i++) {
-                model.setValueAt(i, i, 0);
-                model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
-                model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
-                model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
-                model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
-                model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
-                model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
-                model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
-            }
+                for (int i = 0; i < numberRowsOfTable; i++) {
+                    model.setValueAt(i, i, 0);
+                    model.setValueAt(arrPM.get(i).getMaPhongMay(), i, 1);
+                    model.setValueAt(arrPM.get(i).getTenPhongMay(), i, 2);
+                    model.setValueAt(arrPM.get(i).getDiaChiPhongMay(), i, 3);
+                    model.setValueAt(arrPM.get(i).getSoMayChieu(), i, 4);
+                    model.setValueAt(arrPM.get(i).getSoMayTinh(), i, 5);
+                    model.setValueAt(arrPM.get(i).getTinhTrangPhong(), i, 6);
+                    model.setValueAt(arrPM.get(i).getDanhSachPhanMem(), i, 7);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
