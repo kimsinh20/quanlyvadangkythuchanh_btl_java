@@ -1,0 +1,7 @@
+tên tài khoản : admin 
+mật khẩu      : 123456
+quyền : admin
+tên tài khoản : 20226003(20226001,20226002,20226004,...)
+mật khẩu :      123456
+quyền : user
+yêu cầu : cần có kết nối internet

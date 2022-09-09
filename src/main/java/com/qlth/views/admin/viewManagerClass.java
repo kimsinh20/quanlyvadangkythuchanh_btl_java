@@ -940,7 +940,9 @@ public class viewManagerClass extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewManagerClass().setVisible(true);
+               viewManagerClass viewManagerClass = new viewManagerClass();
+               viewManagerClass.setLocationRelativeTo(viewManagerClass);
+               viewManagerClass.setVisible(true);
             }
         });
     }
@@ -1049,6 +1051,7 @@ public class viewManagerClass extends javax.swing.JFrame {
         if (!isInsertedLopHocPhan) {
             JOptionPane.showMessageDialog(rootPane, "Lỗi, hãy xem lại mã lớp!!!");
         } else {
+            JOptionPane.showMessageDialog(rootPane, "thêm thành công.");
             numberRowsOfTable++;
             model.setRowCount(numberRowsOfTable);
             model.setValueAt(numberRowsOfTable, numberRowsOfTable - 1, 0);
@@ -1112,7 +1115,7 @@ public class viewManagerClass extends javax.swing.JFrame {
 
         DBQuanLyThucHanh.updateLopHocPhan(maLHP, GV.split(" - ")[0], tenMH, soSV, lichHocLyThuyet, phongHocLT, tietHoc, khoa);
 //        boolean isUpdatedLopHocPhan = true;
-
+      JOptionPane.showMessageDialog(rootPane, "sửa thành công.");
         for (int i = 0; i < numberRowsOfTable; i++) {
             if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
                 model.setValueAt(phongHocLT, i, 2);
@@ -1144,7 +1147,7 @@ public class viewManagerClass extends javax.swing.JFrame {
         }
 
         DBQuanLyThucHanh.deleteLopHocPhan(maLHP);
-
+        JOptionPane.showMessageDialog(rootPane, "xóa thành công.");
         for (int i = 0; i < numberRowsOfTable; i++) {
             if (model.getValueAt(i, 1).toString().equalsIgnoreCase(maLHP)) {
                 model.removeRow(i);
